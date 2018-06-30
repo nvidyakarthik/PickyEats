@@ -6,8 +6,38 @@
 
 input, select, textarea {
     width: 80%;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid rgb(155, 155, 155);
+    margin: 5px 0;
+}
+
+#price {
+    margin-left: 50%;
+}
+
+#priceInput {
+    width: 40%;
 }
 
 button {
     width: 100px;
+}
+
+.menuItems {
+    margin: 7px;
+    width: 50%;
+    float: left;
+}
+
+.menuButtons {
+    margin: 10px;
+    width: 30%;
+    float: left;
+}
+
+.edit {
+    width: 40px;
+    height: 20px;
+    margin: 0 5px;
 }
