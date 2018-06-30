@@ -1,0 +1,13 @@
+.half {
+    float: left;
+    width: 45%;
+    padding: 10px;
+}
+
+input, select, textarea {
+    width: 80%;
+}
+
+button {
+    width: 100px;
+}
