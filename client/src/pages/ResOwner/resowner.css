@@ -4,6 +4,10 @@
     padding: 10px;
 }
 
+.title {
+    margin-top: 50px;
+}
+
 input, select, textarea {
     width: 80%;
     height: 30px;
@@ -13,7 +17,7 @@ input, select, textarea {
 }
 
 #price {
-    margin-left: 50%;
+    margin-left: 55%;
 }
 
 #priceInput {

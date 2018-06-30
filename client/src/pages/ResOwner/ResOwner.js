@@ -38,7 +38,7 @@ class ResOwner extends Component {
         return (
             <Container>
                 <div className="half">
-                    <h3>Restaurant Information</h3>
+                    <h3 className="title">Restaurant Information</h3>
 
                     <form>
                         <input
@@ -60,7 +60,7 @@ class ResOwner extends Component {
                         </select>
                     </form>
 
-                    <h3>Menu Items</h3>
+                    <h3 className="title">Menu Items</h3>
 
                     <form>
                         <input
@@ -94,7 +94,7 @@ class ResOwner extends Component {
                 </div>
 
                 <div className="half">
-                    <h3>Added Items</h3>
+                    <h3 className="title">Added Items</h3>
 
                     {this.state.menuItems.length ? (
                         <div>
