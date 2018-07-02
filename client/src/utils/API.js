@@ -31,6 +31,9 @@ export default {
     // Login page Saves the user to the database
   saveUser: function(userData) {
     return axios.post("/api/user", userData);
+  },
+  saveRestaurant: function(restaurantData) {
+    return axios.post("/api/restaurant", restaurantData);
   }
   /* ,
   //user login info

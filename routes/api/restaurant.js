@@ -1,7 +1,10 @@
 const router = require("express").Router();
 const restaurantController = require("../../controllers/restController");
 
-router.route("/restaurants")
+router.route("/")
+.post(restaurantController.createRestaurant);
+
+/* router.route("/restaurants")
 .get(restaurantController.getRestaurants);
 router.route("/categories")
 .get(restaurantController.findAllCategories);
@@ -14,6 +17,6 @@ router.route("/restaurants/rating")
 router.route("/comments/:restaurantId")
 .get(restaurantController.getAllComments);
 router.route("/comments")
-.post(restaurantController.createComment);
+.post(restaurantController.createComment); */
 
 module.exports = router;

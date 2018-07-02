@@ -2,8 +2,19 @@ const db = require("../models");
 
  //Defining methods for the booksController
 module.exports = {
+
+  createRestaurant: function(req, res) {
+    console.log(req.body);
+    db.Restaurant
+      .create(req.body)
+      .then(dbModel => {
+         res.json(dbModel);
+        
+      })
+      .catch(err => res.status(422).json(err));
+  }
     //restaurants from api change it
-  FindAllRestaurants: function(req, res) {
+  /* FindAllRestaurants: function(req, res) {
     db.Restaurant
       .find(req.query)
       .sort({ date: -1 })
@@ -28,5 +39,5 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   }
- 
+  */
 };
