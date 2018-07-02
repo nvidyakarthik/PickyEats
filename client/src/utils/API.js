@@ -34,16 +34,15 @@ export default {
   },
   saveRestaurant: function(restaurantData) {
     return axios.post("/api/restaurant", restaurantData);
-  }
-  /* ,
-  //user login info
+  },
+ /*  //user login info
   getUser:function(){
     return axios.get("/api/user")
   },
   getAllComments:function(restaurantId){
     return axios.get("/api/comments"+restaurantId);
-  },
-  saveComment:function(commentData){
-    return axios.post("/api/comment", commentData);
-  }  */
+  }, */
+  saveComment:function(commentData,restId){
+    return axios.post("/api/restaurant/comment/"+restId, commentData);
+  }  
 };

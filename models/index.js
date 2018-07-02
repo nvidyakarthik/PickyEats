@@ -1,7 +1,6 @@
 module.exports = {
   Login: require("./login"),
   Restaurant:require("./restaurant"),
-  Menu:require("./menu")
-
-
+  Menu:require("./menu"),
+  Comment:require("./comment")
 };

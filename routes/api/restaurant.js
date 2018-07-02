@@ -3,6 +3,8 @@ const restaurantController = require("../../controllers/restController");
 
 router.route("/")
 .post(restaurantController.createRestaurant);
+router.route("/comment/:id")
+.post(restaurantController.createComment);
 
 /* router.route("/restaurants")
 .get(restaurantController.getRestaurants);
@@ -16,7 +18,6 @@ router.route("/restaurants/rating")
 .get(restaurantController.getRestaurantByRating);
 router.route("/comments/:restaurantId")
 .get(restaurantController.getAllComments);
-router.route("/comments")
-.post(restaurantController.createComment); */
+ */
 
 module.exports = router;
