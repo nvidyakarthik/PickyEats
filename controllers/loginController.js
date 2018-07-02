@@ -1,8 +1,8 @@
 const db = require("../models");
 
-/* // Defining methods for the booksController
+// Defining methods for the booksController
 module.exports = {
-  findAll: function(req, res) {
+ /* findAll: function(req, res) {
     db.Book
       .find(req.query)
       .sort({ date: -1 })
@@ -14,13 +14,14 @@ module.exports = {
       .findById(req.params.id)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-  },
-  create: function(req, res) {
-    db.Book
+  },*/
+  createUser: function(req, res) {
+    console.log(req.body);
+    db.Login
       .create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-  },
+  }/*,
   update: function(req, res) {
     db.Book
       .findOneAndUpdate({ _id: req.params.id }, req.body)
@@ -33,6 +34,6 @@ module.exports = {
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-  }
+  }*/
 };
- */
+ 

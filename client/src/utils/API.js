@@ -3,7 +3,7 @@ const APIKEY = "";
 
 export default {
   // Gets all restaurant info from api
-  getRestaurants: function(topic,startdate,enddate) {
+  /* getRestaurants: function(topic,startdate,enddate) {
     return axios.get("/api/restaurants" , { params:
    { 
       q: topic,
@@ -27,11 +27,12 @@ export default {
    //search restaurant by category name
    getRestaurantByRating: function() {
     return axios.get("/api/restaurants/rating");
-  },
+  }, */
     // Login page Saves the user to the database
   saveUser: function(userData) {
     return axios.post("/api/user", userData);
-  },
+  }
+  /* ,
   //user login info
   getUser:function(){
     return axios.get("/api/user")
@@ -41,5 +42,5 @@ export default {
   },
   saveComment:function(commentData){
     return axios.post("/api/comment", commentData);
-  } 
+  }  */
 };
