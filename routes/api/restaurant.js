@@ -6,11 +6,11 @@ router.route("/")
 router.route("/comment/:id")
 .post(restaurantController.createComment)
 .get(restaurantController.findAllComments);
+router.route("/categories")
+.get(restaurantController.findAllCategories);
 
 /* router.route("/restaurants")
 .get(restaurantController.getRestaurants);
-router.route("/categories")
-.get(restaurantController.findAllCategories);
 router.route("/restaurants/:id")
 .get(restaurantController.findRestaurantById);
 router.route("/restaurants/:category")

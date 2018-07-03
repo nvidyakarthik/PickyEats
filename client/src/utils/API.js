@@ -11,11 +11,12 @@ export default {
       end_date:enddate+"0101",
       'api-key':APIKEY } 
     });
-  },
+  },*/
   //get all categories name
   getCategories: function() {
-    return axios.get("/api/categories");
+    return axios.get("/api/restaurant/categories");
   },
+  /*
   //search restaurant by name/lists all menus here
   getRestaurantById: function(id) {
     return axios.get("/api/restaurants/"+id);

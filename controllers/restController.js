@@ -21,7 +21,7 @@ module.exports = {
       .then(dbComment => {
         console.log("params"+req.params.id);
         console.log("dbcomment"+dbComment._id);
-        return db.Restaurant.findOneAndUpdate({ _id:ObjectId("5b3a949a7bdb52a154c06ad2") }, 
+        return db.Restaurant.findOneAndUpdate({ _id:req.params.id }, 
         { $push: { comments: dbComment._id} }, 
         { new: true });
                  
@@ -46,6 +46,13 @@ module.exports = {
       })
       .catch(err => res.status(422).json(err));
   },
+  findAllCategories: function(req, res) {
+    console.log(req.query);
+    db.Category
+      .find(req.query)
+      .then(dbCategories => res.json(dbCategories))
+      .catch(err => res.status(422).json(err));
+  },
     //restaurants from api change it
   /* FindAllRestaurants: function(req, res) {
     db.Restaurant
@@ -54,12 +61,7 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  findAllCategories: function(req, res) {
-    db.Category
-      .findById(req.params.id)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
+  
   findRestaurantById: function(req, res) {
     db.Restaurant
       .findById({ _id: req.params.id })
