@@ -38,10 +38,10 @@ export default {
  /*  //user login info
   getUser:function(){
     return axios.get("/api/user")
-  },
-  getAllComments:function(restaurantId){
-    return axios.get("/api/comments"+restaurantId);
-  }, */
+  },*/
+  getAllComments:function(restId){
+    return axios.get("/api/restaurant/comment/"+restId);
+  }, 
   saveComment:function(commentData,restId){
     return axios.post("/api/restaurant/comment/"+restId, commentData);
   }  

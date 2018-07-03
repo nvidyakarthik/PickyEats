@@ -4,7 +4,8 @@ const restaurantController = require("../../controllers/restController");
 router.route("/")
 .post(restaurantController.createRestaurant);
 router.route("/comment/:id")
-.post(restaurantController.createComment);
+.post(restaurantController.createComment)
+.get(restaurantController.findAllComments);
 
 /* router.route("/restaurants")
 .get(restaurantController.getRestaurants);

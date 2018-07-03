@@ -36,7 +36,16 @@ module.exports = {
         res.status(422).json(err);
 
       });
-  }
+  },
+  findAllComments: function(req, res) {
+    db.Restaurant
+      .findOne({ _id:req.params.id})
+      .populate("comments")
+      .then(dbRestaurant => {
+        res.json(dbRestaurant);
+      })
+      .catch(err => res.status(422).json(err));
+  },
     //restaurants from api change it
   /* FindAllRestaurants: function(req, res) {
     db.Restaurant
