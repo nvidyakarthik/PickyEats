@@ -21,18 +21,19 @@ export default {
   getRestaurantById: function(id) {
     return axios.get("/api/restaurant/"+id);
   },
-  /* //search restaurant by category name
-   getRestaurantByCategory: function(category) {
-    return axios.get("/api/restaurants/"+category);
-  },
    //search restaurant by category name
+   getRestaurantByCategory: function(categoryId) {
+    return axios.get("/api/restaurant/listbycategory/"+categoryId);
+  },
+  /* //search restaurant by category name
    getRestaurantByRating: function() {
     return axios.get("/api/restaurants/rating");
   }, */
-    // Login page Saves the user to the database
+  // Login page Saves the user to the database
   saveUser: function(userData) {
     return axios.post("/api/user", userData);
   },
+  //Save restaurant with menus
   saveRestaurant: function(restaurantData) {
     return axios.post("/api/restaurant", restaurantData);
   },

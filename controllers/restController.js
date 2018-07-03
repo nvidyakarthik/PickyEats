@@ -1,5 +1,4 @@
 const db = require("../models");
-var ObjectId = require('mongoose').Types.ObjectId; 
 
  //Defining methods for the booksController
 module.exports = {
@@ -56,6 +55,14 @@ module.exports = {
     db.Restaurant
       .findById({ _id: req.params.id })
       .populate("menus")
+      .populate("category")
+      .then(dbRestaurant => res.json(dbRestaurant))
+      .catch(err => res.status(422).json(err));
+  },
+  findRestByCategory: function(req, res) {
+    db.Restaurant
+      .find({ category:{ _id : req.params.id}})
+      .populate("category")
       .then(dbRestaurant => res.json(dbRestaurant))
       .catch(err => res.status(422).json(err));
   }
@@ -64,12 +71,6 @@ module.exports = {
     db.Restaurant
       .find(req.query)
       .sort({ date: -1 })
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
-  findRestaurantByCategory: function(req, res) {
-    db.Restaurant
-      .findById({ _id: req.params.category })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   }

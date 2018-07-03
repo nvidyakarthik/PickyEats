@@ -10,7 +10,8 @@ router.route("/categories")
 .get(restaurantController.findAllCategories);
 router.route("/:id")
 .get(restaurantController.findRestaurantById);
-
+router.route("/listbycategory/:id")
+.get(restaurantController.findRestByCategory);
 /* router.route("/restaurants")
 .get(restaurantController.getRestaurants);
 
