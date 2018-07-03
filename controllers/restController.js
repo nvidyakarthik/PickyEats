@@ -47,24 +47,23 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findAllCategories: function(req, res) {
-    console.log(req.query);
     db.Category
       .find(req.query)
       .then(dbCategories => res.json(dbCategories))
       .catch(err => res.status(422).json(err));
-  },
+  },   
+  findRestaurantById: function(req, res) {
+    db.Restaurant
+      .findById({ _id: req.params.id })
+      .populate("menus")
+      .then(dbRestaurant => res.json(dbRestaurant))
+      .catch(err => res.status(422).json(err));
+  }
     //restaurants from api change it
   /* FindAllRestaurants: function(req, res) {
     db.Restaurant
       .find(req.query)
       .sort({ date: -1 })
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  },
-  
-  findRestaurantById: function(req, res) {
-    db.Restaurant
-      .findById({ _id: req.params.id })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

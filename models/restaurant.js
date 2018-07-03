@@ -11,7 +11,7 @@ const menuSchema = new Schema({
 const restaurantSchema = new Schema({
   restaurantName: { type: String, required: true },
   address: { type: String, required: true },
-  category: {type:String,required:true},
+  category: [{ type: Schema.Types.ObjectId, ref: 'Category' }],
   menus:[menuSchema],
   comments:[{ type: Schema.Types.ObjectId, ref: 'Comment' }]
     

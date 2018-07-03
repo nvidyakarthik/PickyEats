@@ -16,12 +16,12 @@ export default {
   getCategories: function() {
     return axios.get("/api/restaurant/categories");
   },
-  /*
+
   //search restaurant by name/lists all menus here
   getRestaurantById: function(id) {
-    return axios.get("/api/restaurants/"+id);
+    return axios.get("/api/restaurant/"+id);
   },
-   //search restaurant by category name
+  /* //search restaurant by category name
    getRestaurantByCategory: function(category) {
     return axios.get("/api/restaurants/"+category);
   },

@@ -8,11 +8,12 @@ router.route("/comment/:id")
 .get(restaurantController.findAllComments);
 router.route("/categories")
 .get(restaurantController.findAllCategories);
+router.route("/:id")
+.get(restaurantController.findRestaurantById);
 
 /* router.route("/restaurants")
 .get(restaurantController.getRestaurants);
-router.route("/restaurants/:id")
-.get(restaurantController.findRestaurantById);
+
 router.route("/restaurants/:category")
 .get(restaurantController.findRestaurantByCategory);
 router.route("/restaurants/rating")
