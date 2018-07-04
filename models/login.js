@@ -1,17 +1,16 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const usersSchema = new Schema({
-    firstName: {type: String, required: true },
-    lastName: {type: String, required: true},
-    email: {type: String, required: true},
-    password: {type: String, required: true},
-    restOwner: Boolean,
-    admin: Boolean,
-    date: {type: Date, default: Date.now}
+const loginSchema = new Schema({
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  email: {type:String,required:true},
+  password: { type: String, required: true },
+  restaurantOwner:{type:Boolean,default:false}
+
 });
 
-const Users = Mongoose.model("Users", usersSchema);
+const Login = mongoose.model("Login", loginSchema);
 
-module.exports = Users;
+module.exports = Login;
  
