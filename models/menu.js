@@ -5,6 +5,7 @@ const menuSchema = new Schema({
   dishName: { type: String, required: true },
   description: { type: String},
   price: {type:Number,required:true},
+  rating:{type:Number,default:0}
     
 });
 

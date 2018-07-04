@@ -25,10 +25,10 @@ export default {
    getRestaurantByCategory: function(categoryId) {
     return axios.get("/api/restaurant/listbycategory/"+categoryId);
   },
-  /* //search restaurant by category name
+  //search restaurant by category name
    getRestaurantByRating: function() {
-    return axios.get("/api/restaurants/rating");
-  }, */
+    return axios.get("/api/restaurant/rating");
+  },
   // Login page Saves the user to the database
   saveUser: function(userData) {
     return axios.post("/api/user", userData);

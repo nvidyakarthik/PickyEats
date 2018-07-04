@@ -65,6 +65,20 @@ module.exports = {
       .populate("category")
       .then(dbRestaurant => res.json(dbRestaurant))
       .catch(err => res.status(422).json(err));
+  },
+  findRestByRating: function(req, res) {
+    db.Restaurant
+      .find({})
+      .populate("menus")
+      .aggregate([{
+       
+          $group: {
+            _id: '$_id',
+            x: {$sum: '$menus.rating' }
+            
+       }}])
+      .then(dbRestaurant => res.json(dbRestaurant))
+      .catch(err => res.status(422).json(err));
   }
     //restaurants from api change it
   /* FindAllRestaurants: function(req, res) {
