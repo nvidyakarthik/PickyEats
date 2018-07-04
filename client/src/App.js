@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import ResOwner from "./pages/ResOwner";
 import Login from "./pages/Login";
 import Resaurant from "./pages/Resaurant";
+import ResSearch from "./pages/ResSearch";
 import NoMatch from "./pages/NoMatch";
 
 import Nav from "./components/Nav";
@@ -19,6 +20,7 @@ const App = () => (
         <Route exact path="/login" component={Login} />
         <Route exact path="/restaurant/:id" component={Resaurant} />
         <Route exact path="/resowner" component={ResOwner} />
+        <Route exact path="/ressearch" component={ResSearch} />
         <Route component={NoMatch} />
       </Switch>
     </div>
