@@ -13,4 +13,8 @@ router.route("/save/:id")
 //for the route api/menu/save
 router.route("/edit/:id")
 .put(menuController.updateMenu);
+
+//for the route api/menu/delete
+router.route("/delete/:id")
+.delete(menuController.deleteMenu);
 module.exports=router;
