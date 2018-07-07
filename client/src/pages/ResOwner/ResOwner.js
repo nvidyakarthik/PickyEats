@@ -6,7 +6,7 @@ class ResOwner extends Component {
     state = {
         restName: "",
         address: "",
-        categories: ["Mexican", "Italian", "Asian"],
+        categories: ["Chinese", "Mexican", "Korean", "American", "Steakhouse", "Italian", "Seafood", "Breakfast", "Pizza", "Burger", "Thai", "Japanese", "Vietnamese", "Sandwiches", "Sushi Bar"],
         dishName: "",
         description: "",
         price: "",
@@ -24,7 +24,8 @@ class ResOwner extends Component {
                 name: "Chow Mein",
                 price: "7.96"
             }
-        ]
+        ],
+        types: ["Appetizer", "Breakfast", "Lunch", "Dinner", "Drink", "Kids"]
     };
 
     handleInputChange = event => {
@@ -69,6 +70,7 @@ class ResOwner extends Component {
                             value={this.state.dishName}
                             onChange={this.handleInputChange}
                         />
+
                         <textarea
                             rows="5"
                             name="description"
@@ -77,6 +79,13 @@ class ResOwner extends Component {
                             onChange={this.handleInputChange}
                             className="textare"
                         />
+                        
+                        <select>
+                            {this.state.types.map(type => (
+                                <option value={type}>{type}</option>
+                            ))}
+                        </select>
+
                         <div id="price">
                             <span>$ </span>
                             <input
