@@ -3,11 +3,11 @@ import "./restaurant.css";
 
 const Restaurant = props => (
     <div>
-        <div className="jumbotron">
+        <div className="restJumbotron">
             <h1 id="restName">Restaurant Name</h1>
-
-            
         </div>
+
+
     </div>
 );
 
