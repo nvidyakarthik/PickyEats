@@ -1,0 +1,32 @@
+.half {
+    float: left;
+    width: 45%;
+    padding: 10px;
+    color: white;
+}
+
+#price {
+    margin-left: 55%;
+}
+
+#priceInput {
+    width: 40%;
+}
+
+.menuItems {
+    margin: 7px;
+    width: 50%;
+    float: left;
+}
+
+.menuButtons {
+    margin: 10px;
+    width: 30%;
+    float: left;
+}
+
+.edit {
+    width: 40px;
+    height: 20px;
+    margin: 0 5px;
+}
