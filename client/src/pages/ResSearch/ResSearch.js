@@ -4,12 +4,18 @@ import "./resSearch.css";
 const ResSearch = () => (
 <div>
     	<div className="card">
-  			<img src="img_avatar.png" alt="Avatar" style="width:100%"/>
-  			<div className="container">
-    			<h4><b>John Doe</b></h4> 
-    			<p>Architect & Engineer</p> 
+  			<img src="" alt="restaurant"/>
+  			<div className="restaurantinfo">
+    			<h4><b>Restaurant Name</b></h4> 
+    			<p>Top Item</p> 
+    			<p>info here</p>
+    			<button className="btn">View Menu</button>
   			</div>
 		</div>
+
+	
+
+
 
 </div>
 );

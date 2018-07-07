@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Container from "../../components/Container";
 import "./login.css";
 
 class Login extends Component {
@@ -8,9 +9,9 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
+            <Container>
 
-            </div>
+            </Container>
         )
     }
 };
