@@ -33,7 +33,8 @@ module.exports = {
   findRestByCategory: function(req, res) {
     db.Restaurant
       .find({ category:{ _id : req.params.id}})
-      .populate("category")
+      
+      .populate("category menus")
       .then(dbRestaurant => res.json(dbRestaurant))
       .catch(err => res.status(422).json(err));
   },
@@ -41,13 +42,33 @@ module.exports = {
   findRestByRating: function(req, res) {
     console.log("inside here");
     db.Restaurant      
-            .aggregate([
+            .aggregate(
+              /* [
+                // Unwind the source
+                { $unwind: "$menus" },
+                // Do the lookup matching
+                { $lookup: {
+                   "from": "menus",
+                   "localField": "menus",
+                   "foreignField": "_id",
+                   "as": "menuObjects"
+                }},
+                // Unwind the result arrays ( likely one or none )
+                 { $unwind: "$menuObjects" }, 
+                // Group back to arrays
+                { $group: {
+                    _id: "$_id",
+                     total:{$avg: {$sum: '$menus.rating' }}, 
+                    menus: { "$push": "$menus" },
+                    menusObjects: { "$push": "$menusObjects" }
+                }}
+            ] */ [
               {$unwind: '$menus' },{
           $group: {
             _id: '$_id',
-            total:{$avg: {$sum: '$menus.rating' }}
+            total:{$sum: '$menus.rating' }
                         
-       }}])
+       }}] )
       .then(dbRestaurant => res.json(dbRestaurant))
       .catch(err => res.status(422).json(err));
   },
