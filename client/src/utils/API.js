@@ -1,17 +1,23 @@
 import axios from "axios";
-const APIKEY = "";
+const CLIENT_ID = "O4WVQMWM1DLCR0UR3ON3JGHVEF0INOC35VUQQOAMV22SS1LU";
+const CLIENT_SECRET="PKLEHEUJA3BSZENQWRSY4X5TWPMQLXQ4JT3W1TPFMCWJ1EIR";
 
 export default {
-  // Gets all restaurant info from api
-  /* getRestaurants: function(topic,startdate,enddate) {
-    return axios.get("/api/restaurants" , { params:
+  // Gets all restaurant info from public api foursquare
+  getRestaurants: function(location) {
+    const location=85297;
+    return axios.get("/api/restaurant/venuesearch", { params:
    { 
-      q: topic,
-      begin_date:startdate+"0101",
-      end_date:enddate+"0101",
-      'api-key':APIKEY } 
+      client_id: CLIENT_ID,
+      client_secret:CLIENT_SECRET,
+      v:20180705,
+      near:location,
+      radius:6000,
+      categoryId:'4bf58dd8d48988d142941735',
+      limit:10
+      } 
     });
-  },*/
+  },
   //get all categories name
   getCategories: function() {
     return axios.get("/api/restaurant/categories");
@@ -35,16 +41,29 @@ export default {
   },
   //Save restaurant with menus
   saveRestaurant: function(restaurantData) {
-    return axios.post("/api/restaurant", restaurantData);
+    return axios.post("/api/restaurant/saverest", restaurantData);
   },
  /*  //user login info
   getUser:function(){
     return axios.get("/api/user")
   },*/
-  getAllComments:function(restId){
-    return axios.get("/api/restaurant/comment/"+restId);
+  //get comments for a particular menu Item
+  getAllComments:function(menuId){
+    return axios.get("/api/menu/comment/"+menuId);
   }, 
-  saveComment:function(commentData,restId){
-    return axios.post("/api/restaurant/comment/"+restId, commentData);
-  }  
+  saveComment:function(commentData,menuId){
+    return axios.post("/api/menu/comment/"+menuId, commentData);
+  },
+  //saves each menu item
+  saveMenuItem:function(menuData,restId){
+    return axios.post("/api/menu/save/"+restId,menuData);
+  },
+  editMenuItem:function(menuId){
+    return axios.put("/api/menu/edit/"+menuId);
+  },
+  removeMenuItem:function(menuId){
+    return axios.delete("/api/menu/delete/"+menuId);
+
+  }
+
 };

@@ -1,4 +1,5 @@
 const db = require("../models");
+const axios=require("axios");
 
  //Defining methods for the booksController
 module.exports = {
@@ -13,44 +14,13 @@ module.exports = {
       })
       .catch(err => res.status(422).json(err));
   },
-  createComment: function(req, res) {
-    console.log(req.body);
-    db.Comment
-      .create(req.body)
-      .then(dbComment => {
-        console.log("params"+req.params.id);
-        console.log("dbcomment"+dbComment._id);
-        return db.Restaurant.findOneAndUpdate({ _id:req.params.id }, 
-        { $push: { comments: dbComment._id} }, 
-        { new: true });
-                 
-      })
-      .then(dbRestaurant=> {
-        
-         res.json(dbRestaurant);
-        
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(422).json(err);
-
-      });
-  },
-  findAllComments: function(req, res) {
-    db.Restaurant
-      .findOne({ _id:req.params.id})
-      .populate("comments")
-      .then(dbRestaurant => {
-        res.json(dbRestaurant);
-      })
-      .catch(err => res.status(422).json(err));
-  },
   findAllCategories: function(req, res) {
     db.Category
       .find(req.query)
       .then(dbCategories => res.json(dbCategories))
       .catch(err => res.status(422).json(err));
-  },   
+  },
+  //search by restaurant name   
   findRestaurantById: function(req, res) {
     db.Restaurant
       .findById({ _id: req.params.id })
@@ -59,34 +29,60 @@ module.exports = {
       .then(dbRestaurant => res.json(dbRestaurant))
       .catch(err => res.status(422).json(err));
   },
+  //find restaurant by
   findRestByCategory: function(req, res) {
     db.Restaurant
       .find({ category:{ _id : req.params.id}})
-      .populate("category")
+      
+      .populate("category menus")
       .then(dbRestaurant => res.json(dbRestaurant))
       .catch(err => res.status(422).json(err));
   },
+  //returns average of menu rating
   findRestByRating: function(req, res) {
-    db.Restaurant
-      .find({})
-      .populate("menus")
-      .aggregate([{
-       
+    console.log("inside here");
+    db.Restaurant      
+            .aggregate(
+              /* [
+                // Unwind the source
+                { $unwind: "$menus" },
+                // Do the lookup matching
+                { $lookup: {
+                   "from": "menus",
+                   "localField": "menus",
+                   "foreignField": "_id",
+                   "as": "menuObjects"
+                }},
+                // Unwind the result arrays ( likely one or none )
+                 { $unwind: "$menuObjects" }, 
+                // Group back to arrays
+                { $group: {
+                    _id: "$_id",
+                     total:{$avg: {$sum: '$menus.rating' }}, 
+                    menus: { "$push": "$menus" },
+                    menusObjects: { "$push": "$menusObjects" }
+                }}
+            ] */ [
+              {$unwind: '$menus' },{
           $group: {
             _id: '$_id',
-            x: {$sum: '$menus.rating' }
-            
-       }}])
+            total:{$sum: '$menus.rating' }
+                        
+       }}] )
       .then(dbRestaurant => res.json(dbRestaurant))
       .catch(err => res.status(422).json(err));
+  },
+  //search all restaurant by zip
+  searchRest: function(req,res){
+     axios
+    .get("https://api.foursquare.com/v2/venues/search",{ params: req.query})
+    .then(({ data: { response } }) => {
+      res.json(response)
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(422).json(err)});
+
   }
-    //restaurants from api change it
-  /* FindAllRestaurants: function(req, res) {
-    db.Restaurant
-      .find(req.query)
-      .sort({ date: -1 })
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
-  }
-  */
+
 };
