@@ -43,7 +43,7 @@ module.exports = {
     console.log("inside here");
     db.Restaurant      
             .aggregate(
-              /* [
+               [
                 // Unwind the source
                 { $unwind: "$menus" },
                 // Do the lookup matching
@@ -58,17 +58,18 @@ module.exports = {
                 // Group back to arrays
                 { $group: {
                     _id: "$_id",
-                     total:{$avg: {$sum: '$menus.rating' }}, 
+                    
+                    total:{"$avg":{"$sum": '$menuObjects.rating' }},
                     menus: { "$push": "$menus" },
-                    menusObjects: { "$push": "$menusObjects" }
+                    menusObjects: { "$push": "$menuObjects" }
                 }}
-            ] */ [
+            ] /* [
               {$unwind: '$menus' },{
           $group: {
             _id: '$_id',
             total:{$sum: '$menus.rating' }
                         
-       }}] )
+       }}]  */)
       .then(dbRestaurant => res.json(dbRestaurant))
       .catch(err => res.status(422).json(err));
   },
