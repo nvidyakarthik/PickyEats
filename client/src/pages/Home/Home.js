@@ -16,6 +16,7 @@ class Home extends Component {
 					<h3 id="subtitle">Start searching for your next dish by entering the restaurants name or what you're in the mood for!</h3>
 
 					<input type="text" placeholder="Search by Restaurant..." />
+					<input type="text" placeholder="City" />
 					<button className="btn">Search</button>
 
 					<div></div>
