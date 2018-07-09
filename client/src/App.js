@@ -24,6 +24,7 @@ const App = () => (
         <Route exact path="/resowner" component={ResOwner} />
         <Route exact path="/resowner/:id" component={MenuEdit} />
         <Route exact path="/ressearch" component={ResSearch} />
+        <Route exact path="/menuitem" component={MenuItem} />
         <Route component={NoMatch} />
       </Switch>
     </div>
