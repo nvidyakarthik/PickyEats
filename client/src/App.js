@@ -8,6 +8,7 @@ import Resaurant from "./pages/Resaurant";
 import MenuEdit from "./pages/MenuEdit";
 import ResSearch from "./pages/ResSearch";
 import NoMatch from "./pages/NoMatch";
+import MenuItem from "./pages/MenuItem";
 
 import Nav from "./components/Nav";
 
