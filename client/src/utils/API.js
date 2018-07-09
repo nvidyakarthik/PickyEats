@@ -36,8 +36,11 @@ export default {
     return axios.get("/api/restaurant/rating");
   },
   // Login page Saves the user to the database
-  saveUser: function(userData) {
-    return axios.post("/api/user", userData);
+  signUpUser: function(userData) {
+    return axios.post("/api/user/signup", userData);
+  },
+  signInUser:function(userData){
+    return axios.post("./api/user/signin",userData);
   },
   //Save restaurant with menus
   saveRestaurant: function(restaurantData) {
