@@ -7,14 +7,14 @@ const MenuItem = () => (
  
   			<div className="restaurantinfo">
     			<h1 id="mainTitle">Restaurant Name</h1> 
- 	
-  			</div>
+ 			</div>
 		</div>
 
 		<div id="menuInfo">
 
-		<p>Top Item</p>
-		<p>Reviews</p>
+		<p id="topItem">Top Item</p>
+		<img src="" alt="top item"/>
+		<p id="reviews">Reviews</p>
 
 		</div> 
     			
