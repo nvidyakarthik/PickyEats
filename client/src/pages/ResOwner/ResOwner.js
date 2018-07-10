@@ -26,54 +26,57 @@ class ResOwner extends Component {
 
                     <h3 className="title">Restaurant Information</h3>
 
-                    <form>
-                        <input
-                            name="restName"
-                            placeholder="Restaurant Name (required)"
-                            value={this.state.restName}
-                            onChange={this.handleInputChange}
-                        />
+                    <div className="form">
+                        <form>
+                            <input
+                                name="restName"
+                                placeholder="Restaurant Name (required)"
+                                value={this.state.restName}
+                                onChange={this.handleInputChange}
+                            />
 
-                        <input
-                            id="street"
-                            name="street"
-                            placeholder="Street Address (required)"
-                            value={this.state.street}
-                            onChange={this.handleInputChange}
-                        />
+                            <input
+                                id="street"
+                                name="street"
+                                placeholder="Street Address (required)"
+                                value={this.state.street}
+                                onChange={this.handleInputChange}
+                            />
 
-                        <input
-                            id="city"
-                            name="city"
-                            placeholder="City (required)"
-                            value={this.state.city}
-                            onChange={this.handleInputChange}
-                        />
+                            <input
+                                id="city"
+                                name="city"
+                                placeholder="City (required)"
+                                value={this.state.city}
+                                onChange={this.handleInputChange}
+                            />
 
-                        <input
-                            id="state"
-                            name="state"
-                            placeholder="State (required)"
-                            value={this.state.state}
-                            onChange={this.handleInputChange}
-                        />
+                            <input
+                                id="state"
+                                name="state"
+                                placeholder="State (required)"
+                                value={this.state.state}
+                                onChange={this.handleInputChange}
+                            />
 
-                        <input
-                            id="zip"
-                            name="zip"
-                            placeholder="Zip Code (required)"
-                            value={this.state.zip}
-                            onChange={this.handleInputChange}
-                        />
+                            <input
+                                id="zip"
+                                name="zip"
+                                placeholder="Zip (required)"
+                                value={this.state.zip}
+                                onChange={this.handleInputChange}
+                            />
 
-                        <select>
-                            {this.state.categories.map(category => (
-                                <option value={category}>{category}</option>
-                            ))}
-                        </select>
-                    </form>
+                            <select id="addRestCategory">
+                                <option value="0">Category...</option>
+                                {this.state.categories.map(category => (
+                                    <option value={category}>{category}</option>
+                                ))}
+                            </select>
+                        </form>
 
-                    <button id="addRestaurant">Add Restaurant</button>
+                        <button id="addRestaurant">Add Restaurant</button>
+                    </div>
                 </div>
             </Container>
         )

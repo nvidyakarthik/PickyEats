@@ -15,12 +15,12 @@ img {
 
 
 .jumbotron{
-	width: 100%;
+	width: 70%;
   	height: 450px;
   	background-image: url(https://images.pexels.com/photos/262918/pexels-photo-262918.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940); 
   	background-size: 100% 100%;
     color: white;
-    margin-top: 5px;
+    margin-left: 15%;
     font-family: 'Quicksand', sans-serif;
     text-align: center;
     font-size: 35px;
@@ -34,12 +34,14 @@ img {
 
 #mainTitle{
     font-size: 85px;
-
+    text-shadow: 4px 5px 5px black;
 }
+
 #subtitle {
 	font-size: 25px;
 	margin-top: 50px;
 	color: white;
+    text-shadow: 3px 4px 5px black;
 }
 
 .jumbotron input[type=text] {
@@ -53,7 +55,7 @@ img {
 }
 
 .dropbtn {
-    background-color: #961b0c;
+    background-color: rgb(0, 95, 0);
     color: white;
     padding: 16px;
     font-size: 16px;
@@ -96,32 +98,19 @@ img {
 }
 
 .dropdown:hover .dropbtn {
-    background-color: #682720;
+    background-color: rgb(0, 95, 0);
 }
 
 .featuredRestaurants {
-	text-align: center;
+    text-align: center;
 	color: white;
 	font-family: 'Quicksand', sans-serif;
 }
 
-#fTitle {
-	font-size: 45px;
-}
-
-.card {
-	background-color: #442312;
-	width: 30%;
+.featuredCard {
+    background-color: rgba(255, 255, 255, 0.24);
+    border-radius: 10px;
+	width: 31.35%;
 	float: left;
-	margin: 20px;
-}
-
-.btn {
-    background-color: #961b0c; 
-    border: none; 
-    color: white; 
-    padding: 12px 16px; 
-    font-size: 16px; 
-    cursor: pointer; 
-    margin-bottom: 10px;
+	margin: 10px;
 }

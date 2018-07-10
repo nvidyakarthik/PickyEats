@@ -25,6 +25,8 @@
     "express": "^4.16.3",
     "if-env": "^1.0.4",
     "mern-cli": "^2.5.0",
-    "mongoose": "^5.1.7"
+    "mongoose": "^5.1.7",
+    "react-popup": "^0.9.3",
+    "reactjs-popup": "^1.1.1"
   }
 }
