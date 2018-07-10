@@ -1,0 +1,27 @@
+.menuJumbo {
+	width: 100%;
+    height: 450px;
+    background-color: #442312;
+    background-size: 100% 100%;
+    color: white;
+    margin-top: 5px;
+    font-family: 'Quicksand', sans-serif;
+    text-align: center;
+    font-size: 35px;
+
+}
+
+
+#menuInfo {
+    text-align: center;
+    background-color: #442312;
+    width: 90%;
+    margin-left:60px;
+    margin-top: 40px;
+    height: 600px;
+}
+
+#topItem {
+    font-size: 50px;
+    font-family: 'Quicksand', sans-serif;
+}
