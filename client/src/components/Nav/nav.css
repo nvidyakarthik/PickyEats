@@ -31,7 +31,7 @@ li a {
     display: block;
     color: white;
     text-align: center;
-    margin-right: 50px;
+    /* margin-right: 50px; */
     padding: 25px 16px;
     text-decoration: none;
     font-family: 'Quicksand', sans-serif;

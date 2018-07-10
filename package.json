@@ -21,12 +21,20 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "bcrypt-nodejs": "^0.0.3",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "connect-mongo": "^2.0.1",
     "express": "^4.16.3",
+    "express-session": "^1.15.6",
     "if-env": "^1.0.4",
+    "jsonwebtoken": "^8.3.0",
     "mern-cli": "^2.5.0",
     "mongoose": "^5.1.7",
     "react-popup": "^0.9.3",
-    "reactjs-popup": "^1.1.1"
+    "reactjs-popup": "^1.1.1",
+    "morgan": "^1.9.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
   }
 }
