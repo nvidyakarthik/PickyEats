@@ -25,44 +25,8 @@
   font-size: 120%;
 }
 
-.menuItem {
-  float: left;
-  color: white;
-  font-family: 'Quicksand', sans-serif;
-  width: 80%;
-  margin: 10px 0 10px 10%;
-  background-color: rgba(255, 255, 255, 0.24);
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.itemPic {
-  float: left;
-  margin-right: 15px;
-}
-
-.itemWords {
-  width: 100%;
-}
-
-.itemName {
-  font-weight: bold;
-  text-shadow: 1px 1px 5px black;
-  font-size: 110%;
-  margin-bottom: 10px;
-}
-
-.itemDescription {
-  min-height: 50px;
-}
-
-.priceRating {
-  float: left;
-  margin-right: 15px;
-}
-
 .rateIt {
-  margin-top: -7px;
+  margin: 8.5% 0 0 -53%;
 }
 
 .modalTitle {

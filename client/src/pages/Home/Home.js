@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Container from "../../components/Container";
+import SmallCard from "../../components/SmallCard";
 import "./home.css";
 import API from "../../utils/API";
 
@@ -7,30 +8,36 @@ import API from "../../utils/API";
 
 class Home extends Component {
 	state = {
-		categories:[],
+		categories: [],
 		//categories: ["Chinese", "Mexican", "Korean", "American", "Steakhouse", "Italian", "Seafood", "Breakfast", "Pizza", "Burger", "Thai", "Japanese", "Vietnamese", "Sandwiches", "Sushi Bar"],
 		restaurants: [
 			{
+				img: "http://placehold.it/100x100",
 				name: "Restaurant 1",
 				info: "Restaurant 1 info",
 			},
 			{
+				img: "http://placehold.it/100x100",
 				name: "Restaurant 2",
 				info: "Restaurant 2 info",
 			},
 			{
+				img: "http://placehold.it/100x100",
 				name: "Restaurant 3",
 				info: "Restaurant 3 info",
 			},
 			{
+				img: "http://placehold.it/100x100",
 				name: "Restaurant 4",
 				info: "Restaurant 4 info",
 			},
 			{
+				img: "http://placehold.it/100x100",
 				name: "Restaurant 5",
 				info: "Restaurant 5 info",
 			},
 			{
+				img: "http://placehold.it/100x100",
 				name: "Restaurant 6",
 				info: "Restaurant 6 info",
 			},
@@ -39,18 +46,18 @@ class Home extends Component {
 
 	componentDidMount() {
 		this.loadCategories();
-		
+
 	}
 
-	loadCategories=()=>{
+	loadCategories = () => {
 		API.getCategories().then(response => {
 			console.log(response.data)
 			this.setState({
-				categories:response.data
-			  });
+				categories: response.data
+			});
 		});
 	}
-	
+
 	render() {
 		return (
 			<div>
@@ -64,12 +71,12 @@ class Home extends Component {
 					<button className="btn">Search</button>
 
 					<div></div>
-				
+
 					<div className="dropdown">
 						<button className="dropbtn">I'm in the mood for</button>
 						<div className="dropdown-content">
 							{this.state.categories.map(category => (
-								<a href={'/ressearch/'+category._id} key={this.state.categories.id}  value={category.categoryName}>{category.categoryName}</a>
+								<a href={'/ressearch/' + category._id} key={this.state.categories.id} value={category.categoryName}>{category.categoryName}</a>
 							))}
 						</div>
 					</div>
@@ -79,14 +86,11 @@ class Home extends Component {
 					<div className="featuredRestaurants">
 						<h1 className="title">Featured Restaurants</h1>
 						{this.state.restaurants.map(restaurant => (
-							<div className="featuredCard">
-								<img src="" alt="restaurant" />
-								<div className="restaurantinfo">
-									<h4><b>{restaurant.name}</b></h4>
-									<p>{restaurant.info}</p>
-									<button className="btn">Menu</button>
-								</div>
-							</div>
+							<SmallCard
+								name={restaurant.name}
+								img={restaurant.img}
+								info={restaurant.info}
+							/>
 						))}
 					</div>
 				</Container>
