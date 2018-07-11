@@ -13,6 +13,9 @@ const Nav = props => {
 						</Link>
 					</li>
 					<li className="user">
+						<a href="">{props.user.firstName}</a>
+					</li>
+					<li>
 						<Link to="/logout" className="nav-link" onClick={props._logout}>
 							Logout
 						</Link>
