@@ -5,8 +5,9 @@ import "./menuItem.css";
 
 class MenuItem extends Component {
     state = {
-        name: "Item Name",
-        description: "Item Description",
+        restName: "Restaurant Name",
+        itemName: "Item Name",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         pic: "http://placehold.it/550x250",
         reviews: [
             {
@@ -38,24 +39,19 @@ class MenuItem extends Component {
         return (
             <div id="menuItemPage">
                 <div className="menuJumbo">
-                    <div className="restaurantinfo">
-                    <h1 id="restName">{this.state.name}</h1>
-                    </div>
+                    <h1 id="restName">{this.state.restName}</h1>
+                    <h1 className="itemName">{this.state.itemName}</h1>
                 </div>
 
                 <Container>
-                    <div id="topInfo">
-                        <p id="topItem">Item Desc</p>
-                        <img src="http://via.placeholder.com/550x250" alt="top item" />
-
-                        <p id="topdisc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-
+                    <div className="half">
+                        <p className="title">Details</p>
+                        <img src={this.state.pic} alt="top item" />
+                        <p id="topdesc">{this.state.description}</p>
                     </div>
 
                     <div className="half">
-                        <div id="reviewTitle" className="title">Reviews</div>
+                        <div className="title">Reviews</div>
                         {this.state.reviews.map(review => (
                             <LongCard
                                 name={review.name}
@@ -68,10 +64,7 @@ class MenuItem extends Component {
 
                     <div id="restDirect">
                         <div className="modalButtons">
-
-
                             <button className="resButton">Go to Restaurant Page</button>
-
                         </div>
                     </div>
                 </Container>
