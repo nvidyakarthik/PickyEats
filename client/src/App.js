@@ -89,7 +89,7 @@ class App extends React.Component {
             }
             />
             <Route exact path="/signup" component={SignUp} />
-            <Route exact path="/restaurant/:id" component={Resaurant} />
+            <Route exact path="/restaurant/" component={Resaurant} />
             <Route exact path="/resowner" component={ResOwner} />
             <Route exact path="/resowner/:id" component={MenuEdit} />
             <Route exact path="/ressearch" component={ResSearch} />

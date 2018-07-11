@@ -78,12 +78,14 @@ class SignUp extends Component {
                         />
                         <input
                             name="password"
+                            type="password"
                             placeholder="Password (required)"
                             value={this.state.password}
                             onChange={this.handleInputChange}
                         />
                         <input
                             name="confirmPass"
+                            type="password"
                             placeholder="Confirm Password (required)"
                             value={this.state.confirmPass}
                             onChange={this.handleInputChange}
