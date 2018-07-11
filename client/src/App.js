@@ -19,7 +19,7 @@ class App extends React.Component {
     super()
     this.state = {
       loggedIn: false,
-      user: null
+      user: null      
     }
     this._logout = this._logout.bind(this)
     this._login = this._login.bind(this)
@@ -31,7 +31,7 @@ class App extends React.Component {
         console.log('THERE IS A USER')
         this.setState({
           loggedIn: true,
-          user: response.data.user
+          user: response.data.user          
         })
       } else {
         this.setState({
@@ -91,11 +91,9 @@ class App extends React.Component {
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/restaurant/:id" component={Resaurant} />
             <Route exact path="/resowner" component={ResOwner} />
-            <Route exact path="/resowner/:id" component={MenuEdit} />
-      
+            <Route exact path="/resowner/:id" component={MenuEdit} />      
             <Route exact path="/ressearch/:id" component={ResSearch} />
             <Route exact path="/menuitem" component={MenuItem} />
-
             <Route component={NoMatch} />
           </Switch>
         </div>
