@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import "./nav.css";
 
 const Nav = props => {
+	
 	if (props.loggedIn) {
+		const isResOwner=props.user.restaurantOwner;
 		return (
 			
 				<ul id="nav">
@@ -13,16 +15,21 @@ const Nav = props => {
 						</Link>
 					</li>
 					<li className="user">
-						<a href="">{props.user.firstName}</a>
-					</li>
-					<li>
 						<Link to="/logout" className="nav-link" onClick={props._logout}>
 							Logout
 						</Link>
-					</li>
-					<li className="user">
-						<a href="#">{props.user.firstName}</a>
-					</li>
+					</li>					
+					{isResOwner ?
+						<li className="user">
+							<Link to="/resowner" className="nav-link">
+								Dashboard
+							</Link>
+						</li> 
+					 : ''}
+					 <li className="user">
+						<a href="">Welcome {props.user.firstName}</a>
+					</li>				
+					
 				</ul>
 			
 		);
