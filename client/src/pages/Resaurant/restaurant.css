@@ -1,0 +1,106 @@
+#restaurantPage {
+  min-height: 1000px;
+}
+
+.restJumbotron{
+	width: 70%;
+  height: 450px;
+  background-image: url(https://www.onholdinc.com/mohblog/wp-content/uploads/2018/03/restaurant.jpg); 
+  background-size: 100% 100%;
+  color: white;
+  margin-left: 15%;
+  font-family: 'Quicksand', sans-serif;
+  text-align: center;
+  font-size: 35px;
+  padding-top: 10%;
+}
+
+#menu {
+  text-align: center;
+}
+
+#restName {
+  font-weight: bold;
+  text-shadow: 3px 4px 5px black;
+  font-size: 120%;
+}
+
+.menuItem {
+  float: left;
+  color: white;
+  font-family: 'Quicksand', sans-serif;
+  width: 80%;
+  margin: 10px 0 10px 10%;
+  background-color: rgba(255, 255, 255, 0.24);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.itemPic {
+  float: left;
+  margin-right: 15px;
+}
+
+.itemWords {
+  width: 100%;
+}
+
+.itemName {
+  font-weight: bold;
+  text-shadow: 1px 1px 5px black;
+  font-size: 110%;
+  margin-bottom: 10px;
+}
+
+.itemDescription {
+  min-height: 50px;
+}
+
+.priceRating {
+  float: left;
+  margin-right: 15px;
+}
+
+.rateIt {
+  margin-top: -7px;
+}
+
+.modalTitle {
+  color: #961b0c;
+  font-weight: bold;
+  font-size: 130%;
+  margin: 10px 10px 20px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid silver;
+}
+
+.modalContent {
+  text-align: center;
+  margin: auto;
+}
+
+.modalSection {
+  box-shadow: none;
+  font-family: 'Quicksand', sans-serif;
+  color: black;
+  margin: 5px 10px;
+}
+
+.modalReview {
+  height: 100px;
+}
+
+.modalDiv {
+  text-align: left;
+  margin: 20px 0 0 10%;
+}
+
+.modalButtons {
+  width: 100%;
+  padding-left: 50%;
+}
+
+.modalButton {
+  margin: 10px 10px;
+  box-shadow: 1px 2px 5px grey;
+}

@@ -5,27 +5,11 @@ import "./resowner.css";
 class ResOwner extends Component {
     state = {
         restName: "",
-        address: "",
+        street: "",
+        city: "",
+        state: "",
+        zip: "",
         categories: ["Chinese", "Mexican", "Korean", "American", "Steakhouse", "Italian", "Seafood", "Breakfast", "Pizza", "Burger", "Thai", "Japanese", "Vietnamese", "Sandwiches", "Sushi Bar"],
-        dishName: "",
-        description: "",
-        price: "",
-        menuItems: [
-            {
-                name: "Burrito",
-                description: "good stuff",
-                price: "5.99"
-            },
-            {
-                name: "Lasagna",
-                price: "15.99"
-            },
-            {
-                name: "Chow Mein",
-                price: "7.96"
-            }
-        ],
-        types: ["Appetizer", "Breakfast", "Lunch", "Dinner", "Drink", "Kids"]
     };
 
     handleInputChange = event => {
@@ -38,90 +22,61 @@ class ResOwner extends Component {
     render() {
         return (
             <Container>
-                <div className="half">
+                <div className="middle">
+
                     <h3 className="title">Restaurant Information</h3>
 
-                    <form>
-                        <input
-                            name="restName"
-                            placeholder="Restaurant Name (required)"
-                            value={this.state.restName}
-                            onChange={this.handleInputChange}
-                        />
-                        <input
-                            name="address"
-                            placeholder="Restaurant Address (required)"
-                            value={this.state.address}
-                            onChange={this.handleInputChange}
-                        />
-                        <select>
-                            {this.state.categories.map(category => (
-                                <option value={category}>{category}</option>
-                            ))}
-                        </select>
-                    </form>
-
-                    <h3 className="title">Menu Items</h3>
-
-                    <form>
-                        <input
-                            name="dishName"
-                            placeholder="Item Name (required)"
-                            value={this.state.dishName}
-                            onChange={this.handleInputChange}
-                        />
-
-                        <textarea
-                            rows="5"
-                            name="description"
-                            placeholder="Description (optional)"
-                            value={this.state.description}
-                            onChange={this.handleInputChange}
-                            className="textare"
-                        />
-                        
-                        <select>
-                            {this.state.types.map(type => (
-                                <option value={type}>{type}</option>
-                            ))}
-                        </select>
-
-                        <div id="price">
-                            <span>$ </span>
+                    <div className="form">
+                        <form>
                             <input
-                                id="priceInput"
-                                name="price"
-                                placeholder="Price (required)"
-                                value={this.state.price}
+                                name="restName"
+                                placeholder="Restaurant Name (required)"
+                                value={this.state.restName}
                                 onChange={this.handleInputChange}
                             />
-                        </div>
-                        <p></p>
-                        <button id="addItem">Add Item</button>
-                        <button id="done">I'm Done</button>
-                    </form>
-                </div>
 
-                <div className="half">
-                    <h3 className="title">Added Items</h3>
+                            <input
+                                id="street"
+                                name="street"
+                                placeholder="Street Address (required)"
+                                value={this.state.street}
+                                onChange={this.handleInputChange}
+                            />
 
-                    {this.state.menuItems.length ? (
-                        <div>
-                            {this.state.menuItems.map(item => (
-                                <div>
-                                    <div className="menuItems">
-                                        ${item.price} {item.name}
-                                    </div>
-                                    <div className="menuButtons">
-                                        <button className="edit">Edit</button>
-                                        <span className="delete">✗</span>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    ) : (
-                            <h3>Add some menu items!</h3>
-                        )}
+                            <input
+                                id="city"
+                                name="city"
+                                placeholder="City (required)"
+                                value={this.state.city}
+                                onChange={this.handleInputChange}
+                            />
+
+                            <input
+                                id="state"
+                                name="state"
+                                placeholder="State (required)"
+                                value={this.state.state}
+                                onChange={this.handleInputChange}
+                            />
+
+                            <input
+                                id="zip"
+                                name="zip"
+                                placeholder="Zip (required)"
+                                value={this.state.zip}
+                                onChange={this.handleInputChange}
+                            />
+
+                            <select id="addRestCategory">
+                                <option value="0">Category (required)</option>
+                                {this.state.categories.map(category => (
+                                    <option value={category}>{category}</option>
+                                ))}
+                            </select>
+                        </form>
+
+                        <button className="infoButton">Add Restaurant</button>
+                    </div>
                 </div>
             </Container>
         )

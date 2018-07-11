@@ -1,48 +1,75 @@
-.half {
-    float: left;
-    width: 45%;
-    padding: 10px;
+.middle {
     color: white;
+    width: 50%;
+    margin: 50px 0 0 25%;
 }
 
 .title {
     margin-top: 50px;
+    font-size: 170%;
+    margin-bottom: 20px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+    text-shadow: 4px 5px 5px black;
+    color: white;
+}
+
+.form {
+    padding: 10px;
+    margin-bottom: 50px;
 }
 
 input, select, textarea {
-    width: 80%;
-    height: 30px;
+    width: 90%;
+    height: 35px;
     border-radius: 5px;
     border: 1px solid rgb(155, 155, 155);
-    margin: 5px 0;
+    font-family: 'Quicksand', sans-serif;
+    margin: 10px 5%;
+    padding: 5px;
+    box-shadow: 2px 3px 5px black;
 }
 
-#price {
-    margin-left: 55%;
+#street {
+    width: 90%;
+    float: left;
 }
 
-#priceInput {
-    width: 40%;
+#city {
+    width: 30%;
+    margin: 7px 5px 7px 5%;
+    float: left;
+}
+
+#state {
+    width: 13%;
+    margin: 7px 5px;
+    float: left;
+}
+
+#zip {
+    width: 15%;
+    margin: 7px 5px;
+    float: left;
+}
+
+#addRestCategory {
+    float: left;
+    margin: 7px 5px;
+    width: 26%;
+}
+
+.infoButton {
+    margin: 10px 0 10px 75%;
 }
 
 button {
-    width: 100px;
-}
-
-.menuItems {
-    margin: 7px;
-    width: 50%;
-    float: left;
-}
-
-.menuButtons {
-    margin: 10px;
-    width: 30%;
-    float: left;
-}
-
-.edit {
-    width: 40px;
-    height: 20px;
-    margin: 0 5px;
+    background-color: rgb(0, 95, 0);
+    border: none;
+    color: white;
+    padding: 7px;
+    box-shadow: 3px 4px 5px black;
+    margin-right: 10px;
+    font-family: 'Quicksand', sans-serif;
+    border-radius: 5px;
 }

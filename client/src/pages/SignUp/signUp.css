@@ -1,0 +1,13 @@
+#resOwner {
+    border: none;
+    color: white;
+    box-shadow: 3px 4px 5px black;
+    height: 50px;
+    padding: 7px 20px;
+    margin-left: 25%;
+    font-size: 120%;
+    background-color: tomato;
+    font-family: 'Quicksand', sans-serif;
+    border-radius: 5px;
+    text-decoration: none;
+}

@@ -5,7 +5,7 @@ const CLIENT_SECRET="PKLEHEUJA3BSZENQWRSY4X5TWPMQLXQ4JT3W1TPFMCWJ1EIR";
 export default {
   // Gets all restaurant info from public api foursquare
   getRestaurants: function(location) {
-    const location=85297;
+    location=85297;
     return axios.get("/api/restaurant/venuesearch", { params:
    { 
       client_id: CLIENT_ID,
@@ -35,9 +35,20 @@ export default {
    getRestaurantByRating: function() {
     return axios.get("/api/restaurant/rating");
   },
-  // Login page Saves the user to the database
-  saveUser: function(userData) {
-    return axios.post("/api/user", userData);
+  // signup page Saves the user to the database
+  signUpUser: function(userData) {
+    return axios.post("/auth/signup", userData);
+  },
+  //login page checks email and password
+  signInUser:function(userData){
+    return axios.post("/auth/login",userData);
+  },
+  //sign out for the app
+  signOut:function(){
+    return axios.get("/auth/logout");
+  },
+  getUserInfo:function(){
+    return axios.get("/auth/user");
   },
   //Save restaurant with menus
   saveRestaurant: function(restaurantData) {
