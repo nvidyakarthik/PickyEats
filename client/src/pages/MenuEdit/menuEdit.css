@@ -1,27 +1,41 @@
 .half {
     float: left;
-    width: 45%;
+    width: 50%;
     padding: 10px;
     color: white;
 }
 
 #price {
-    margin-left: 55%;
+    margin-left: 5%;
 }
 
 #priceInput {
-    width: 40%;
+    width: 25%;
+    margin-left: 5px;
+}
+
+#addDone {
+    margin-left: 65%;
+}
+
+#addedMenu {
+    float: left;
+    background-color: rgba(255, 255, 255, 0.24);
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .menuItems {
-    margin: 7px;
-    width: 50%;
+    margin: 15px 0;
+    width: 80%;
     float: left;
+    font-family: 'Quicksand', sans-serif;
+    text-shadow: 1px 2px 5px black;
 }
 
 .menuButtons {
-    margin: 10px;
-    width: 30%;
+    margin: 12px 15px 0 0;
     float: left;
 }
 
@@ -29,4 +43,10 @@
     width: 40px;
     height: 20px;
     margin: 0 5px;
+    padding: 0;
+    font-size: 70%;
+}
+
+#done {
+    background-color: rgb(226, 68, 40);
 }
