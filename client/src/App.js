@@ -92,8 +92,10 @@ class App extends React.Component {
             <Route exact path="/restaurant/:id" component={Resaurant} />
             <Route exact path="/resowner" component={ResOwner} />
             <Route exact path="/resowner/:id" component={MenuEdit} />
+      
             <Route exact path="/ressearch/:id" component={ResSearch} />
             <Route exact path="/menuitem" component={MenuItem} />
+
             <Route component={NoMatch} />
           </Switch>
         </div>
