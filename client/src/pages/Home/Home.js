@@ -38,13 +38,19 @@ class Home extends Component {
 	};
 
 	componentDidMount() {
+		this.loadCategories();
+		
+	}
+
+	loadCategories=()=>{
 		API.getCategories().then(response => {
-		  console.log(response.data)
-		  this.setState({
-			  categories:response.data
-			});
+			console.log(response.data)
+			this.setState({
+				categories:response.data
+			  });
 		});
 	}
+	
 	render() {
 		return (
 			<div>
@@ -58,13 +64,12 @@ class Home extends Component {
 					<button className="btn">Search</button>
 
 					<div></div>
-
-
+				
 					<div className="dropdown">
 						<button className="dropbtn">I'm in the mood for</button>
 						<div className="dropdown-content">
 							{this.state.categories.map(category => (
-								<a href="" key={this.state.categories.id} value={category.categoryName}>{category.categoryName}</a>
+								<a href={'/ressearch/'+category._id} key={this.state.categories.id}  value={category.categoryName}>{category.categoryName}</a>
 							))}
 						</div>
 					</div>
