@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import Container from "../../components/Container";
 import "./home.css";
+import API from "../../utils/API";
+
 
 
 class Home extends Component {
 	state = {
-		categories: ["Chinese", "Mexican", "Korean", "American", "Steakhouse", "Italian", "Seafood", "Breakfast", "Pizza", "Burger", "Thai", "Japanese", "Vietnamese", "Sandwiches", "Sushi Bar"],
+		categories:[],
+		//categories: ["Chinese", "Mexican", "Korean", "American", "Steakhouse", "Italian", "Seafood", "Breakfast", "Pizza", "Burger", "Thai", "Japanese", "Vietnamese", "Sandwiches", "Sushi Bar"],
 		restaurants: [
 			{
 				name: "Restaurant 1",
@@ -34,6 +37,20 @@ class Home extends Component {
 		]
 	};
 
+	componentDidMount() {
+		this.loadCategories();
+		
+	}
+
+	loadCategories=()=>{
+		API.getCategories().then(response => {
+			console.log(response.data)
+			this.setState({
+				categories:response.data
+			  });
+		});
+	}
+	
 	render() {
 		return (
 			<div>
@@ -47,13 +64,12 @@ class Home extends Component {
 					<button className="btn">Search</button>
 
 					<div></div>
-
-
+				
 					<div className="dropdown">
 						<button className="dropbtn">I'm in the mood for</button>
 						<div className="dropdown-content">
 							{this.state.categories.map(category => (
-								<a href="" value={category}>{category}</a>
+								<a href={'/ressearch/'+category._id} key={this.state.categories.id}  value={category.categoryName}>{category.categoryName}</a>
 							))}
 						</div>
 					</div>
