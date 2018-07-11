@@ -10,6 +10,7 @@ class ResOwner extends Component {
         city: "",
         state: "",
         zip: "",
+        categoryId:"",
         //categories: ["Chinese", "Mexican", "Korean", "American", "Steakhouse", "Italian", "Seafood", "Breakfast", "Pizza", "Burger", "Thai", "Japanese", "Vietnamese", "Sandwiches", "Sushi Bar"],
         categories:[]
     };
@@ -27,9 +28,35 @@ class ResOwner extends Component {
 			this.setState({
 				categories:response.data
 			  });
-		});
+		}).catch(err => console.log(err));
 		
-	}
+    }
+    
+    handleSubmit=(event)=>{
+        
+        event.preventDefault();
+        const restData={
+            restaurantName: this.state.restName,
+            street: this.state.street,
+            city: this.state.city,
+            state: this.state.state,
+            zip: this.state.zip,
+            category:this.state.categoryId
+        }
+        API.saveRestaurant(restData).then(response => {
+			console.log(response.data)
+			
+		}).catch(err => console.log(err));
+		
+    }
+
+    change=(event)=> {        
+        const selectedValue= event.target.value;
+        console.log("categoryId"+selectedValue);
+        this.setState({
+            categoryId: selectedValue
+        });
+    }
 
     render() {
         return (
@@ -79,15 +106,15 @@ class ResOwner extends Component {
                                 onChange={this.handleInputChange}
                             />
 
-                            <select id="addRestCategory">
+                            <select id="addRestCategory" value={this.state.category} onChange={ e => this.change(e) }>
                                 <option value="0">Category (required)</option>
                                 {this.state.categories.map(category => (
                                     <option key={category.id} value={category._id}>{category.categoryName}</option>
                                 ))}
                             </select>
                         </form>
-
-                        <button className="infoButton">Add Restaurant</button>
+ 
+                        <button className="infoButton" onClick={this.handleSubmit}>Add Restaurant</button>
                     </div>
                 </div>
             </Container>
