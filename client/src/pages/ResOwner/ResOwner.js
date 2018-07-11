@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Container from "../../components/Container";
 import "./resowner.css";
+import API from "../../utils/API";
 
 class ResOwner extends Component {
     state = {
@@ -9,7 +10,8 @@ class ResOwner extends Component {
         city: "",
         state: "",
         zip: "",
-        categories: ["Chinese", "Mexican", "Korean", "American", "Steakhouse", "Italian", "Seafood", "Breakfast", "Pizza", "Burger", "Thai", "Japanese", "Vietnamese", "Sandwiches", "Sushi Bar"],
+        //categories: ["Chinese", "Mexican", "Korean", "American", "Steakhouse", "Italian", "Seafood", "Breakfast", "Pizza", "Burger", "Thai", "Japanese", "Vietnamese", "Sandwiches", "Sushi Bar"],
+        categories:[]
     };
 
     handleInputChange = event => {
@@ -18,6 +20,16 @@ class ResOwner extends Component {
             [name]: value
         });
     };
+
+    componentDidMount() {
+		API.getCategories().then(response => {
+			console.log(response.data)
+			this.setState({
+				categories:response.data
+			  });
+		});
+		
+	}
 
     render() {
         return (
@@ -70,7 +82,7 @@ class ResOwner extends Component {
                             <select id="addRestCategory">
                                 <option value="0">Category (required)</option>
                                 {this.state.categories.map(category => (
-                                    <option value={category}>{category}</option>
+                                    <option key={category.id} value={category._id}>{category.categoryName}</option>
                                 ))}
                             </select>
                         </form>
