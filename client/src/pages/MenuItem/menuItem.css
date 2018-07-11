@@ -1,9 +1,11 @@
+
 .menuJumbo {
-	width: 100%;
-    height: 450px;
-    background-color: #442312;
+	width: 90%;
+    height: 100px;
+    background-color: rgb(0, 95, 0);
     background-size: 100% 100%;
     color: white;
+    margin-left:60px;
     margin-top: 5px;
     font-family: 'Quicksand', sans-serif;
     text-align: center;
@@ -12,16 +14,81 @@
 }
 
 
-#menuInfo {
+#topInfo {
+    font-family: 'Quicksand', sans-serif;
+    color: white;
     text-align: center;
-    background-color: #442312;
-    width: 90%;
-    margin-left:60px;
-    margin-top: 40px;
+    width: 40%;
     height: 600px;
+    float: left;
+    margin-left: 70px;
+    margin-top: 40px;
+    background-color: rgba(255, 255, 255, 0.24);
+    border-radius: 10px;
+   
+    
+   
 }
 
 #topItem {
-    font-size: 50px;
     font-family: 'Quicksand', sans-serif;
+    color: white;
+    font-size: 55px;
+    text-shadow: 4px 5px 5px black;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#topdisc {
+    font-family: 'Quicksand', sans-serif;
+    color: white;
+    padding: 10px;
+}
+
+#highlightTitle {
+    font-size: 25px;
+    text-shadow: 4px 5px 5px black;
+    margin-bottom: 20px;
+}
+
+#genReviews {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.24);
+    border-radius: 10px;
+    margin-top: 40px;
+    width: 40%;
+    height: 500px;
+    float: left;
+    margin-left: 50px;
+
+}
+
+#restDirect {
+    text-align: center;
+    background-color: transparent;
+    border-radius: 10px;
+    margin-top: 20px;
+    width: 40%;
+    height: 80px;
+    float: left;
+    margin-left: 50px;
+}
+
+.resButton, .rateButton {
+    margin-top: 10px;
+    height: 50px;
+    font-size: 15px;
+    text-align: center;
+    float: left;
+
+    
+}
+
+.resButton {
+    
+    margin-left: -150px;
+}
+
+.rateButton {
+    margin-left: 10px;
 }

@@ -10,7 +10,7 @@ import ResSearch from "./pages/ResSearch";
 import NoMatch from "./pages/NoMatch";
 import SignUp from "./pages/SignUp";
 import API from "./utils/API"
-//import MenuItem from "./pages/MenuItem";
+import MenuItem from "./pages/MenuItem";
 
 import Nav from "./components/Nav";
 
@@ -93,6 +93,7 @@ class App extends React.Component {
             <Route exact path="/resowner" component={ResOwner} />
             <Route exact path="/resowner/:id" component={MenuEdit} />
             <Route exact path="/ressearch/:id" component={ResSearch} />
+            <Route exact path="/menuitem" component={MenuItem} />
             <Route component={NoMatch} />
           </Switch>
         </div>
