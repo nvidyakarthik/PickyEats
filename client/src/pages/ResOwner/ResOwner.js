@@ -68,14 +68,14 @@ class ResOwner extends Component {
                             />
 
                             <select id="addRestCategory">
-                                <option value="0">Category...</option>
+                                <option value="0">Category (required)</option>
                                 {this.state.categories.map(category => (
                                     <option value={category}>{category}</option>
                                 ))}
                             </select>
                         </form>
 
-                        <button id="addRestaurant">Add Restaurant</button>
+                        <button className="infoButton">Add Restaurant</button>
                     </div>
                 </div>
             </Container>

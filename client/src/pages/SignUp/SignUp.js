@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Container from "../../components/Container";
+import { Link } from 'react-router-dom';
 import "./signUp.css";
 import API from "../../utils/API";
 import { Redirect } from 'react-router-dom'
@@ -14,7 +15,7 @@ class SignUp extends Component {
         password: "",
         confirmPass: "",
         restaurantOwner: false,
-        redirectTo:null
+        redirectTo: null
     };
     this.handleInputChange=this.handleInputChange.bind(this);
     this.handleSubmit=this.handleSubmit.bind(this);
@@ -54,10 +55,10 @@ class SignUp extends Component {
 		}
         return (
             <Container>
-                <div className="half">
+                <div className="middle">
                     <h3 className="title">Sign Up</h3>
 
-                    <form>
+                    <form className="form">
                         <input
                             name="firstName"
                             placeholder="First Name (required)"
@@ -90,8 +91,11 @@ class SignUp extends Component {
                             value={this.state.confirmPass}
                             onChange={this.handleInputChange}
                         />
-                        <button id="createAcc" onClick={this.handleSubmit}>Create Account</button>
+
+                        <button id="createAcc" className="infoButton" onClick={this.handleSubmit}>Create Account</button>
                     </form>
+
+                    <Link to="/resowner" id="resOwner" >I'm a restuarant owner!</Link>
                 </div>               
             </Container>
         )
