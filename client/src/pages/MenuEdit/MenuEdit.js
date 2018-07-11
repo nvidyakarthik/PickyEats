@@ -33,7 +33,7 @@ class MenuEdit extends Component {
 
                     <h3 className="title">Menu Items</h3>
 
-                    <form>
+                    <form className="form">
                         <input
                             name="dishName"
                             placeholder="Item Name (required)"
@@ -51,13 +51,14 @@ class MenuEdit extends Component {
                         />
 
                         <select>
+                            <option value="">Type...</option>
                             {this.state.types.map(type => (
                                 <option value={type}>{type}</option>
                             ))}
                         </select>
 
                         <div id="price">
-                            <span>$ </span>
+                            <span>$</span>
                             <input
                                 id="priceInput"
                                 name="price"
@@ -66,9 +67,10 @@ class MenuEdit extends Component {
                                 onChange={this.handleInputChange}
                             />
                         </div>
-                        <p></p>
-                        <button id="addItem">Add Item</button>
-                        <button id="done">I'm Done</button>
+                        <div id="addDone">
+                            <button id="addItem">Add Item</button>
+                            <button id="done">I'm Done</button>
+                        </div>
                     </form>
                 </div>
 
@@ -76,15 +78,15 @@ class MenuEdit extends Component {
                     <h3 className="title">Added Items</h3>
 
                     {this.state.menuItems.length ? (
-                        <div>
+                        <div id="addedMenu">
                             {this.state.menuItems.map(item => (
                                 <div>
+                                    <div className="menuButtons">
+                                        <span className="delete">✗</span>
+                                        <button className="edit">Edit</button>
+                                    </div>
                                     <div className="menuItems">
                                         ${item.price} {item.name}
-                                    </div>
-                                    <div className="menuButtons">
-                                        <button className="edit">Edit</button>
-                                        <span className="delete">✗</span>
                                     </div>
                                 </div>
                             ))}

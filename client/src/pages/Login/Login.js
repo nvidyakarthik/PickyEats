@@ -41,9 +41,8 @@ class Login extends Component {
 		} else {
         return (
             <Container>
-                
-                <div className="half">
-                    <h3 className="title">Sign In</h3>
+                <div className="middle">
+                    <h3 className="title">Login</h3>
 
                     <input
                         name="email"
@@ -58,7 +57,7 @@ class Login extends Component {
                         value={this.state.password}
                         onChange={this.handleInputChange}
                     />
-                    <button id="signIn" onClick={this.handleSubmit}>Sign In</button>
+                    <button id="signIn" className="infoButton" onClick={this.handleSubmit}>Sign In</button>
                 </div>
             </Container>
         )
