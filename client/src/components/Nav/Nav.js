@@ -14,7 +14,7 @@ const Nav = props => {
 						
 					</li>
 					<li>
-						<a href="#">{props.user.firstName}</a>
+						<a href="">{props.user.firstName}</a>
 					</li>
 					<li>
 						<Link to="/logout" className="nav-link" onClick={props._logout}>
