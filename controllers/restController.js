@@ -86,3 +86,33 @@ module.exports = {
   }
 
 };
+
+
+//session stored 
+var estLat = sessionStorage.getItem("startLat");
+var estlng = sessionStorage.getItem("startLng");
+
+function foursquareSearch (category, loc, rad){
+  let apiString='https://api.foursquare.com/v2/venues/search?';
+  const clientID = '&client_id=WPAVV4TBTN0WB1AMQAZG5XTQFJ5AQ2EBWJPLU4Z1PSGAZLVC'
+  const clientSecret = '&client_secret=2JYX2TBCNACXMXOUXCVOM5DALR4F4ZZ5H3L35PZ1I54OVP1U'
+  const version = '&v=20170801'
+
+  let location = string('&near'=+loc);
+  let radius = string('&radius='+rad);
+  let categoryID = '&categoryId='+ category;
+  const limit = '&limit=10';
+
+  console.log(apiString);
+    $.ajax({
+      url: apitstring+clientID+clientSecret+version+location+radius+categoryID+limit,
+      method:'GET'
+    }).then(result => {
+      let venues = results.response.venues;
+      console.log(venues);
+      console.log(venues.id);
+    
+    })
+  
+}
+
