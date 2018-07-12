@@ -3,10 +3,12 @@ import Popup from "reactjs-popup";
 import Container from "../../components/Container";
 import LongCard from "../../components/LongCard";
 import "./restaurant.css";
+import API from "../../utils/API";
 
 class Restaurant extends Component {
     state = {
-        menu: [
+        restaurantName:"",
+        menus: [
             {
                 id: 1,
                 img: "http://placehold.it/100x100",
@@ -33,21 +35,31 @@ class Restaurant extends Component {
             }
         ]
     };
+    componentDidMount() {
+        const restaurantId=this.props.match.params.id;
+		API.getRestaurantById(restaurantId).then(response => {
+			console.log(response.data)
+			this.setState({
+                restaurantName:response.data.restaurantName,
+                menus:response.data.menus
+			});
+		});
 
+	}
 
     render() {
         return (
             <div id="restaurantPage">
                 <div className="restJumbotron">
-                    <h1 id="restName">Restaurant Name</h1>
+                    <h1 id="restName">{this.state.restaurantName}</h1>
                 </div>
 
                 <div id="menu" className="title">Menu</div>
-                {this.state.menu.map(item => (
+                {this.state.menus.map(item => (
                     <Container>
                         <LongCard
-                            img={item.img}
-                            name={item.name}
+                            img="http://placehold.it/100x100"
+                            name={item.dishName}
                             description={item.description}
                             price={"$" + item.price}
                             rating={item.rating}
