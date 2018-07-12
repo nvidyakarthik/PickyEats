@@ -49,8 +49,8 @@ module.exports = {
   findRestByCategory: function(req, res) {
     db.Restaurant
       .find({ category:{ _id : req.params.id}})
-      
-      .populate("category menus")
+      .populate("category")
+      //.populate("category menus")
       .then(dbRestaurant => res.json(dbRestaurant))
       .catch(err => res.status(422).json(err));
   },
