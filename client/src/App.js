@@ -93,7 +93,7 @@ class App extends React.Component {
             <Route exact path="/resowner" component={ResOwner} />
             <Route exact path="/resowner/:id" component={MenuEdit} />      
             <Route exact path="/ressearch/:id" component={ResSearch} />
-            <Route exact path="/menuitem" component={MenuItem} />
+            <Route exact path="/menuitem/:id" component={MenuItem} />
             <Route component={NoMatch} />
           </Switch>
         </div>
