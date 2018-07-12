@@ -5,7 +5,7 @@ const axios=require("axios");
 module.exports = {
 
   createRestaurant: function(req, res) {
-    console.log(req.body);
+    console.log("Inside create restaurant"+req.body);
     db.Restaurant
       .create(req.body)
       .then(dbModel => {
@@ -14,6 +14,22 @@ module.exports = {
       })
       .catch(err => res.status(422).json(err));
   },
+  updateRestMenu: function (req, res) {
+     db.Restaurant.findOneAndUpdate({ _id: req.params.id },
+        { $push: { menus: req.body.menus } },
+        { new: true })
+        
+        .then(dbRestaurant => {
+          console.log(dbRestaurant);
+            res.json(dbRestaurant);
+
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(422).json(err);
+
+        });
+}, 
   findAllCategories: function(req, res) {
     db.Category
       .find(req.query)
@@ -33,8 +49,8 @@ module.exports = {
   findRestByCategory: function(req, res) {
     db.Restaurant
       .find({ category:{ _id : req.params.id}})
-      
-      .populate("category menus")
+      .populate("category")
+      //.populate("category menus")
       .then(dbRestaurant => res.json(dbRestaurant))
       .catch(err => res.status(422).json(err));
   },

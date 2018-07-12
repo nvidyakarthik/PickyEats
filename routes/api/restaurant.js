@@ -1,13 +1,13 @@
 const router = require("express").Router();
 const restaurantController = require("../../controllers/restController");
-
+router.route("/updaterest/:id")
+.put(restaurantController.updateRestMenu);
 router.route("/rating")
 .get(restaurantController.findRestByRating); 
 router.route("/venuesearch")
 .get(restaurantController.searchRest);
 router.route("/saverest")
 .post(restaurantController.createRestaurant);
-
 router.route("/categories")
 .get(restaurantController.findAllCategories);
 router.route("/:id")

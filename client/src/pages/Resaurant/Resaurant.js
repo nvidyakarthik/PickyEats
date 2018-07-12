@@ -3,10 +3,12 @@ import Popup from "reactjs-popup";
 import Container from "../../components/Container";
 import LongCard from "../../components/LongCard";
 import "./restaurant.css";
+import API from "../../utils/API";
 
 class Restaurant extends Component {
     state = {
-        menu: [
+        restaurantName:"",
+        menus: [
             {
                 id: 1,
                 img: "http://placehold.it/100x100",
@@ -33,36 +35,53 @@ class Restaurant extends Component {
             }
         ]
     };
+    componentDidMount() {
+        const restaurantId=this.props.match.params.id;
+		API.getRestaurantById(restaurantId).then(response => {
+			console.log(response.data)
+			this.setState({
+                restaurantName:response.data.restaurantName,
+                menus:response.data.menus
+			});
+		});
 
+    }
+    linkToMenuItem=(menuId)=>{
+        console.log("menuId"+menuId);
+        this.props.history.push("/menuitem/"+menuId);           
+    }
 
     render() {
         return (
             <div id="restaurantPage">
                 <div className="restJumbotron">
-                    <h1 id="restName">Restaurant Name</h1>
+                    <h1 id="restName">{this.state.restaurantName}</h1>
                 </div>
 
                 <div id="menu" className="title">Menu</div>
-                {this.state.menu.map(item => (
+                {this.state.menus.map(item => (
                     <Container>
                         <LongCard
-                            img={item.img}
-                            name={item.name}
+                            img="http://placehold.it/100x100"
+                            key={item._id}
+                            id={item._id}
+                            name={item.dishName}
                             description={item.description}
                             price={"$" + item.price}
                             rating={item.rating}
+                            menuLink={this.linkToMenuItem}
                         />
                         <Popup
-                            trigger={<button className="priceRating rateIt" id={item.id}>Rate it!</button>}
+                            trigger={<button className="priceRating rateIt" id={item._id}>Rate it!</button>}
                             modal
                             closeOnDocumentClick>
                             {close => (
                                 <div>
-                                    <div className="modalTitle">{item.name}</div>
+                                    <div className="modalTitle">{item.dishName}</div>
                                     <div className="modalContent">
-                                        <textarea id={"review" + item.id} className="modalSection modalReview" placeholder="Your review..." />
+                                        <textarea id={"review" + item._id} className="modalSection modalReview" placeholder="Your review..." />
                                         <div className="modalSection modalDiv">Your rating:</div>
-                                        <select id={"rating" + item.id} className="modalSection ratingSelect">
+                                        <select id={"rating" + item._id} className="modalSection ratingSelect">
                                             <option value="0">0</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>

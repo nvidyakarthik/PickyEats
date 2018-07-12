@@ -11,11 +11,13 @@ const Schema = mongoose.Schema;
 }); */
 
 const restaurantSchema = new Schema({
-  restaurantName: { type: String, required: true },
-  address: { type: String, required: true },
-  category: [{ type: Schema.Types.ObjectId, ref: 'Category' }],
+  restaurantName: { type: String, required: true ,trim:true },
+  street: { type: String, required: true ,trim: true},
+  city:{type: String, required: true, trim: true},
+  state:{type: String, required: true, trim: true},
+  zip:{type:Number,required:true,trim: true},
+  category: { type: Schema.Types.ObjectId, ref: 'Category' },
   menus:[{ type: Schema.Types.ObjectId, ref: 'Menu' }]
- 
     
 });
 

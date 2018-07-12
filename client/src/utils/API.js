@@ -50,9 +50,13 @@ export default {
   getUserInfo:function(){
     return axios.get("/auth/user");
   },
-  //Save restaurant with menus
+  //create new restaurant without menus
   saveRestaurant: function(restaurantData) {
     return axios.post("/api/restaurant/saverest", restaurantData);
+  },
+  //update restaurant with menus
+  upadateRestaurant: function(restId,menuData) {
+    return axios.put("/api/restaurant/updaterest/"+restId, menuData);
   },
  /*  //user login info
   getUser:function(){
