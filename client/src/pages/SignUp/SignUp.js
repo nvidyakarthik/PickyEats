@@ -6,20 +6,20 @@ import API from "../../utils/API";
 import { Redirect } from 'react-router-dom'
 
 class SignUp extends Component {
-   constructor(){ 
-       super();
-    this.state = {
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        confirmPass: "",
-        restaurantOwner: false,
-        redirectTo: null
-    };
-    this.handleInputChange=this.handleInputChange.bind(this);
-    this.handleSubmit=this.handleSubmit.bind(this);
-}
+    constructor() {
+        super();
+        this.state = {
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
+            confirmPass: "",
+            restaurantOwner: false,
+            redirectTo: null
+        };
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
 
     handleInputChange = event => {
         const { name, value } = event.target;
@@ -27,32 +27,33 @@ class SignUp extends Component {
             [name]: value
         });
     };
-    handleSubmit=(event)=>{
+    
+    handleSubmit = (event) => {
         event.preventDefault();
         API.signUpUser({
-            firstName:this.state.firstName,
-            lastName:this.state.lastName,
-            email:this.state.email,
-            password:this.state.password,
-            restaurantOwner:this.state.restaurantOwner
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            email: this.state.email,
+            password: this.state.password,
+            restaurantOwner: this.state.restaurantOwner
         })
-        .then(response => {
-            console.log(response)
-            if (!response.data.errmsg) {
-                console.log('youre good')
-                this.setState({
-                    redirectTo: '/login'
-                })
-            } else {
-                console.log('duplicate')
-            }
-        });
+            .then(response => {
+                console.log(response)
+                if (!response.data.errmsg) {
+                    console.log('youre good')
+                    this.setState({
+                        redirectTo: '/login'
+                    })
+                } else {
+                    console.log('duplicate')
+                }
+            });
     }
 
     render() {
         if (this.state.redirectTo) {
-			return <Redirect to={{ pathname: this.state.redirectTo }} />
-		}
+            return <Redirect to={{ pathname: this.state.redirectTo }} />
+        }
         return (
             <Container>
                 <div className="middle">
@@ -91,12 +92,17 @@ class SignUp extends Component {
                             value={this.state.confirmPass}
                             onChange={this.handleInputChange}
                         />
+                        <input
+                            name="resowner"
+                            type="checkbox"
+                            value=""
+                            className="checkbox"
+                        />
+                        <span className="ownerCheckbox">I'm a restaurant owner!</span>
 
                         <button id="createAcc" className="infoButton" onClick={this.handleSubmit}>Create Account</button>
                     </form>
-
-                    <Link to="/resowner" id="resOwner" >I'm a restuarant owner!</Link>
-                </div>               
+                </div>
             </Container>
         )
     }
