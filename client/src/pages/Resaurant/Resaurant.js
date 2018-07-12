@@ -72,16 +72,16 @@ class Restaurant extends Component {
                             menuLink={this.linkToMenuItem}
                         />
                         <Popup
-                            trigger={<button className="priceRating rateIt" id={item.id}>Rate it!</button>}
+                            trigger={<button className="priceRating rateIt" id={item._id}>Rate it!</button>}
                             modal
                             closeOnDocumentClick>
                             {close => (
                                 <div>
-                                    <div className="modalTitle">{item.name}</div>
+                                    <div className="modalTitle">{item.dishName}</div>
                                     <div className="modalContent">
-                                        <textarea id={"review" + item.id} className="modalSection modalReview" placeholder="Your review..." />
+                                        <textarea id={"review" + item._id} className="modalSection modalReview" placeholder="Your review..." />
                                         <div className="modalSection modalDiv">Your rating:</div>
-                                        <select id={"rating" + item.id} className="modalSection ratingSelect">
+                                        <select id={"rating" + item._id} className="modalSection ratingSelect">
                                             <option value="0">0</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
