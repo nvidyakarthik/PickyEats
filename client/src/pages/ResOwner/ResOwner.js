@@ -45,10 +45,8 @@ class ResOwner extends Component {
             category:this.state.categoryId
         }
         API.saveRestaurant(restData).then(response => {
-            console.log(response.data);
-            //history.push("/signup");
-            //this.context.router.history.push('/signup');
-            this.props.history.push("/signup");
+            console.log("id of data"+response.data._id);
+            this.props.history.push("/resowner/"+response.data._id);
 			
 		}).catch(err => console.log(err));
 		
