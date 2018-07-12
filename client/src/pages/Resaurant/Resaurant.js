@@ -45,7 +45,11 @@ class Restaurant extends Component {
 			});
 		});
 
-	}
+    }
+    linkToMenuItem=(menuId)=>{
+        console.log("menuId"+menuId);
+        this.props.history.push("/menuitem/"+menuId);           
+    }
 
     render() {
         return (
@@ -59,10 +63,13 @@ class Restaurant extends Component {
                     <Container>
                         <LongCard
                             img="http://placehold.it/100x100"
+                            key={item._id}
+                            id={item._id}
                             name={item.dishName}
                             description={item.description}
                             price={"$" + item.price}
                             rating={item.rating}
+                            menuLink={this.linkToMenuItem}
                         />
                         <Popup
                             trigger={<button className="priceRating rateIt" id={item.id}>Rate it!</button>}
