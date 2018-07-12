@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Container from "../../components/Container";
 import "./resowner.css";
 import API from "../../utils/API";
+import { withRouter } from "react-router-dom";
 
 class ResOwner extends Component {
     state = {
@@ -44,7 +45,10 @@ class ResOwner extends Component {
             category:this.state.categoryId
         }
         API.saveRestaurant(restData).then(response => {
-			console.log(response.data)
+            console.log(response.data);
+            //history.push("/signup");
+            //this.context.router.history.push('/signup');
+            this.props.history.push("/signup");
 			
 		}).catch(err => console.log(err));
 		
@@ -66,7 +70,7 @@ class ResOwner extends Component {
                     <h3 className="title">Restaurant Information</h3>
 
                     <div className="form">
-                        <form>
+                        <form onSubmit={this.handleSubmit.bind(this)}>
                             <input
                                 name="restName"
                                 placeholder="Restaurant Name (required)"
@@ -112,14 +116,15 @@ class ResOwner extends Component {
                                     <option key={category.id} value={category._id}>{category.categoryName}</option>
                                 ))}
                             </select>
+                            <button className="infoButton" type="submit" >Add Restaurant</button>
                         </form>
  
-                        <button className="infoButton" onClick={this.handleSubmit}>Add Restaurant</button>
+                        
                     </div>
                 </div>
             </Container>
         )
     }
 };
-
-export default ResOwner;
+export default withRouter(ResOwner);
+//export default ResOwner;
