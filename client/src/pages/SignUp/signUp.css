@@ -1,13 +1,14 @@
-#resOwner {
-    border: none;
-    color: white;
-    box-shadow: 3px 4px 5px black;
-    height: 50px;
-    padding: 7px 20px;
-    margin-left: 25%;
-    font-size: 120%;
-    background-color: tomato;
+.checkbox {
+    height: 15px;
+    width: 15px;
+    margin: 2% 10%;
+    box-shadow: none;
+    float: left;
+}
+
+.ownerCheckbox {
     font-family: 'Quicksand', sans-serif;
-    border-radius: 5px;
-    text-decoration: none;
+    float: left;
+    margin: 2% 0 0 -7%;
+    text-shadow: 2px 3px 5px black;
 }
