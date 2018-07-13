@@ -64,12 +64,6 @@ class Home extends Component {
 		});
 	};
 
-	restaurantMenu = id => {
-		API.getRestaurantById(id).then(response => {
-			console.log(response.data)
-		})
-	}
-
 	render() {
 		return (
 			<div>
@@ -103,7 +97,7 @@ class Home extends Component {
 								name={restaurant.name}
 								img={restaurant.img}
 								info={restaurant.info}
-								onClick={this.restaurantMenu}
+								link="Website"
 							/>
 						))}
 					</div>
