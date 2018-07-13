@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Container from "../../components/Container";
 import SmallCard from "../../components/SmallCard";
+import {Link} from "react-router-dom";
 import "./home.css";
 import API from "../../utils/API";
 
@@ -12,34 +13,46 @@ class Home extends Component {
 		//categories: ["Chinese", "Mexican", "Korean", "American", "Steakhouse", "Italian", "Seafood", "Breakfast", "Pizza", "Burger", "Thai", "Japanese", "Vietnamese", "Sandwiches", "Sushi Bar"],
 		restaurants: [
 			{
+				id: 1,
 				img: "http://placehold.it/100x100",
 				name: "Restaurant 1",
 				info: "Restaurant 1 info",
+				link: "google.com"
 			},
 			{
+				id: 2,
 				img: "http://placehold.it/100x100",
 				name: "Restaurant 2",
 				info: "Restaurant 2 info",
+				link: "google.com"
 			},
 			{
+				id: 3,
 				img: "http://placehold.it/100x100",
 				name: "Restaurant 3",
 				info: "Restaurant 3 info",
+				link: "google.com"
 			},
 			{
+				id: 4,
 				img: "http://placehold.it/100x100",
 				name: "Restaurant 4",
 				info: "Restaurant 4 info",
+				link: "google.com"
 			},
 			{
+				id: 5,
 				img: "http://placehold.it/100x100",
 				name: "Restaurant 5",
 				info: "Restaurant 5 info",
+				link: "google.com"
 			},
 			{
+				id: 6,
 				img: "http://placehold.it/100x100",
 				name: "Restaurant 6",
 				info: "Restaurant 6 info",
+				link: "google.com"
 			},
 		]
 	};
@@ -56,6 +69,10 @@ class Home extends Component {
 				categories: response.data
 			});
 		});
+	};
+
+	takeMeTo = () => {
+		alert("website clicked");
 	}
 
 	render() {
@@ -87,9 +104,12 @@ class Home extends Component {
 						<h1 className="title">Featured Restaurants</h1>
 						{this.state.restaurants.map(restaurant => (
 							<SmallCard
+								id={restaurant.id}
 								name={restaurant.name}
 								img={restaurant.img}
 								info={restaurant.info}
+								linkTitle="Website"
+								onClick={this.takeMeTo}
 							/>
 						))}
 					</div>

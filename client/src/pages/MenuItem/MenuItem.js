@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 import Container from "../../components/Container";
 import LongCard from "../../components/LongCard";
 import "./menuItem.css";
@@ -64,7 +65,9 @@ class MenuItem extends Component {
 
                     <div id="restDirect">
                         <div className="modalButtons">
+                            <Link to="/restaurant/:id">
                             <button className="resButton">Go to Restaurant Page</button>
+                            </Link>
                         </div>
                     </div>
                 </Container>
