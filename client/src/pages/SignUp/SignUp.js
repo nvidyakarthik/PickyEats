@@ -50,6 +50,10 @@ class SignUp extends Component {
             });
     }
 
+    toggleCheckboxValue= () => {
+        this.setState({restaurantOwner: !this.state.restaurantOwner});
+    }
+
     render() {
         if (this.state.redirectTo) {
             return <Redirect to={{ pathname: this.state.redirectTo }} />
@@ -95,8 +99,9 @@ class SignUp extends Component {
                         <input
                             name="resowner"
                             type="checkbox"
-                            value=""
+                            value={this.state.restaurantOwner}
                             className="checkbox"
+                            onChange={this.toggleCheckboxValue}
                         />
                         <span className="ownerCheckbox">I'm a restaurant owner!</span>
 
