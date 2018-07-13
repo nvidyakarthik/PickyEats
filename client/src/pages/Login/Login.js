@@ -57,13 +57,6 @@ class Login extends Component {
                         value={this.state.password}
                         onChange={this.handleInputChange}
                     />
-                    <input
-                        name="resowner"
-                        type="checkbox"
-                        value=""
-                        className="checkbox"
-                    />
-                    <span className="ownerCheckbox">I'm a restaurant owner!</span>
                     <button id="signIn" className="infoButton" onClick={this.handleSubmit}>Sign In</button>
                 </div>
             </Container>

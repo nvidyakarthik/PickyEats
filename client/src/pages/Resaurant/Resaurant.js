@@ -12,7 +12,7 @@ class Restaurant extends Component {
             {
                 id: 1,
                 img: "http://placehold.it/100x100",
-                name: "Burrito",
+                dishName: "Burrito",
                 description: "Sooo yummy. I got the beef burrito, and I'm usually very picky about burritos and this one satisfied me completely!",
                 price: "5.99",
                 rating: "5/5"
@@ -20,7 +20,7 @@ class Restaurant extends Component {
             {
                 id: 2,
                 img: "http://placehold.it/100x100",
-                name: "Lasagna",
+                dishName: "Lasagna",
                 description: "I could have used more sauce, but it's not bad.",
                 price: "15.99",
                 rating: "3/5"
@@ -28,13 +28,14 @@ class Restaurant extends Component {
             {
                 id: 3,
                 img: "http://placehold.it/100x100",
-                name: "Chow Mein",
+                dishName: "Chow Mein",
                 description: "Ugh, not good at all. It was dry, flavorless, and made me sick after. Do not get.",
                 price: "7.96",
                 rating: "1/5"
             }
         ]
     };
+
     componentDidMount() {
         const restaurantId=this.props.match.params.id;
 		API.getRestaurantById(restaurantId).then(response => {
@@ -45,7 +46,8 @@ class Restaurant extends Component {
 			});
 		});
 
-    }
+    };
+
     linkToMenuItem=(menuId)=>{
         console.log("menuId"+menuId);
         this.props.history.push("/menuitem/"+menuId);           
@@ -69,10 +71,10 @@ class Restaurant extends Component {
                             description={item.description}
                             price={"$" + item.price}
                             rating={item.rating}
-                            menuLink={this.linkToMenuItem}
                         />
+
                         <Popup
-                            trigger={<button className="priceRating rateIt" id={item._id}>Rate it!</button>}
+                            trigger={<button className="rateIt" id={item._id}>Rate it!</button>}
                             modal
                             closeOnDocumentClick>
                             {close => (
@@ -97,6 +99,9 @@ class Restaurant extends Component {
                                 </div>
                             )}
                         </Popup>
+                        
+                        <button className="linkToMenuItem" onClick={() => this.linkToMenuItem(item._id)}>More Reviews</button>
+                    
                     </Container>
                 ))}
 

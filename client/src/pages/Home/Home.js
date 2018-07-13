@@ -12,31 +12,37 @@ class Home extends Component {
 		//categories: ["Chinese", "Mexican", "Korean", "American", "Steakhouse", "Italian", "Seafood", "Breakfast", "Pizza", "Burger", "Thai", "Japanese", "Vietnamese", "Sandwiches", "Sushi Bar"],
 		restaurants: [
 			{
+				id: 1,
 				img: "http://placehold.it/100x100",
 				name: "Restaurant 1",
 				info: "Restaurant 1 info",
 			},
 			{
+				id: 2,
 				img: "http://placehold.it/100x100",
 				name: "Restaurant 2",
 				info: "Restaurant 2 info",
 			},
 			{
+				id: 3,
 				img: "http://placehold.it/100x100",
 				name: "Restaurant 3",
 				info: "Restaurant 3 info",
 			},
 			{
+				id: 4,
 				img: "http://placehold.it/100x100",
 				name: "Restaurant 4",
 				info: "Restaurant 4 info",
 			},
 			{
+				id: 5,
 				img: "http://placehold.it/100x100",
 				name: "Restaurant 5",
 				info: "Restaurant 5 info",
 			},
 			{
+				id: 6,
 				img: "http://placehold.it/100x100",
 				name: "Restaurant 6",
 				info: "Restaurant 6 info",
@@ -56,6 +62,12 @@ class Home extends Component {
 				categories: response.data
 			});
 		});
+	};
+
+	restaurantMenu = id => {
+		API.getRestaurantById(id).then(response => {
+			console.log(response.data)
+		})
 	}
 
 	render() {
@@ -87,9 +99,11 @@ class Home extends Component {
 						<h1 className="title">Featured Restaurants</h1>
 						{this.state.restaurants.map(restaurant => (
 							<SmallCard
+								id={restaurant.id}
 								name={restaurant.name}
 								img={restaurant.img}
 								info={restaurant.info}
+								onClick={this.restaurantMenu}
 							/>
 						))}
 					</div>

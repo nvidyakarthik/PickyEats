@@ -85,8 +85,9 @@ class ResSearch extends Component {
 					</Container>
 
 				) : (
-						<h1 className="title">No restaurants available to Display</h1>
-
+						<Container>
+							<h1 className="title">No restaurants available to display</h1>
+						</Container>
 					)}
 			</div>
 		)
