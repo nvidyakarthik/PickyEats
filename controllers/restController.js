@@ -97,7 +97,7 @@ function foursquareSearch (category, loc, rad){
   const clientID = '&client_id=WPAVV4TBTN0WB1AMQAZG5XTQFJ5AQ2EBWJPLU4Z1PSGAZLVC'
   const clientSecret = '&client_secret=2JYX2TBCNACXMXOUXCVOM5DALR4F4ZZ5H3L35PZ1I54OVP1U'
   const version = '&v=20170801'
-
+ let resturantApi= 'https://api.foursquare.com/v2/venues/';
   let location = string('&near'=+loc);
   let radius = string('&radius='+rad);
   let categoryID = '&categoryId='+ category;
@@ -111,8 +111,11 @@ function foursquareSearch (category, loc, rad){
       let venues = results.response.venues;
       console.log(venues);
       console.log(venues.id);
-    
+    console.log(resturantApi+venues.id+'/'+menu)
     })
   
 }
 
+ foursquareSearch{
+  console.log(results.response.venues)
+};
