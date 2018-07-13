@@ -106,7 +106,7 @@ module.exports = {
 
 
 //session stored 
-var estLat = sessionStorage.getItem("startLat");
+/* var estLat = sessionStorage.getItem("startLat");
 var estlng = sessionStorage.getItem("startLng");
 
 function foursquareSearch (category, loc, rad){
@@ -136,3 +136,4 @@ function foursquareSearch (category, loc, rad){
  foursquareSearch{
   console.log(results.response.venues)
 };
+ */
