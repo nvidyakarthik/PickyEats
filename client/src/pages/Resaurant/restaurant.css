@@ -26,7 +26,13 @@
 }
 
 .rateIt {
-  margin: 8.5% 0 0 -53%;
+  float: right;
+  margin: -4.5% 7% 0 0;
+}
+
+.linkToMenuItem {
+  margin: -4.5% 13% 0 0;
+  float: right;
 }
 
 .modalTitle {
