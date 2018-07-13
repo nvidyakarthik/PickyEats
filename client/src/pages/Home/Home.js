@@ -90,6 +90,7 @@ class Home extends Component {
 								name={restaurant.name}
 								img={restaurant.img}
 								info={restaurant.info}
+								link="Website"
 							/>
 						))}
 					</div>
