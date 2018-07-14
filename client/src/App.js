@@ -7,6 +7,7 @@ import LoginForm from "./pages/Login";
 import Resaurant from "./pages/Resaurant";
 import MenuEdit from "./pages/MenuEdit";
 import ResSearch from "./pages/ResSearch";
+import ResSearchName from "./pages/ResSearchName";
 import NoMatch from "./pages/NoMatch";
 import SignUp from "./pages/SignUp";
 import API from "./utils/API"
@@ -93,7 +94,8 @@ class App extends React.Component {
             <Route exact path="/resowner" component={ResOwner} />
             <Route exact path="/resowner/:id" component={MenuEdit} />      
             <Route exact path="/ressearch/:id" component={ResSearch} />
-            <Route exact path="/menuitem/:id" component={MenuItem} />
+            <Route exact path="/searchbyname/:name/:city" component={ResSearchName} />
+            <Route exact path="/menuitem/:id/:menuId" component={MenuItem} />
             <Route component={NoMatch} />
           </Switch>
         </div>
