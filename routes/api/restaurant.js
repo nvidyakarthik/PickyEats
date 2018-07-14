@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const restaurantController = require("../../controllers/restController");
+router.route("/listbycategory/:id")
+.get(restaurantController.findRestByCategory);
 router.route("/updaterest/:id")
 .put(restaurantController.updateRestMenu);
 router.route("/rating")
@@ -12,8 +14,11 @@ router.route("/categories")
 .get(restaurantController.findAllCategories);
 router.route("/:id")
 .get(restaurantController.findRestaurantById);
-router.route("/listbycategory/:id")
-.get(restaurantController.findRestByCategory);
+router.route("/listbyname/city")
+.post(restaurantController.findRestByNameCity);
+
+ 
+ 
  
 //search from puclic api foursquare
 
