@@ -31,6 +31,11 @@ export default {
    getRestaurantByCategory: function(categoryId) {
     return axios.get("/api/restaurant/listbycategory/"+categoryId);
   },
+  //search restaurant by name and city
+  getRestByNameCity: function(formData) {
+    console.log("in api");
+    return axios.post("/api/restaurant/listbyname/city",formData);
+  },
   //search restaurant by category name
    getRestaurantByRating: function() {
     return axios.get("/api/restaurant/rating");
