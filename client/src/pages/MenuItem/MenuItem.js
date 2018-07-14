@@ -3,14 +3,17 @@ import { Link } from 'react-router-dom';
 import Container from "../../components/Container";
 import LongCard from "../../components/LongCard";
 import "./menuItem.css";
+import API from "../../utils/API";
 
 class MenuItem extends Component {
     state = {
         restName: "Restaurant Name",
+        restaurantId:"",
         itemName: "Item Name",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         pic: "http://placehold.it/550x250",
-        reviews: [
+       reviews:[]
+        /*  reviews: [
             {
                 id: 1,
                 img: "http://placehold.it/100x100",
@@ -19,7 +22,7 @@ class MenuItem extends Component {
                 rating: "5/5"
             },
             {
-                id: 2,
+                _id: 2,
                 img: "http://placehold.it/100x100",
                 name: "Mike P.",
                 description: "I don't really get the hype of this dish, but it's not bad.",
@@ -32,8 +35,32 @@ class MenuItem extends Component {
                 description: "Maybe I got a bad serving of it but I don't understand how this has such good reviews. Terrible. Would not get again!",
                 rating: "1/5"
             }
-        ]
+        ]  */
     };
+    
+    componentDidMount() {
+        let menuId = this.props.match.params.menuId;
+        let restId=this.props.match.params.id;
+        this.setState({restaurantId:restId});
+		API.getAllComments(menuId)
+		.then(response => {
+        console.log("data received "+response.data);
+            this.setState({               
+                reviews: response.data.comments,
+                itemName:response.data.dishName,
+                description:response.data.description
+            });
+          
+        }).catch(err => console.log(err));
+    } 
+
+    goToRestPage=(event)=>{
+        event.preventDefault();
+        const restId=this.state.restaurantId;
+        console.log("restaurantId"+restId);
+        this.props.history.push("/restaurant/"+restId);          
+
+    }
 
 
     render() {
@@ -55,8 +82,9 @@ class MenuItem extends Component {
                         <div className="title">Reviews</div>
                         {this.state.reviews.map(review => (
                             <LongCard
-                                name={review.name}
-                                img={review.img}
+                                //name={review.users.firstName}
+                                name="test"
+                                img="http://placehold.it/100x100"
                                 description={review.description}
                                 rating={review.rating}
                             />
@@ -66,7 +94,7 @@ class MenuItem extends Component {
                     <div id="restDirect">
                         <div className="modalButtons">
                             <Link to="/restaurant/:id">
-                            <button className="resButton">Go to Restaurant Page</button>
+                            <button className="resButton" onClick={this.goToRestPage.bind(this)}>Go to Restaurant Page</button>
                             </Link>
                         </div>
                     </div>

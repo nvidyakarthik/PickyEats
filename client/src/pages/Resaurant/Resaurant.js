@@ -6,6 +6,7 @@ import "./restaurant.css";
 import API from "../../utils/API";
 
 class Restaurant extends Component {
+    
     state = {
         restaurantName:"",
         menus: [
@@ -44,13 +45,14 @@ class Restaurant extends Component {
                 restaurantName:response.data.restaurantName,
                 menus:response.data.menus
 			});
-		});
+		}).catch(err => console.log(err));
 
     };
 
     linkToMenuItem=(menuId)=>{
+        const restaurantId=this.props.match.params.id;
         console.log("menuId"+menuId);
-        this.props.history.push("/menuitem/"+menuId);           
+        this.props.history.push("/menuitem/"+restaurantId+"/"+menuId);           
     }
 
     render() {

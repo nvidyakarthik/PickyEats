@@ -48,8 +48,9 @@ module.exports = {
   },
   findAllComments: function(req, res) {
     db.Menu
-      .findOne({ _id:req.params.id})
+      .findById({ _id:req.params.id})
       .populate("comments")
+      .populate("comments.users")
       .then(dbMenu => {
           //console.log("firstName"+dbMenu.user.firstName);
         res.json(dbMenu);
@@ -60,7 +61,7 @@ module.exports = {
     db.Menu
       .findOneAndUpdate({ _id:req.params.id},req.body,{new:true})
       
-      .then(dbMenu => {
+      .then(dbMenu => { 
           //console.log("firstName"+dbMenu.user.firstName);
         res.json(dbMenu);
       })
