@@ -79,6 +79,8 @@ class MenuItem extends Component {
                     </div>
 
                     <div className="half">
+                    {this.state.reviews.length ? (
+                        <div>
                         <div className="title">Reviews</div>
                         {this.state.reviews.map(review => (
                             <LongCard
@@ -88,6 +90,9 @@ class MenuItem extends Component {
                                 rating={review.rating}
                             />
                         ))}
+                        </div>
+                        ):(<div className="title">No Reviews Yet</div>
+                        )}
                     </div>
 
                     <div id="restDirect">
