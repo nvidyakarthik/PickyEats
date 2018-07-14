@@ -45,9 +45,24 @@ module.exports = {
       .then(dbRestaurant => res.json(dbRestaurant))
       .catch(err => res.status(422).json(err));
   },
+  findRestByNameCity: function(req, res) {
+    console.log("in findrestbynamecity"+req.body.restaurantName);
+    console.log("city"+req.body.city);
+    db.Restaurant
+      //.find({"restaurantName": {$regex : `^${req.body.restaurantName}.*` , $options: 'si' }})
+      .find({ $and: [{"restaurantName":{ $e: req.body.restaurantName}}, { "city": { $e: req.body.city } } ] })
+      .populate("category")
+      .then(dbRestaurant =>{ 
+        console.log(dbRestaurant);
+        res.json(dbRestaurant);})
+      .catch(err => {
+         res.status(422).json({err:db.Restaurant.toString()});
+      });
+  },
   //find restaurant by
   findRestByCategory: function(req, res) {
-    db.Restaurant
+    console.log("in findRestByCategory"+req.params.id);
+    db.Restaurant    
       .find({ category:{ _id : req.params.id}})
       .populate("category")
       //.populate("category menus")

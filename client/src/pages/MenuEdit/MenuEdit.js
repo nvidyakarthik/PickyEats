@@ -48,9 +48,21 @@ class MenuEdit extends Component {
         }        
         API.saveMenuItem(menuItemData,restaurantId).then(response => {
             this.setState({ids:[...this.state.ids, response.data._id]});
-            this.setState({ menuItems: [...this.state.menuItems, response.data]});          
+            this.setState({ menuItems: [...this.state.menuItems, response.data]}); 
+            this.setState(
+                {
+                    dishName:"",
+                    description:"",
+                    price:"",
+                    menuType:""
+                })         
 			
 		}).catch(err => console.log(err)); 
+    }
+    deleteMenuItem=(event)=>{
+        event.preventDefault();
+        console.log("delete id"+event.target.value);
+
     }
 
     handleSubmit=(event)=>{
@@ -101,8 +113,8 @@ class MenuEdit extends Component {
                             className="textare"
                         />
 
-                        <select value={this.state.menutype} onChange={ e => this.change(e) }>
-                            <option value="">Type...</option>
+                        <select value={this.state.menutype?this.state.menutype:"t"} onChange={ e => this.change(e) }>
+                            <option value="t">Type...</option>
                             {this.state.types.map(type => (
                                 <option key={type} value={type}>{type}</option>
                             ))}
@@ -133,7 +145,7 @@ class MenuEdit extends Component {
                             {this.state.menuItems.map(item => (
                                 <div>
                                     <div className="menuButtons">
-                                        <span className="delete">✗</span>
+                                        <span className="delete" value={item._id} onClick={this.deleteMenuItem.bind(this)}>✗</span>
                                         <button className="edit">Edit</button>
                                     </div>
                                     <div className="menuItems">
