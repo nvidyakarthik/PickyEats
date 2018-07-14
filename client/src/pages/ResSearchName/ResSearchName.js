@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import Container from "../../components/Container";
 import SmallCard from "../../components/SmallCard";
-import "./resSearch.css";
+import "./resSearchName.css";
 import API from "../../utils/API";
 
-class ResSearch extends Component {
+class resSearchName extends Component {
 	state = {
-		restaurantType: "",
+        restaurantName: "",
+        city:"",
 		restaurants: []
-		/* restaurants: [
+		 /* restaurants: [
 			{
 				img: "http://placehold.it/100x100",
 				name: "Restaurant 1",
@@ -39,27 +40,23 @@ class ResSearch extends Component {
 				name: "Restaurant 6",
 				info: "Restaurant 6 info",
 			},
-		] */
+		]  */
 	}
 	 componentDidMount() {
-		const categoryId = this.props.match.params.id;
-		API.getRestaurantByCategory(categoryId).then(response => {
-			console.log(response.data);
-			if (response.data.length !== 0) {
-				this.setState({
-					restaurantType: response.data[0].category.categoryName,
-					restaurants: response.data
-				});
-			}
-			else {
-				this.setState({
-					restaurantType: "",
-					restaurants: []
-				})
-			}
-		}).catch(err => console.log(err));
-
-	} 
+		let restName = this.props.match.params.name;
+		this.setState({restaurantName:restName})
+        let city=this.props.match.params.city;
+        API.getRestByNameCity({restaurantName:restName,
+			city:city})
+		.then(response => {
+        console.log("data received "+response.data);
+            this.setState({               
+                restaurants: response.data
+            });
+          
+        }).catch(err => console.log(err));
+    } 
+    
 	viewMenu = (restaurantId) => {
 		this.props.history.push("/restaurant/" + restaurantId);
 	}
@@ -69,7 +66,7 @@ class ResSearch extends Component {
 			<div>
 				{this.state.restaurants.length ? (
 					<Container>
-						<h1 className="title">{this.state.restaurantType}</h1>
+						<h1 className="title">Search Results for {this.state.restaurantName}</h1>
 						{this.state.restaurants.map(restaurant => (
 
 							<SmallCard
@@ -79,7 +76,6 @@ class ResSearch extends Component {
 								img="http://placehold.it/100x100"
 								info={restaurant.street + " " + restaurant.city}
 								onClick={this.viewMenu}
-								linkTitle="Menu"
 
 							/>
 						))}
@@ -95,4 +91,4 @@ class ResSearch extends Component {
 	}
 };
 
-export default ResSearch;
+export default resSearchName;

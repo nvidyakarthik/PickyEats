@@ -31,6 +31,11 @@ export default {
    getRestaurantByCategory: function(categoryId) {
     return axios.get("/api/restaurant/listbycategory/"+categoryId);
   },
+  //search restaurant by name and city
+  getRestByNameCity: function(formData) {
+    console.log("in api");
+    return axios.post("/api/restaurant/listbyname/city",formData);
+  },
   //search restaurant by category name
    getRestaurantByRating: function() {
     return axios.get("/api/restaurant/rating");
@@ -66,8 +71,8 @@ export default {
   getAllComments:function(menuId){
     return axios.get("/api/menu/comment/"+menuId);
   }, 
-  saveComment:function(commentData,menuId){
-    return axios.post("/api/menu/comment/"+menuId, commentData);
+  saveComment:function(commentData,restId){
+    return axios.post("/api/menu/comment/"+restId, commentData);
   },
   //saves each menu item
   saveMenuItem:function(menuData,restId){
