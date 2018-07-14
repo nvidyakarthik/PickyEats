@@ -35,10 +35,7 @@ router.post(
 		console.log('POST to /login')
         const user = JSON.parse(JSON.stringify(req.user)) // hack
         console.log("*****************"+req.message);
-        const cleanUser = Object.assign({}, user);
-		console.log(cleanUser);
-		localStorage.setItem('userId',user._id);
-        
+        const cleanUser = Object.assign({}, user);        
 		if (cleanUser) {
 			console.log(`Deleting ${cleanUser.password}`)
 			delete cleanUser.password
