@@ -15,46 +15,40 @@ class Home extends Component {
 		//categories: ["Chinese", "Mexican", "Korean", "American", "Steakhouse", "Italian", "Seafood", "Breakfast", "Pizza", "Burger", "Thai", "Japanese", "Vietnamese", "Sandwiches", "Sushi Bar"],
 		restaurants: [
 			{
-				id: 1,
+				id: "https://steak44.com/",
 				img: "https://media-cdn.tripadvisor.com/media/photo-w/05/e9/32/0f/steak-44.jpg",
 				name: "Steak 44",
-				info: "5101 N 44th St, Phoenix, AZ 85018",
-				link: "https://steak44.com/"
+				info: "5101 N 44th St, Phoenix, AZ 85018"
 			},
 			{
-				id: 2,
-				img: "http://placehold.it/100x100",
-				name: "Restaurant 2",
-				info: "Restaurant 2 info",
-				link: "google.com"
+				id: "http://bobbyq.net/",
+				img: "https://media-cdn.tripadvisor.com/media/photo-w/03/da/64/32/bobby-q-s.jpg",
+				name: "Bobby Q",
+				info: "8501 N 27th Ave, Phoenix, AZ 85051"
 			},
 			{
-				id: 3,
-				img: "http://placehold.it/100x100",
-				name: "Restaurant 3",
-				info: "Restaurant 3 info",
-				link: "google.com"
+				id: "http://pomopizzeria.com/",
+				img: "https://media-cdn.tripadvisor.com/media/photo-o/04/1a/eb/f6/bufala-verace.jpg",
+				name: "Pomo Pizzeria",
+				info: "705 N 1st St, Suite 120, Phoenix, AZ 85004"
 			},
 			{
-				id: 4,
-				img: "http://placehold.it/100x100",
-				name: "Restaurant 4",
-				info: "Restaurant 4 info",
-				link: "google.com"
+				id: "http://www.carolinasmex.com/?utm_source=tripadvisor&utm_medium=referral",
+				img: "https://media-cdn.tripadvisor.com/media/photo-w/07/5c/99/18/authentic-food.jpg",
+				name: "The Original Carolina's",
+				info: "1202 E Mohave St, Phoenix, AZ 85034"
 			},
 			{
-				id: 5,
-				img: "http://placehold.it/100x100",
-				name: "Restaurant 5",
-				info: "Restaurant 5 info",
-				link: "google.com"
+				id: "http://www.sweetrepublic.com/stores?utm_source=tripadvisor&utm_medium=referral",
+				img: "https://media-cdn.tripadvisor.com/media/photo-p/08/6c/f2/8b/s-mores-sundae.jpg",
+				name: "Sweet Republic",
+				info: "6054 N 16th St, Phoenix, AZ 85016"
 			},
 			{
-				id: 6,
-				img: "http://placehold.it/100x100",
-				name: "Restaurant 6",
-				info: "Restaurant 6 info",
-				link: "google.com"
+				id: "https://pappadeaux.com/home/",
+				img: "https://media-cdn.tripadvisor.com/media/photo-w/0e/8a/4c/c8/meal.jpg",
+				name: "Pappadeaux Seafood",
+				info: "11051 N Black Canyon Hwy, Phoenix, AZ 85029"
 			},
 		]
 	};
@@ -84,8 +78,8 @@ class Home extends Component {
 		this.props.history.push("/searchbyname/"+this.state.restaurantName+"/"+this.state.city); 
 	}
 
-	takeMeTo = () => {
-		return window.location = "https://www.google.com"
+	takeMeTo = (site) => {
+		return window.location = site;
 	}
 
 	render() {
