@@ -41,7 +41,7 @@ class ResSearch extends Component {
 			},
 		] */
 	}
-	componentDidMount() {
+	 componentDidMount() {
 		const categoryId = this.props.match.params.id;
 		API.getRestaurantByCategory(categoryId).then(response => {
 			console.log(response.data);
@@ -59,7 +59,7 @@ class ResSearch extends Component {
 			}
 		}).catch(err => console.log(err));
 
-	}
+	} 
 	viewMenu = (restaurantId) => {
 		this.props.history.push("/restaurant/" + restaurantId);
 	}
@@ -79,6 +79,7 @@ class ResSearch extends Component {
 								img="http://placehold.it/100x100"
 								info={restaurant.street + " " + restaurant.city}
 								onClick={this.viewMenu}
+								linkTitle="Menu"
 
 							/>
 						))}
