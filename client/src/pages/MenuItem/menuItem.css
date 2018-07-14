@@ -39,6 +39,8 @@
     font-size: 15px;
     text-align: center;
     float: left;
-    margin-left: 475px;
-      
+}
+
+#reviewbox {
+    min-height: 400px;
 }

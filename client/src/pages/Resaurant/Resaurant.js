@@ -58,6 +58,7 @@ class Restaurant extends Component {
         console.log("menuId" + menuId);
         this.props.history.push("/menuitem/" + restaurantId + "/" + menuId);
     }
+    
     change = (event) => {
         const selectedValue = event.target.value;
         this.setState({
