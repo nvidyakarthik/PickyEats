@@ -8,11 +8,11 @@ import API from "../../utils/API";
 class MenuItem extends Component {
     state = {
         restName: "Restaurant Name",
-        restaurantId:"",
+        restaurantId: "",
         itemName: "Item Name",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         pic: "http://placehold.it/550x250",
-       reviews:[]
+        reviews: []
         /*  reviews: [
             {
                 id: 1,
@@ -37,28 +37,28 @@ class MenuItem extends Component {
             }
         ]  */
     };
-    
+
     componentDidMount() {
         let menuId = this.props.match.params.menuId;
-        let restId=this.props.match.params.id;
-        this.setState({restaurantId:restId});
-		API.getAllComments(menuId)
-		.then(response => {
-        console.log("data received "+response.data);
-            this.setState({               
-                reviews: response.data.comments,
-                itemName:response.data.dishName,
-                description:response.data.description
-            });
-          
-        }).catch(err => console.log(err));
-    } 
+        let restId = this.props.match.params.id;
+        this.setState({ restaurantId: restId });
+        API.getAllComments(menuId)
+            .then(response => {
+                console.log("data received " + response.data);
+                this.setState({
+                    reviews: response.data.comments,
+                    itemName: response.data.dishName,
+                    description: response.data.description
+                });
 
-    goToRestPage=(event)=>{
+            }).catch(err => console.log(err));
+    }
+
+    goToRestPage = (event) => {
         event.preventDefault();
-        const restId=this.state.restaurantId;
-        console.log("restaurantId"+restId);
-        this.props.history.push("/restaurant/"+restId);          
+        const restId = this.state.restaurantId;
+        console.log("restaurantId" + restId);
+        this.props.history.push("/restaurant/" + restId);
 
     }
 
@@ -79,26 +79,26 @@ class MenuItem extends Component {
                     </div>
 
                     <div className="half">
-                    {this.state.reviews.length ? (
-                        <div>
-                        <div className="title">Reviews</div>
-                        {this.state.reviews.map(review => (
-                            <LongCard
-                                name={review.user}
-                                img="http://placehold.it/100x100"
-                                description={review.description}
-                                rating={review.rating}
-                            />
-                        ))}
-                        </div>
-                        ):(<div className="title">No Reviews Yet</div>
-                        )}
+                        {this.state.reviews.length ? (
+                            <div id="reviewbox">
+                                <div className="title">Reviews</div>
+                                {this.state.reviews.map(review => (
+                                    <LongCard
+                                        name={review.user}
+                                        img="http://placehold.it/100x100"
+                                        description={review.description}
+                                        rating={review.rating}
+                                    />
+                                ))}
+                            </div>
+                        ) : (<div className="title">No Reviews Yet</div>
+                            )}
                     </div>
 
                     <div id="restDirect">
                         <div className="modalButtons">
                             <Link to="/restaurant/:id">
-                            <button className="resButton" onClick={this.goToRestPage.bind(this)}>Go to Restaurant Page</button>
+                                <button className="resButton" onClick={this.goToRestPage.bind(this)}>Go to Restaurant Page</button>
                             </Link>
                         </div>
                     </div>
