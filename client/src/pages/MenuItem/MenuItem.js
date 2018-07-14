@@ -82,8 +82,7 @@ class MenuItem extends Component {
                         <div className="title">Reviews</div>
                         {this.state.reviews.map(review => (
                             <LongCard
-                                //name={review.users.firstName}
-                                name="test"
+                                name={review.user}
                                 img="http://placehold.it/100x100"
                                 description={review.description}
                                 rating={review.rating}

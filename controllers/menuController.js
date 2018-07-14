@@ -50,7 +50,6 @@ module.exports = {
     db.Menu
       .findById({ _id:req.params.id})
       .populate("comments")
-      .populate("comments.users")
       .then(dbMenu => {
           //console.log("firstName"+dbMenu.user.firstName);
         res.json(dbMenu);

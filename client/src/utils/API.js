@@ -71,8 +71,8 @@ export default {
   getAllComments:function(menuId){
     return axios.get("/api/menu/comment/"+menuId);
   }, 
-  saveComment:function(commentData,menuId){
-    return axios.post("/api/menu/comment/"+menuId, commentData);
+  saveComment:function(commentData,restId){
+    return axios.post("/api/menu/comment/"+restId, commentData);
   },
   //saves each menu item
   saveMenuItem:function(menuData,restId){
