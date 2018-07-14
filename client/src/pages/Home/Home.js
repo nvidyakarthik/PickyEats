@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Container from "../../components/Container";
 import SmallCard from "../../components/SmallCard";
-import {Link} from "react-router-dom";
 import "./home.css";
 import API from "../../utils/API";
 
@@ -14,10 +13,10 @@ class Home extends Component {
 		restaurants: [
 			{
 				id: 1,
-				img: "http://placehold.it/100x100",
-				name: "Restaurant 1",
-				info: "Restaurant 1 info",
-				link: "google.com"
+				img: "https://media-cdn.tripadvisor.com/media/photo-w/05/e9/32/0f/steak-44.jpg",
+				name: "Steak 44",
+				info: "5101 N 44th St, Phoenix, AZ 85018",
+				link: "https://steak44.com/"
 			},
 			{
 				id: 2,
@@ -72,7 +71,7 @@ class Home extends Component {
 	};
 
 	takeMeTo = () => {
-		alert("website clicked");
+		return window.location = "https://www.google.com"
 	}
 
 	render() {
