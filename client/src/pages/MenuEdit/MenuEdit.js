@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Container from "../../components/Container";
 import "./menuEdit.css";
 import API from "../../utils/API";
-import MDSpinner from "react-md-spinner";
+//import MDSpinner from "react-md-spinner";
 
 class MenuEdit extends Component {
     state = {
@@ -67,9 +67,12 @@ class MenuEdit extends Component {
         API.removeMenuItem(menuId).then(response => {
             console.log("menu item deleted");
             this.setState({
-                menuItems: this.state.menuItems.filter((_, i) => i._id !== menuId),
-                ids: this.state.ids.filter((_, i) => i !== menuId)
+                menuItems: this.state.menuItems.filter(item => {
+                    item._id !== menuId
+                }),
+                ids: this.state.ids.filter(item => item !== menuId)
               });
+              console.log(this.state.menuItems);
                        
         }).catch(err => console.log(err)); 
 
@@ -99,9 +102,9 @@ class MenuEdit extends Component {
     }
 
     render() {
-        if(!this.state.menuItems.length){
+        /* if(!this.state.menuItems.length){
 			return <MDSpinner className="spinner" size={100}/>
-		}
+		} */
         return (
             <Container>
                 <div className="half">
