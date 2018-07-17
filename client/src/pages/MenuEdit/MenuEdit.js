@@ -61,7 +61,16 @@ class MenuEdit extends Component {
     }
     deleteMenuItem=(event)=>{
         event.preventDefault();
-        console.log("delete id"+event.target.value);
+        const menuId=event.target.value;
+        console.log("delete id"+menuId);
+        API.removeMenuItem(menuId).then(response => {
+            console.log("menu item deleted");
+            this.setState({
+                menuItems: this.state.menuItems.filter((_, i) => i._id !== menuId),
+                ids: this.state.ids.filter((_, i) => i !== menuId)
+              });
+                       
+        }).catch(err => console.log(err)); 
 
     }
 
@@ -145,7 +154,7 @@ class MenuEdit extends Component {
                             {this.state.menuItems.map(item => (
                                 <div>
                                     <div className="menuButtons">
-                                        <span className="delete" value={item._id} onClick={this.deleteMenuItem.bind(this)}>✗</span>
+                                        <button className="delete" value={item._id} onClick={this.deleteMenuItem.bind(this)}>✗</button>
                                         <button className="edit">Edit</button>
                                     </div>
                                     <div className="menuItems">
