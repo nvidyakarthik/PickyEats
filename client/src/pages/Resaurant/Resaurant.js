@@ -89,6 +89,9 @@ class Restaurant extends Component {
         }
         API.saveComment(commentData, menuId).then(response => {
             console.log(response.data);
+            API.updateAvgRating(menuId).then(res => {
+                console.log("averaRating rating created"+res.data);
+            }).catch(err=>console.log(err));
             this.props.history.push("/menuitem/" + restaurantId + "/" + menuId);
         }).catch(err => console.log(err));
     }

@@ -74,6 +74,10 @@ export default {
   saveComment:function(commentData,restId){
     return axios.post("/api/menu/comment/"+restId, commentData);
   },
+  //search restaurant by category name
+  updateAvgRating: function(menuId) {
+    return axios.get("/api/menu/avgrating/"+menuId);
+  },
   //saves each menu item
   saveMenuItem:function(menuData,restId){
     return axios.post("/api/menu/save/"+restId,menuData);

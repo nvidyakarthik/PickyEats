@@ -17,4 +17,8 @@ router.route("/edit/:id")
 //for the route api/menu/delete
 router.route("/delete/:id")
 .delete(menuController.deleteMenu);
+
+//for the route api/menu/avgrating
+router.route("/avgrating/:id")
+.get(menuController.updateAvgRating);
 module.exports=router;

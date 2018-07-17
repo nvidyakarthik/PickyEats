@@ -10,6 +10,7 @@ class MenuItem extends Component {
         restName: "Restaurant Name",
         restaurantId: "",
         itemName: "Item Name",
+        rating:"",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         pic: "http://placehold.it/550x250",
         reviews: []
@@ -48,7 +49,8 @@ class MenuItem extends Component {
                 this.setState({
                     reviews: response.data.comments,
                     itemName: response.data.dishName,
-                    description: response.data.description
+                    description: response.data.description,
+                    rating:response.data.rating
                 });
 
             }).catch(err => console.log(err));
@@ -76,6 +78,7 @@ class MenuItem extends Component {
                         <p className="title">Details</p>
                         <img src={this.state.pic} alt="top item" />
                         <p id="topdesc">{this.state.description}</p>
+                        <p id="avgRating">Average Rating : {this.state.rating}</p>
                     </div>
 
                     <div className="half">

@@ -1,5 +1,8 @@
 const db = require("../models");
 const axios=require("axios");
+const mongoose = require("mongoose");
+const ObjectId=mongoose.Types.ObjectId;
+
 
  //Defining methods for the booksController
 module.exports = {
@@ -72,36 +75,34 @@ module.exports = {
   //returns average of menu rating
   findRestByRating: function(req, res) {
     console.log("inside here");
-    db.Restaurant      
-            .aggregate(
-               [
-                // Unwind the source
-                { $unwind: "$menus" },
-                // Do the lookup matching
-                { $lookup: {
-                   "from": "menus",
-                   "localField": "menus",
-                   "foreignField": "_id",
-                   "as": "menuObjects"
-                }},
-                // Unwind the result arrays ( likely one or none )
-                 { $unwind: "$menuObjects" }, 
-                // Group back to arrays
-                { $group: {
-                    _id: "$_id",
-                    
-                    total:{"$avg":{"$sum": '$menuObjects.rating' }},
-                    menus: { "$push": "$menus" },
-                    menusObjects: { "$push": "$menuObjects" }
-                }}
-            ] /* [
-              {$unwind: '$menus' },{
-          $group: {
-            _id: '$_id',
-            total:{$sum: '$menus.rating' }
-                        
-       }}]  */)
-      .then(dbRestaurant => res.json(dbRestaurant))
+    db.Menu.aggregate(
+      [
+        {
+          $match:{
+              "_id" : ObjectId("5b4931a8636f94d25c24a292")
+          }
+      },
+       // Unwind the source
+       { $unwind: "$comments" },
+       // Do the lookup matching
+       { $lookup: {
+          "from": "comments",//other table name
+          "localField": "comments",
+          "foreignField": "_id",
+          "as": "commentObjects"
+       }},
+       // Unwind the result arrays ( likely one or none )
+        { $unwind: "$commentObjects" }, 
+       // Group back to arrays
+       { $group: {
+           _id: "$_id",           
+           averageRating:{"$avg":{"$sum": '$commentObjects.rating' }},
+           commentObjects: { "$push": "$commentObjects" }
+       }}
+   ])
+      .then(dbRestaurant =>{ 
+        console.log(dbRestaurant);
+        res.json(dbRestaurant)})
       .catch(err => res.status(422).json(err));
   },
   //search all restaurant by zip
