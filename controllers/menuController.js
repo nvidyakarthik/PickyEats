@@ -1,5 +1,7 @@
 const db = require("../models");
 const axios = require("axios");
+const mongoose = require("mongoose");
+const ObjectId=mongoose.Types.ObjectId;
 
 module.exports = {
    
@@ -45,6 +47,42 @@ module.exports = {
         res.status(422).json(err);
 
       });
+  },
+   //returns average of menu rating
+   updateAvgRating: function(req, res) {
+    console.log("inside updateAvgRating"+req.params.id);
+    db.Menu.aggregate(
+      [
+        {
+          $match:{
+              "_id" : ObjectId(req.params.id)
+          }
+      },
+       // Unwind the source
+       { $unwind: "$comments" },
+       // Do the lookup matching
+       { $lookup: {
+          "from": "comments",//other table name
+          "localField": "comments",
+          "foreignField": "_id",
+          "as": "commentObjects"
+       }},
+       // Unwind the result arrays ( likely one or none )
+        { $unwind: "$commentObjects" }, 
+       // Group back to arrays
+       { $group: {
+           _id: "$_id",           
+           avgRating:{"$avg":{"$sum": '$commentObjects.rating' }}
+          
+       }}
+   ])
+      .then(dbRating =>{ 
+      // console.log(dbRating);
+        return db.Menu
+        .findOneAndUpdate({ _id:req.params.id},{rating:dbRating[0].avgRating},{new:true})       
+      }).then(dbMenu=>{
+        res.json(dbMenu)})
+      .catch(err => res.status(422).json(err));
   },
   findAllComments: function(req, res) {
     db.Menu
