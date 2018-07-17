@@ -4,6 +4,7 @@ import Container from "../../components/Container";
 import LongCard from "../../components/LongCard";
 import "./restaurant.css";
 import API from "../../utils/API";
+import MDSpinner from "react-md-spinner";
 
 class Restaurant extends Component {
 
@@ -13,7 +14,8 @@ class Restaurant extends Component {
         rating: "",
         userId: "",
         reviewerName:"",
-        menus: [
+        menus:[],
+        /* menus: [
             {
                 id: 1,
                 img: "http://placehold.it/100x100",
@@ -38,7 +40,7 @@ class Restaurant extends Component {
                 price: "7.96",
                 rating: "1/5"
             }
-        ]
+        ] */
     };
 
     componentDidMount() {
@@ -97,6 +99,9 @@ class Restaurant extends Component {
     }
 
     render() {
+        if(!this.state.menus.length){
+			return <MDSpinner className="spinner" size={100}/>
+		}
         return (
             <div id="restaurantPage">
                 <div className="restJumbotron">

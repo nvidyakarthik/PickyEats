@@ -4,6 +4,7 @@ import Container from "../../components/Container";
 import LongCard from "../../components/LongCard";
 import "./menuItem.css";
 import API from "../../utils/API";
+import MDSpinner from "react-md-spinner";
 
 class MenuItem extends Component {
     state = {
@@ -64,8 +65,10 @@ class MenuItem extends Component {
 
     }
 
-
     render() {
+        if(!this.state.reviews.length){
+			return <MDSpinner className="spinner" size={75}/>
+		}
         return (
             <div id="menuItemPage">
                 <div className="menuJumbo">
@@ -91,6 +94,7 @@ class MenuItem extends Component {
                                         img="http://placehold.it/100x100"
                                         description={review.description}
                                         rating={review.rating}
+                                        key={review._id}
                                     />
                                 ))}
                             </div>

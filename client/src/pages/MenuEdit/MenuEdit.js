@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Container from "../../components/Container";
 import "./menuEdit.css";
 import API from "../../utils/API";
+import MDSpinner from "react-md-spinner";
 
 class MenuEdit extends Component {
     state = {
@@ -98,6 +99,9 @@ class MenuEdit extends Component {
     }
 
     render() {
+        if(!this.state.menuItems.length){
+			return <MDSpinner className="spinner" size={100}/>
+		}
         return (
             <Container>
                 <div className="half">
@@ -152,7 +156,7 @@ class MenuEdit extends Component {
                     {this.state.menuItems.length ? (
                         <div id="addedMenu">
                             {this.state.menuItems.map(item => (
-                                <div>
+                                <div key={item._id}>
                                     <div className="menuButtons">
                                         <button className="delete" value={item._id} onClick={this.deleteMenuItem.bind(this)}>✗</button>
                                         <button className="edit">Edit</button>
