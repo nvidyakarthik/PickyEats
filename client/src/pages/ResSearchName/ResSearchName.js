@@ -3,6 +3,7 @@ import Container from "../../components/Container";
 import SmallCard from "../../components/SmallCard";
 import "./resSearchName.css";
 import API from "../../utils/API";
+import MDSpinner from "react-md-spinner";
 
 class resSearchName extends Component {
 	state = {
@@ -62,6 +63,9 @@ class resSearchName extends Component {
 	}
 
 	render() {
+		if(!this.state.restaurants.length){
+			return <MDSpinner className="spinner" size={100}/>
+		}
 		return (
 			<div>
 				{this.state.restaurants.length ? (
