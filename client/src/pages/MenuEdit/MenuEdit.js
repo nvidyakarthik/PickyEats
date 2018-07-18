@@ -165,7 +165,7 @@ class MenuEdit extends Component {
                                         <button className="edit">Edit</button>
                                     </div>
                                     <div className="menuItems">
-                                        ${item.price} {item.dishName} Type:{item.menutype}
+                                        ${item.price} {item.dishName} | {item.menutype}
                                     </div>
                                 </div>
                             ))}
