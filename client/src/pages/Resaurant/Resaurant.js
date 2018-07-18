@@ -99,9 +99,9 @@ class Restaurant extends Component {
     }
 
     render() {
-        if(!this.state.menus.length){
+        /* if(!this.state.menus.length){
 			return <MDSpinner className="spinner" size={100}/>
-		}
+		} */
         return (
             <div id="restaurantPage">
                 <div className="restJumbotron">

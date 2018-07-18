@@ -66,9 +66,9 @@ class MenuItem extends Component {
     }
 
     render() {
-        if(!this.state.reviews.length){
+        /* if(!this.state.reviews.length){
 			return <MDSpinner className="spinner" size={75}/>
-		}
+		} */
         return (
             <div id="menuItemPage">
                 <div className="menuJumbo">

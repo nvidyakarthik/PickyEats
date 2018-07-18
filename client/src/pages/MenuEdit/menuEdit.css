@@ -27,8 +27,8 @@
 }
 
 .menuItems {
-    margin: 15px 0;
-    width: 80%;
+    margin: 20px 0 15px;
+    width: 70%;
     float: left;
     font-family: 'Quicksand', sans-serif;
     text-shadow: 1px 2px 5px black;
@@ -41,10 +41,17 @@
 
 .edit {
     width: 40px;
-    height: 20px;
+    height: 30px;
     margin: 0 5px;
     padding: 0;
     font-size: 70%;
+}
+
+.delete {
+    font-size: 70%;
+    height: 30px;
+    margin-right: 2px;
+    background-color: rgb(255, 38, 0);
 }
 
 #done {
