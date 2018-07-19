@@ -82,9 +82,14 @@ export default {
   saveMenuItem:function(menuData,restId){
     return axios.post("/api/menu/save/"+restId,menuData);
   },
-  editMenuItem:function(menuId){
-    return axios.put("/api/menu/edit/"+menuId);
+  editMenuItem:function(menuData,menuId){
+    return axios.put("/api/menu/edit/"+menuId,menuData);
   },
+  //get comments for a particular menu Item
+  getAllMenus:function(restId){
+    return axios.get("/api/menu/read/"+restId);
+  },
+  //delete menu item
   removeMenuItem:function(menuId){
     return axios.delete("/api/menu/delete/"+menuId);
 
