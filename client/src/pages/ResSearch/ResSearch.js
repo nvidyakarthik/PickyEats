@@ -66,9 +66,9 @@ class ResSearch extends Component {
 	}
 
 	render() {
-		if(!this.state.restaurants.length){
+		/* if(!this.state.restaurants.length){
 			return <MDSpinner className="spinner" size={100}/>
-		}
+		} */
 		return (
 			<div>
 				{this.state.restaurants.length ? (

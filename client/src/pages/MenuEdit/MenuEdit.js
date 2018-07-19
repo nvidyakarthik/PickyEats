@@ -211,7 +211,7 @@ class MenuEdit extends Component {
                                         <button className="edit" value={item._id} onClick={this.editMenuItem.bind(this)}>Edit</button>
                                     </div>
                                     <div className="menuItems">
-                                        ${item.price} {item.dishName} Type:{item.menutype}
+                                        ${item.price} {item.dishName} | {item.menutype}
                                     </div>
                                 </div>
                             ))}
