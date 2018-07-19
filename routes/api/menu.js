@@ -10,13 +10,17 @@ router.route("/comment/:id")
 router.route("/save/:id")
 .post(menuController.createMenu);
 
-//for the route api/menu/save
+//for the route api/menu/edit
 router.route("/edit/:id")
 .put(menuController.updateMenu);
 
 //for the route api/menu/delete
 router.route("/delete/:id")
 .delete(menuController.deleteMenu);
+
+//for the route api/menu/read
+router.route("/read/:id")
+.get(menuController.findAllMenus);
 
 //for the route api/menu/avgrating
 router.route("/avgrating/:id")

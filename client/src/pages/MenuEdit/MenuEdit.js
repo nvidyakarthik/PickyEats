@@ -12,21 +12,8 @@ class MenuEdit extends Component {
         menutype:"",
         menuItems:[],
         ids:[],
-        /* menuItems: [
-            {
-                name: "Burrito",
-                description: "good stuff",
-                price: "5.99"
-            },
-            {
-                name: "Lasagna",
-                price: "15.99"
-            },
-            {
-                name: "Chow Mein",
-                price: "7.96"
-            }
-        ], */
+        updateId:"",
+        isEdit:false,
         types: ["Appetizer", "Breakfast", "Lunch", "Dinner", "Drink", "Kids"]
     };
 
@@ -40,46 +27,101 @@ class MenuEdit extends Component {
     addMenuItem=(event)=>{
         event.preventDefault();
         console.log("params id"+this.props.match.params.id);
-        const restaurantId=this.props.match.params.id;
+        const restId=this.props.match.params.id;
          const menuItemData={
+            restaurantId:restId, 
             dishName:this.state.dishName,
             description:this.state.description,
             price:this.state.price,
             menutype:this.state.menutype
         }        
-        API.saveMenuItem(menuItemData,restaurantId).then(response => {
+        API.saveMenuItem(menuItemData,restId).then(response => {
             this.setState({ids:[...this.state.ids, response.data._id]});
             this.setState({ menuItems: [...this.state.menuItems, response.data]}); 
             this.setState(
-                {
+                {   
                     dishName:"",
                     description:"",
                     price:"",
-                    menuType:""
-                })         
+                    menutype:""
+                });        
 			
 		}).catch(err => console.log(err)); 
+    }
+    loadAllMenus=(restId)=>{
+        API.getAllMenus(restId).then(response => {
+            this.setState({menuItems:response.data});
+        }).catch(err => console.log(err)); 
     }
     deleteMenuItem=(event)=>{
         event.preventDefault();
         const menuId=event.target.value;
+       // const restId=this.props.match.params.id;
         console.log("delete id"+menuId);
         API.removeMenuItem(menuId).then(response => {
-            console.log("menu item deleted");
+            let newArrIds = this.state.ids.filter((x) => x._id !==menuId );
+            let newMenuItems=this.state.menuItems.filter(item=>item._id!==menuId);
             this.setState({
-                menuItems: this.state.menuItems.filter(item => {
-                    item._id !== menuId
-                }),
-                ids: this.state.ids.filter(item => item !== menuId)
-              });
-              console.log(this.state.menuItems);
-                       
+                ids:newArrIds,
+                menuItems:newMenuItems
+            });
+             
+            console.log("menu item deleted"+response.data);
+                                
         }).catch(err => console.log(err)); 
 
     }
 
-    handleSubmit=(event)=>{
-        
+    updateMenuItem=(event)=>{
+        event.preventDefault();
+        const menuId=event.target.value;
+        console.log(menuId);
+        const restId=this.props.match.params.id;
+         const menuItemData={
+            restaurantId:restId, 
+            dishName:this.state.dishName,
+            description:this.state.description,
+            price:this.state.price,
+            menutype:this.state.menutype
+        }    
+        API.editMenuItem(menuItemData,menuId).then(response => {
+            const foundIndex=this.state.menuItems.findIndex(item=> item._id===menuId);
+            const newMenuItems=this.state.menuItems;
+            newMenuItems[foundIndex]=response.data;
+            this.setState({menuItems:newMenuItems});
+            this.setState(
+                {   
+                    dishName:"",
+                    description:"",
+                    price:"",
+                    menutype:"",
+                    isEdit:false
+                });           
+            
+        }).catch(err => console.log(err)); 
+    }
+
+    editMenuItem=(event)=>{
+        this.setState({isEdit:true});
+        event.preventDefault();
+        const menuId=event.target.value;
+        console.log(menuId);
+        this.setState({updateId:menuId});
+        this.state.menuItems.map(item => {
+            console.log("itemId"+item._id);
+            if(item._id == menuId){
+                this.setState({
+                    dishName:item.dishName,
+                    description:item.description,
+                    menutype:item.menutype,
+                    price:item.price
+                });
+            }
+        });  
+
+    }
+
+    handleSubmit=(event)=>{        
         event.preventDefault();
         const restaurantId=this.props.match.params.id;
         console.log("inside submit");
@@ -147,7 +189,11 @@ class MenuEdit extends Component {
                             />
                         </div>
                         <div id="addDone">
+                        {this.state.isEdit?(
+                            <button id="updateItem" value={this.state.updateId} onClick={this.updateMenuItem.bind(this)}>Update Item</button>
+                        ):(
                             <button id="addItem" onClick={this.addMenuItem.bind(this)}>Add Item</button>
+                        )}
                             <button id="done" type="submit">I'm Done</button>
                         </div>
                     </form>
@@ -162,7 +208,7 @@ class MenuEdit extends Component {
                                 <div key={item._id}>
                                     <div className="menuButtons">
                                         <button className="delete" value={item._id} onClick={this.deleteMenuItem.bind(this)}>✗</button>
-                                        <button className="edit">Edit</button>
+                                        <button className="edit" value={item._id} onClick={this.editMenuItem.bind(this)}>Edit</button>
                                     </div>
                                     <div className="menuItems">
                                         ${item.price} {item.dishName} | {item.menutype}

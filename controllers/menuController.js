@@ -94,7 +94,19 @@ module.exports = {
       })
       .catch(err => res.status(422).json(err));
   },
+  findAllMenus: function(req, res) {
+    console.log("Inside find all menus");
+    db.Menu
+      .find({restaurantId:req.params.id})
+      .then(dbMenu => {
+          //console.log("firstName"+dbMenu.user.firstName);
+        res.json(dbMenu);
+      })
+      .catch(err => res.status(422).json(err));
+  },
+
   updateMenu: function(req, res) {
+    console.log("Inside updateMenu");
     db.Menu
       .findOneAndUpdate({ _id:req.params.id},req.body,{new:true})
       
@@ -105,6 +117,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   deleteMenu: function(req, res) {
+
     db.Menu
       .deleteOne({ _id:req.params.id})
       
