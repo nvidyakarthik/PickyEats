@@ -13,16 +13,26 @@ class ResOwner extends Component {
         zip: "",
         categoryId:"",
         //categories: ["Chinese", "Mexican", "Korean", "American", "Steakhouse", "Italian", "Seafood", "Breakfast", "Pizza", "Burger", "Thai", "Japanese", "Vietnamese", "Sandwiches", "Sushi Bar"],
-        categories:[]
+        categories:[],
+        selectedFile:""
     };
 
-    handleInputChange = event => {
-        const { name, value } = event.target;
+    handleInputChange = e => {
+        console.log(e.target.name);
+        
+        switch (e.target.name) {
+            case 'selectedFile':
+              this.setState({ selectedFile: e.target.files[0] });
+              break;
+            default:
+              this.setState({ [e.target.name]: e.target.value });
+          }
+        /* const { name, value } = event.target;
         this.setState({
             [name]: value
-        });
+        }); */
     };
-
+    
     componentDidMount() {
 		API.getCategories().then(response => {
 			console.log(response.data)
@@ -34,7 +44,7 @@ class ResOwner extends Component {
     }
     
     handleSubmit=(event)=>{
-        
+        console.log("imgname"+this.state.selectedFile);
         event.preventDefault();
         const restData={
             restaurantName: this.state.restName,
@@ -42,14 +52,15 @@ class ResOwner extends Component {
             city: this.state.city,
             state: this.state.state,
             zip: this.state.zip,
+            imgpath:this.state.selectedFile,
             category:this.state.categoryId
         }
-        API.saveRestaurant(restData).then(response => {
+         API.saveRestaurant(restData).then(response => {
             console.log("id of data"+response.data._id);
             this.props.history.push("/resowner/"+response.data._id);
 			
 		}).catch(err => console.log(err));
-		
+		 
     }
 
     change=(event)=> {        
@@ -106,7 +117,7 @@ class ResOwner extends Component {
                                 placeholder="Zip (required)"
                                 value={this.state.zip}
                                 onChange={this.handleInputChange}
-                            />
+                            />                             
 
                             <select id="addRestCategory" value={this.state.category} onChange={ e => this.change(e) }>
                                 <option value="0">Category (required)</option>
@@ -114,6 +125,12 @@ class ResOwner extends Component {
                                     <option key={category.id} value={category._id}>{category.categoryName}</option>
                                 ))}
                             </select>
+
+                            <input
+                                type="file"
+                                name="selectedFile"
+                                onChange={this.handleInputChange}
+                            />   
                             <button className="infoButton" type="submit" >Add Restaurant</button>
                         </form>
  

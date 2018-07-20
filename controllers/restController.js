@@ -8,7 +8,7 @@ const ObjectId=mongoose.Types.ObjectId;
 module.exports = {
 
   createRestaurant: function(req, res) {
-    console.log("Inside create restaurant"+req.body);
+    console.log("Inside create restaurant"+req.file.fileName);
     db.Restaurant
       .create(req.body)
       .then(dbModel => {

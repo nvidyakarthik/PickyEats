@@ -16,8 +16,9 @@ const restaurantSchema = new Schema({
   city:{type: String, required: true, trim: true},
   state:{type: String, required: true, trim: true},
   zip:{type:Number,required:true,trim: true},
+  imgpath: {type: String,required: true,trim: true},
   category: { type: Schema.Types.ObjectId, ref: 'Category' },
-  menus:[{ type: Schema.Types.ObjectId, ref: 'Menu' }]
+  menus:[{ type: Schema.Types.ObjectId, ref: 'Menu' }], 
     
 });
 
