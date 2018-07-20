@@ -17,7 +17,12 @@
   .itemWords {
     width: 100%;
   }
-  
+
+  #imgId{
+    height:100px;
+    width:100px;
+  }
+
   .itemName {
     font-weight: bold;
     text-shadow: 1px 1px 5px black;

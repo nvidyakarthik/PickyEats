@@ -14,28 +14,35 @@ class MenuEdit extends Component {
         ids:[],
         updateId:"",
         isEdit:false,
-        types: ["Appetizer", "Breakfast", "Lunch", "Dinner", "Drink", "Kids"]
+        types: ["Appetizer", "Breakfast", "Lunch", "Dinner", "Drink", "Kids"],
+        selectedFile:""
     };
 
-    handleInputChange = event => {
-        const { name, value } = event.target;
-        this.setState({
-            [name]: value
-        });
+    handleInputChange = e => {
+        console.log(e.target.name);        
+        switch (e.target.name) {
+            case 'selectedFile':
+              this.setState({ selectedFile: e.target.files[0] });
+              break;
+            default:
+              this.setState({ [e.target.name]: e.target.value });
+          }
     };
 
     addMenuItem=(event)=>{
         event.preventDefault();
+        console.log("imgname"+this.state.selectedFile);
         console.log("params id"+this.props.match.params.id);
         const restId=this.props.match.params.id;
-         const menuItemData={
-            restaurantId:restId, 
-            dishName:this.state.dishName,
-            description:this.state.description,
-            price:this.state.price,
-            menutype:this.state.menutype
-        }        
-        API.saveMenuItem(menuItemData,restId).then(response => {
+        const formData=new FormData();
+        formData.append('restaurantId',restId);
+        formData.append('dishName',this.state.dishName);
+        formData.append('description',this.state.description);
+        formData.append('price',this.state.price);
+        formData.append('imgpath', this.state.selectedFile);
+        formData.append('menutype',this.state.menutype);
+             
+        API.saveMenuItem(formData,restId).then(response => {
             this.setState({ids:[...this.state.ids, response.data._id]});
             this.setState({ menuItems: [...this.state.menuItems, response.data]}); 
             this.setState(
@@ -43,7 +50,8 @@ class MenuEdit extends Component {
                     dishName:"",
                     description:"",
                     price:"",
-                    menutype:""
+                    menutype:"",
+                    selectedFile:""
                 });        
 			
 		}).catch(err => console.log(err)); 
@@ -188,6 +196,12 @@ class MenuEdit extends Component {
                                 onChange={this.handleInputChange}
                             />
                         </div>
+                        <input
+                            type="file"
+                            name="selectedFile"
+                            onChange={this.handleInputChange}
+                        />      
+
                         <div id="addDone">
                         {this.state.isEdit?(
                             <button id="updateItem" value={this.state.updateId} onClick={this.updateMenuItem.bind(this)}>Update Item</button>

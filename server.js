@@ -11,8 +11,22 @@ const PORT = process.env.PORT || 3001;
 
 // Define middleware here
 app.use(morgan('dev'))
+app.use('/uploads',express.static('uploads'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use((req, res, next) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header(
+	  "Access-Control-Allow-Headers",
+	  "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+	);
+	if (req.method === "OPTIONS") {
+	  res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+	  return res.status(200).json({});
+	}
+	next();
+  });
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
