@@ -25,7 +25,8 @@ class MenuItem extends Component {
     componentDidMount() {
         let menuId = this.props.match.params.menuId;
         let restId = this.props.match.params.id;
-        this.setState({ restaurantId: restId });
+        this.setState({ restaurantId: restId ,
+        restName:localStorage.getItem('restName')});
         API.getAllComments(menuId)
             .then(response => {
                 console.log("data received " + response.data);
@@ -33,7 +34,8 @@ class MenuItem extends Component {
                     reviews: response.data.comments,
                     itemName: response.data.dishName,
                     description: response.data.description,
-                    rating: response.data.rating
+                    rating: response.data.rating,
+                    pic:response.data.imgpath
                 });
 
             }).catch(err => console.log(err));
@@ -92,7 +94,7 @@ class MenuItem extends Component {
                 <Container>
                     <div className="half">
                         <p className="title">Details</p>
-                        <img src={this.state.pic} alt="top item" />
+                        <img src={this.state.pic===""?"http://placehold.it/100x100":'/uploads/'+this.state.pic} alt="top item" />
                         <p className="topdesc">{this.state.description}</p>
                         <p className="topdesc">Average Rating:
                             <Rating

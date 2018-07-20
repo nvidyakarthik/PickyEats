@@ -21,7 +21,8 @@ class Restaurant extends Component {
     componentDidMount() {
         const restaurantId = this.props.match.params.id;
         API.getRestaurantById(restaurantId).then(response => {
-            console.log(response.data)
+            console.log(response.data);
+            localStorage.setItem('restName', response.data.restaurantName);
             this.setState({
                 restaurantName: response.data.restaurantName,
                 menus: response.data.menus
@@ -86,7 +87,7 @@ class Restaurant extends Component {
                 {this.state.menus.map(item => (
                     <Container>
                         <LongCard
-                            img="http://placehold.it/100x100"
+                            img={item.imgpath===""?"http://placehold.it/100x100":'/uploads/'+item.imgpath}
                             key={item._id}
                             id={item._id}
                             name={item.dishName}

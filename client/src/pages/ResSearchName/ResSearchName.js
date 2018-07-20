@@ -77,7 +77,7 @@ class resSearchName extends Component {
 								key={restaurant._id}
 								id={restaurant._id}
 								name={restaurant.restaurantName}
-								img="http://placehold.it/100x100"
+								img={restaurant.imgpath===""?"http://placehold.it/100x100":'/uploads/'+restaurant.imgpath}
 								info={restaurant.street + " " + restaurant.city}
 								onClick={this.viewMenu}
 

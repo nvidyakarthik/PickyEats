@@ -11,18 +11,25 @@ class ResOwner extends Component {
         city: "",
         state: "",
         zip: "",
+        phone:0,
         categoryId:"",
         //categories: ["Chinese", "Mexican", "Korean", "American", "Steakhouse", "Italian", "Seafood", "Breakfast", "Pizza", "Burger", "Thai", "Japanese", "Vietnamese", "Sandwiches", "Sushi Bar"],
-        categories:[]
+        categories:[],
+        selectedFile:""
     };
 
-    handleInputChange = event => {
-        const { name, value } = event.target;
-        this.setState({
-            [name]: value
-        });
+    handleInputChange = e => {
+        console.log(e.target.name);
+        
+        switch (e.target.name) {
+            case 'selectedFile':
+              this.setState({ selectedFile: e.target.files[0] });
+              break;
+            default:
+              this.setState({ [e.target.name]: e.target.value });
+          }
     };
-
+    
     componentDidMount() {
 		API.getCategories().then(response => {
 			console.log(response.data)
@@ -34,22 +41,24 @@ class ResOwner extends Component {
     }
     
     handleSubmit=(event)=>{
-        
+        console.log("imgname"+this.state.selectedFile);
         event.preventDefault();
-        const restData={
-            restaurantName: this.state.restName,
-            street: this.state.street,
-            city: this.state.city,
-            state: this.state.state,
-            zip: this.state.zip,
-            category:this.state.categoryId
-        }
-        API.saveRestaurant(restData).then(response => {
+        let formData = new FormData();
+
+      formData.append('restaurantName', this.state.restName);
+      formData.append('street', this.state.street);
+      formData.append('city', this.state.city);
+      formData.append('state', this.state.state);
+      formData.append('zip', this.state.zip);
+      formData.append('phone', this.state.phone);
+      formData.append('imgpath', this.state.selectedFile);
+      formData.append('category', this.state.categoryId);
+        API.saveRestaurant(formData).then(response => {
             console.log("id of data"+response.data._id);
             this.props.history.push("/resowner/"+response.data._id);
 			
 		}).catch(err => console.log(err));
-		
+		 
     }
 
     change=(event)=> {        
@@ -106,7 +115,7 @@ class ResOwner extends Component {
                                 placeholder="Zip (required)"
                                 value={this.state.zip}
                                 onChange={this.handleInputChange}
-                            />
+                            />                                                    
 
                             <select id="addRestCategory" value={this.state.category} onChange={ e => this.change(e) }>
                                 <option value="0">Category (required)</option>
@@ -114,6 +123,20 @@ class ResOwner extends Component {
                                     <option key={category.id} value={category._id}>{category.categoryName}</option>
                                 ))}
                             </select>
+
+                            <input
+                                id="phone"
+                                name="phone"
+                                placeholder="phone (required)"
+                                value={this.state.phone}
+                                onChange={this.handleInputChange}
+                            />      
+
+                             <input
+                                type="file"
+                                name="selectedFile"
+                                onChange={this.handleInputChange}
+                            />    
                             <button className="infoButton" type="submit" >Add Restaurant</button>
                         </form>
  
