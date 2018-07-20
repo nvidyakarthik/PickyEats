@@ -11,6 +11,7 @@ class ResOwner extends Component {
         city: "",
         state: "",
         zip: "",
+        phone:0,
         categoryId:"",
         //categories: ["Chinese", "Mexican", "Korean", "American", "Steakhouse", "Italian", "Seafood", "Breakfast", "Pizza", "Burger", "Thai", "Japanese", "Vietnamese", "Sandwiches", "Sushi Bar"],
         categories:[],
@@ -49,6 +50,7 @@ class ResOwner extends Component {
       formData.append('city', this.state.city);
       formData.append('state', this.state.state);
       formData.append('zip', this.state.zip);
+      formData.append('phone', this.state.phone);
       formData.append('imgpath', this.state.selectedFile);
       formData.append('category', this.state.categoryId);
         API.saveRestaurant(formData).then(response => {
@@ -113,7 +115,7 @@ class ResOwner extends Component {
                                 placeholder="Zip (required)"
                                 value={this.state.zip}
                                 onChange={this.handleInputChange}
-                            />                             
+                            />                                                    
 
                             <select id="addRestCategory" value={this.state.category} onChange={ e => this.change(e) }>
                                 <option value="0">Category (required)</option>
@@ -121,6 +123,14 @@ class ResOwner extends Component {
                                     <option key={category.id} value={category._id}>{category.categoryName}</option>
                                 ))}
                             </select>
+
+                            <input
+                                id="phone"
+                                name="phone"
+                                placeholder="phone (required)"
+                                value={this.state.phone}
+                                onChange={this.handleInputChange}
+                            />      
 
                              <input
                                 type="file"
