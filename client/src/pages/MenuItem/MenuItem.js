@@ -96,7 +96,7 @@ class MenuItem extends Component {
                         <p className="topdesc">{this.state.description}</p>
                         <p className="topdesc">Average Rating:
                             <Rating
-                                stop={this.state.rating}
+                                stop="5"
                                 initialRating={this.state.rating}
                                 emptySymbol="far fa-star"
                                 fullSymbol="fas fa-star"
