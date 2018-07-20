@@ -4,7 +4,7 @@ import "./longCard.css";
 
 const LongCard = props => (
     <div className="menuItem">
-        <img className="itemPic" src={props.img} alt="pic" />
+        <img className="itemPic" src={props.img} id="imgId" alt="pic" />
         <div className="itemWords" id={props.id} >
             <div className="itemName">{props.name}</div>
             <div className="itemDescription">{props.description}</div>

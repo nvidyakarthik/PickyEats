@@ -86,7 +86,7 @@ class Restaurant extends Component {
                 {this.state.menus.map(item => (
                     <Container>
                         <LongCard
-                            img="http://placehold.it/100x100"
+                            img={item.imgpath===""?"http://placehold.it/100x100":'/uploads/'+item.imgpath}
                             key={item._id}
                             id={item._id}
                             name={item.dishName}

@@ -8,6 +8,7 @@ const menuSchema = new Schema({
   price: {type:Number,required:true},
   menutype:{type:String,required:true,trim:true},
   rating:{type:Number,default:0},
+  imgpath: {type: String,trim: true},
   comments:[{ type: Schema.Types.ObjectId, ref: 'Comment' }]        
 });
 
