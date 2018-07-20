@@ -3,7 +3,7 @@ import Container from "../../components/Container";
 import SmallCard from "../../components/SmallCard";
 import "./resSearchName.css";
 import API from "../../utils/API";
-import MDSpinner from "react-md-spinner";
+//import MDSpinner from "react-md-spinner";
 
 class resSearchName extends Component {
 	state = {

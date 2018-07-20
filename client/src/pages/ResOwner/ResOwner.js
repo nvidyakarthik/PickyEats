@@ -27,10 +27,6 @@ class ResOwner extends Component {
             default:
               this.setState({ [e.target.name]: e.target.value });
           }
-        /* const { name, value } = event.target;
-        this.setState({
-            [name]: value
-        }); */
     };
     
     componentDidMount() {
@@ -46,16 +42,16 @@ class ResOwner extends Component {
     handleSubmit=(event)=>{
         console.log("imgname"+this.state.selectedFile);
         event.preventDefault();
-        const restData={
-            restaurantName: this.state.restName,
-            street: this.state.street,
-            city: this.state.city,
-            state: this.state.state,
-            zip: this.state.zip,
-            imgpath:this.state.selectedFile,
-            category:this.state.categoryId
-        }
-         API.saveRestaurant(restData).then(response => {
+        let formData = new FormData();
+
+      formData.append('restaurantName', this.state.restName);
+      formData.append('street', this.state.street);
+      formData.append('city', this.state.city);
+      formData.append('state', this.state.state);
+      formData.append('zip', this.state.zip);
+      formData.append('imgpath', this.state.selectedFile);
+      formData.append('category', this.state.categoryId);
+        API.saveRestaurant(formData).then(response => {
             console.log("id of data"+response.data._id);
             this.props.history.push("/resowner/"+response.data._id);
 			
@@ -126,11 +122,11 @@ class ResOwner extends Component {
                                 ))}
                             </select>
 
-                            <input
+                             <input
                                 type="file"
                                 name="selectedFile"
                                 onChange={this.handleInputChange}
-                            />   
+                            />    
                             <button className="infoButton" type="submit" >Add Restaurant</button>
                         </form>
  
