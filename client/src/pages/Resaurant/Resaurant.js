@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import Popup from "reactjs-popup";
 import Container from "../../components/Container";
 import LongCard from "../../components/LongCard";
+import Rating from "react-rating";
 import "./restaurant.css";
 import API from "../../utils/API";
-import MDSpinner from "react-md-spinner";
+//import MDSpinner from "react-md-spinner";
 
 class Restaurant extends Component {
 
@@ -13,34 +14,8 @@ class Restaurant extends Component {
         review: "",
         rating: "",
         userId: "",
-        reviewerName:"",
-        menus:[],
-        /* menus: [
-            {
-                id: 1,
-                img: "http://placehold.it/100x100",
-                dishName: "Burrito",
-                description: "Sooo yummy. I got the beef burrito, and I'm usually very picky about burritos and this one satisfied me completely!",
-                price: "5.99",
-                rating: "5/5"
-            },
-            {
-                id: 2,
-                img: "http://placehold.it/100x100",
-                dishName: "Lasagna",
-                description: "I could have used more sauce, but it's not bad.",
-                price: "15.99",
-                rating: "3/5"
-            },
-            {
-                id: 3,
-                img: "http://placehold.it/100x100",
-                dishName: "Chow Mein",
-                description: "Ugh, not good at all. It was dry, flavorless, and made me sick after. Do not get.",
-                price: "7.96",
-                rating: "1/5"
-            }
-        ] */
+        reviewerName: "",
+        menus: [],
     };
 
     componentDidMount() {
@@ -60,11 +35,10 @@ class Restaurant extends Component {
         console.log("menuId" + menuId);
         this.props.history.push("/menuitem/" + restaurantId + "/" + menuId);
     }
-    
+
     change = (event) => {
-        const selectedValue = event.target.value;
         this.setState({
-            rating: selectedValue
+            rating: event
         });
     }
 
@@ -82,18 +56,18 @@ class Restaurant extends Component {
         console.log("menuId" + event.target.value);
         console.log("review" + this.state.review);
         console.log("rating" + this.state.rating);
-        console.log("name"+this.state.reviewerName);
+        console.log("name" + this.state.reviewerName);
         let commentData = {
             description: this.state.review,
             rating: this.state.rating,
-            user:this.state.reviewerName
-            
+            user: this.state.reviewerName
+
         }
         API.saveComment(commentData, menuId).then(response => {
             console.log(response.data);
             API.updateAvgRating(menuId).then(res => {
-                console.log("averaRating rating created"+res.data);
-            }).catch(err=>console.log(err));
+                console.log("averaRating rating created" + res.data);
+            }).catch(err => console.log(err));
             this.props.history.push("/menuitem/" + restaurantId + "/" + menuId);
         }).catch(err => console.log(err));
     }
@@ -143,15 +117,16 @@ class Restaurant extends Component {
                                             placeholder="Your review..."
                                             onChange={this.handleInputChange.bind(this)}
                                         />
-                                        <div className="modalSection modalDiv">Your rating:</div>
-                                        <select id={"rating" + item._id} value={this.state.rating} onChange={e => this.change(e)} className="modalSection ratingSelect">
-                                            <option value="0">0</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                        </select>
+                                        <div className="modalSection modalDiv">Your rating:
+                                            <Rating
+                                                id={"rating" + item._id}
+                                                stop="5"
+                                                initialRating={this.state.rating}
+                                                emptySymbol="far fa-star"
+                                                fullSymbol="fas fa-star"
+                                                onChange={(rate) => this.change(rate)}
+                                            />
+                                        </div>
                                     </div>
                                     <div className="modalButtons">
                                         <button className="modalButton" onClick={() => { close() }}>Cancel</button>

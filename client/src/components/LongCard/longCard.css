@@ -33,3 +33,11 @@
     float: left;
     margin-right: 15px;
   }
+
+  .fas {
+    color: gold;
+  }
+  
+  .far {
+    color: silver;
+  }
