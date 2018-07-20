@@ -21,7 +21,8 @@ class Restaurant extends Component {
     componentDidMount() {
         const restaurantId = this.props.match.params.id;
         API.getRestaurantById(restaurantId).then(response => {
-            console.log(response.data)
+            console.log(response.data);
+            localStorage.setItem('restName', response.data.restaurantName);
             this.setState({
                 restaurantName: response.data.restaurantName,
                 menus: response.data.menus

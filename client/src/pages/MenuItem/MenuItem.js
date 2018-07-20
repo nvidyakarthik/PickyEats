@@ -25,7 +25,8 @@ class MenuItem extends Component {
     componentDidMount() {
         let menuId = this.props.match.params.menuId;
         let restId = this.props.match.params.id;
-        this.setState({ restaurantId: restId });
+        this.setState({ restaurantId: restId ,
+        restName:localStorage.getItem('restName')});
         API.getAllComments(menuId)
             .then(response => {
                 console.log("data received " + response.data);
