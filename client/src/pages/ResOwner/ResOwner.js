@@ -11,7 +11,7 @@ class ResOwner extends Component {
         city: "",
         state: "",
         zip: "",
-        phone:0,
+        phone: "Phone Number (required)",
         categoryId:"",
         //categories: ["Chinese", "Mexican", "Korean", "American", "Steakhouse", "Italian", "Seafood", "Breakfast", "Pizza", "Burger", "Thai", "Japanese", "Vietnamese", "Sandwiches", "Sushi Bar"],
         categories:[],
@@ -40,11 +40,10 @@ class ResOwner extends Component {
 		
     }
     
-    handleSubmit=(event)=>{
-        console.log("imgname"+this.state.selectedFile);
-        event.preventDefault();
-        let formData = new FormData();
-
+    handleSubmit=(event)=>{       
+      event.preventDefault();
+      console.log("imgname"+this.state.selectedFile);
+      let formData = new FormData();
       formData.append('restaurantName', this.state.restName);
       formData.append('street', this.state.street);
       formData.append('city', this.state.city);
@@ -127,12 +126,13 @@ class ResOwner extends Component {
                             <input
                                 id="phone"
                                 name="phone"
-                                placeholder="phone (required)"
+                                placeholder="Phone Number (required)"
                                 value={this.state.phone}
                                 onChange={this.handleInputChange}
                             />      
 
                              <input
+                                className="fileUpload"
                                 type="file"
                                 name="selectedFile"
                                 onChange={this.handleInputChange}

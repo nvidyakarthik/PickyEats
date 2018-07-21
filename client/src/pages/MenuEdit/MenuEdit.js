@@ -9,80 +9,80 @@ class MenuEdit extends Component {
         dishName: "",
         description: "",
         price: "",
-        menutype:"",
-        menuItems:[],
-        ids:[],
-        updateId:"",
-        isEdit:false,
+        menutype: "",
+        menuItems: [],
+        ids: [],
+        updateId: "",
+        isEdit: false,
         types: ["Appetizer", "Breakfast", "Lunch", "Dinner", "Drink", "Kids"],
-        selectedFile:""
+        selectedFile: ""
     };
 
     handleInputChange = e => {
-        console.log(e.target.name);        
+        console.log(e.target.name);
         switch (e.target.name) {
             case 'selectedFile':
-              this.setState({ selectedFile: e.target.files[0] });
-              break;
+                this.setState({ selectedFile: e.target.files[0] });
+                break;
             default:
-              this.setState({ [e.target.name]: e.target.value });
-          }
+                this.setState({ [e.target.name]: e.target.value });
+        }
     };
 
-    addMenuItem=(event)=>{
+    addMenuItem = (event) => {
         event.preventDefault();
-        console.log("imgname"+this.state.selectedFile);
-        console.log("params id"+this.props.match.params.id);
-        const restId=this.props.match.params.id;
-        const formData=new FormData();
-        formData.append('restaurantId',restId);
-        formData.append('dishName',this.state.dishName);
-        formData.append('description',this.state.description);
-        formData.append('price',this.state.price);
+        console.log("imgname" + this.state.selectedFile);
+        console.log("params id" + this.props.match.params.id);
+        const restId = this.props.match.params.id;
+        const formData = new FormData();
+        formData.append('restaurantId', restId);
+        formData.append('dishName', this.state.dishName);
+        formData.append('description', this.state.description);
+        formData.append('price', this.state.price);
         formData.append('imgpath', this.state.selectedFile);
-        formData.append('menutype',this.state.menutype);
-             
-        API.saveMenuItem(formData,restId).then(response => {
-            this.setState({ids:[...this.state.ids, response.data._id]});
-            this.setState({ menuItems: [...this.state.menuItems, response.data]}); 
+        formData.append('menutype', this.state.menutype);
+
+        API.saveMenuItem(formData, restId).then(response => {
+            this.setState({ ids: [...this.state.ids, response.data._id] });
+            this.setState({ menuItems: [...this.state.menuItems, response.data] });
             this.setState(
-                {   
-                    dishName:"",
-                    description:"",
-                    price:"",
-                    menutype:"",
-                    selectedFile:""
-                });        
-			
-		}).catch(err => console.log(err)); 
+                {
+                    dishName: "",
+                    description: "",
+                    price: "",
+                    menutype: "",
+                    selectedFile: ""
+                });
+
+        }).catch(err => console.log(err));
     }
-    loadAllMenus=(restId)=>{
+    loadAllMenus = (restId) => {
         API.getAllMenus(restId).then(response => {
-            this.setState({menuItems:response.data});
-        }).catch(err => console.log(err)); 
+            this.setState({ menuItems: response.data });
+        }).catch(err => console.log(err));
     }
-    deleteMenuItem=(event)=>{
+    deleteMenuItem = (event) => {
         event.preventDefault();
-        const menuId=event.target.value;
-       // const restId=this.props.match.params.id;
-        console.log("delete id"+menuId);
+        const menuId = event.target.value;
+        // const restId=this.props.match.params.id;
+        console.log("delete id" + menuId);
         API.removeMenuItem(menuId).then(response => {
-            let newArrIds = this.state.ids.filter((x) => x._id !==menuId );
-            let newMenuItems=this.state.menuItems.filter(item=>item._id!==menuId);
+            let newArrIds = this.state.ids.filter((x) => x._id !== menuId);
+            let newMenuItems = this.state.menuItems.filter(item => item._id !== menuId);
             this.setState({
-                ids:newArrIds,
-                menuItems:newMenuItems
+                ids: newArrIds,
+                menuItems: newMenuItems
             });
-             
-            console.log("menu item deleted"+response.data);
-                                
-        }).catch(err => console.log(err)); 
+
+            console.log("menu item deleted" + response.data);
+
+        }).catch(err => console.log(err));
 
     }
 
-    updateMenuItem=(event)=>{
+    updateMenuItem = (event) => {
         event.preventDefault();
-        const menuId=event.target.value;
+        const menuId = event.target.value;
         console.log(menuId);
         const restId=this.props.match.params.id;
         const formData=new FormData();
@@ -111,43 +111,43 @@ class MenuEdit extends Component {
         }).catch(err => console.log(err)); 
     }
 
-    editMenuItem=(event)=>{
-        this.setState({isEdit:true});
+    editMenuItem = (event) => {
+        this.setState({ isEdit: true });
         event.preventDefault();
-        const menuId=event.target.value;
+        const menuId = event.target.value;
         console.log(menuId);
-        this.setState({updateId:menuId});
+        this.setState({ updateId: menuId });
         this.state.menuItems.map(item => {
-            console.log("itemId"+item._id);
-            if(item._id == menuId){
+            console.log("itemId" + item._id);
+            if (item._id == menuId) {
                 this.setState({
-                    dishName:item.dishName,
-                    description:item.description,
-                    menutype:item.menutype,
-                    price:item.price
+                    dishName: item.dishName,
+                    description: item.description,
+                    menutype: item.menutype,
+                    price: item.price
                 });
             }
-        });  
+        });
 
     }
 
-    handleSubmit=(event)=>{        
+    handleSubmit = (event) => {
         event.preventDefault();
-        const restaurantId=this.props.match.params.id;
+        const restaurantId = this.props.match.params.id;
         console.log("inside submit");
-        this.state.ids.map(data =>console.log(data));
-        const menuIds={menus:this.state.ids};
-        
-        API.upadateRestaurant(restaurantId,menuIds).then(response => {
-            console.log("Response from submit"+response.data);
-            this.props.history.push("/restaurant/"+restaurantId);           
-			
-		}).catch(err => console.log(err));
-		
+        this.state.ids.map(data => console.log(data));
+        const menuIds = { menus: this.state.ids };
+
+        API.upadateRestaurant(restaurantId, menuIds).then(response => {
+            console.log("Response from submit" + response.data);
+            this.props.history.push("/restaurant/" + restaurantId);
+
+        }).catch(err => console.log(err));
+
     }
 
-    change=(event)=> {             
-        const selectedValue= event.target.value;
+    change = (event) => {
+        const selectedValue = event.target.value;
         this.setState({
             menutype: selectedValue
         });
@@ -181,7 +181,7 @@ class MenuEdit extends Component {
                             className="textare"
                         />
 
-                        <select value={this.state.menutype?this.state.menutype:"t"} onChange={ e => this.change(e) }>
+                        <select value={this.state.menutype ? this.state.menutype : "t"} onChange={e => this.change(e)}>
                             <option value="t">Type...</option>
                             {this.state.types.map(type => (
                                 <option key={type} value={type}>{type}</option>
@@ -197,19 +197,21 @@ class MenuEdit extends Component {
                                 value={this.state.price}
                                 onChange={this.handleInputChange}
                             />
-                        </div>
+                        </div>  
+
                         <input
+                            className="fileUpload"
                             type="file"
                             name="selectedFile"
                             onChange={this.handleInputChange}
-                        />      
+                        />
 
                         <div id="addDone">
-                        {this.state.isEdit?(
-                            <button id="updateItem" value={this.state.updateId} onClick={this.updateMenuItem.bind(this)}>Update Item</button>
-                        ):(
-                            <button id="addItem" onClick={this.addMenuItem.bind(this)}>Add Item</button>
-                        )}
+                            {this.state.isEdit ? (
+                                <button id="updateItem" value={this.state.updateId} onClick={this.updateMenuItem.bind(this)}>Update Item</button>
+                            ) : (
+                                    <button id="addItem" onClick={this.addMenuItem.bind(this)}>Add Item</button>
+                                )}
                             <button id="done" type="submit">I'm Done</button>
                         </div>
                     </form>

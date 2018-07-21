@@ -9,39 +9,8 @@ class ResSearch extends Component {
 	state = {
 		restaurantType: "",
 		restaurants: []
-		/* restaurants: [
-			{
-				img: "http://placehold.it/100x100",
-				name: "Restaurant 1",
-				info: "Restaurant 1 info",
-			},
-			{
-				img: "http://placehold.it/100x100",
-				name: "Restaurant 2",
-				info: "Restaurant 2 info",
-			},
-			{
-				img: "http://placehold.it/100x100",
-				name: "Restaurant 3",
-				info: "Restaurant 3 info",
-			},
-			{
-				img: "http://placehold.it/100x100",
-				name: "Restaurant 4",
-				info: "Restaurant 4 info",
-			},
-			{
-				img: "http://placehold.it/100x100",
-				name: "Restaurant 5",
-				info: "Restaurant 5 info",
-			},
-			{
-				img: "http://placehold.it/100x100",
-				name: "Restaurant 6",
-				info: "Restaurant 6 info",
-			},
-		] */
-	}
+	};
+	
 	 componentDidMount() {
 		const categoryId = this.props.match.params.id;
 		API.getRestaurantByCategory(categoryId).then(response => {
