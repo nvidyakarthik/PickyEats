@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 3001;
 
 // Define middleware here
 app.use(morgan('dev'))
+//Used for finding images in this path after uploading file
 app.use('/uploads',express.static('uploads'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -58,6 +59,7 @@ db.once('open', () => {
 	)
 });
 
+// ===== Passport ====
 app.use(
 	session({
 		secret: process.env.APP_SECRET || 'secret key',
@@ -66,8 +68,6 @@ app.use(
 		saveUninitialized: false// don't create session until something stored
 	})
 );
-
-// ===== Passport ====
 app.use(passport.initialize());
 app.use(passport.session()); // will call the deserializeUser
 
