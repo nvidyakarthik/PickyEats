@@ -85,14 +85,15 @@ class MenuEdit extends Component {
         const menuId=event.target.value;
         console.log(menuId);
         const restId=this.props.match.params.id;
-         const menuItemData={
-            restaurantId:restId, 
-            dishName:this.state.dishName,
-            description:this.state.description,
-            price:this.state.price,
-            menutype:this.state.menutype
-        }    
-        API.editMenuItem(menuItemData,menuId).then(response => {
+        const formData=new FormData();
+        formData.append('restaurantId',restId);
+        formData.append('dishName',this.state.dishName);
+        formData.append('description',this.state.description);
+        formData.append('price',this.state.price);
+        formData.append('imgpath', this.state.selectedFile);
+        formData.append('menutype',this.state.menutype);
+        
+        API.editMenuItem(formData,menuId).then(response => {
             const foundIndex=this.state.menuItems.findIndex(item=> item._id===menuId);
             const newMenuItems=this.state.menuItems;
             newMenuItems[foundIndex]=response.data;
@@ -103,7 +104,8 @@ class MenuEdit extends Component {
                     description:"",
                     price:"",
                     menutype:"",
-                    isEdit:false
+                    isEdit:false,
+                    selectedFile:""
                 });           
             
         }).catch(err => console.log(err)); 
