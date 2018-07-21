@@ -1,0 +1,13 @@
+#footer {
+    height: 40px;
+    width: 100%;
+    background-color: #682720;
+    text-align: center;
+    color: rgb(221, 221, 221);
+    padding-top: 15px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 80%;
+    float: left;
+    position: sticky;
+    bottom: 0;
+}

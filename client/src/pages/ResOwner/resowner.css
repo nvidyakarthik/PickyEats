@@ -30,6 +30,11 @@ input, select, textarea {
     box-shadow: 2px 3px 5px black;
 }
 
+.fileUpload {
+    border: none;
+    box-shadow: none;
+}
+
 #street {
     width: 90%;
     float: left;

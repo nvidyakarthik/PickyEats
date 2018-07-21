@@ -14,6 +14,7 @@ import API from "./utils/API"
 import MenuItem from "./pages/MenuItem";
 
 import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 
 
 class App extends React.Component {
@@ -81,6 +82,7 @@ class App extends React.Component {
       <Router>
         <div>
           <Nav _logout={this._logout} loggedIn={this.state.loggedIn} user={this.state.user}/>
+          
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/login" render={() =>
@@ -99,6 +101,8 @@ class App extends React.Component {
             <Route exact path="/menuitem/:id/:menuId" component={MenuItem} />
             <Route component={NoMatch} />
           </Switch>
+
+          <Footer />
         </div>
       </Router>
     );

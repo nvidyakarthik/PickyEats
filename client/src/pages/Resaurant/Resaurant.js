@@ -84,8 +84,9 @@ class Restaurant extends Component {
                 </div>
 
                 <div id="menu" className="title">Menu</div>
+                <Container>
                 {this.state.menus.map(item => (
-                    <Container>
+                    <div>
                         <LongCard
                             img={item.imgpath===""?"http://placehold.it/100x100":'/uploads/'+item.imgpath}
                             key={item._id}
@@ -139,8 +140,9 @@ class Restaurant extends Component {
 
                         <button className="linkToMenuItem" onClick={() => this.linkToMenuItem(item._id)}>More Reviews</button>
 
-                    </Container>
+                    </div>
                 ))}
+                </Container>
 
                 <div id="popupContainer"></div>
 
