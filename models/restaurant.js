@@ -12,6 +12,7 @@ const Schema = mongoose.Schema;
 
 const restaurantSchema = new Schema({
   restaurantName: { type: String, required: true ,trim:true },
+  personId:{ type: Schema.Types.ObjectId, ref: 'Login' },
   street: { type: String, required: true ,trim: true},
   city:{type: String, required: true, trim: true},
   state:{type: String, required: true, trim: true},

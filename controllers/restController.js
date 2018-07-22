@@ -49,6 +49,13 @@ module.exports = {
       .then(dbRestaurant => res.json(dbRestaurant))
       .catch(err => res.status(422).json(err));
   },
+  //list all restaurants by restaurant owner   
+  findRestByOwner: function(req, res) {
+    db.Restaurant
+      .find({ personId: req.params.id })
+      .then(dbRestaurant => res.json(dbRestaurant))
+      .catch(err => res.status(422).json(err));
+  },
   findRestByNameCity: function(req, res) {
     console.log("in findrestbynamecity"+req.body.restaurantName);
     console.log("city"+req.body.city);
@@ -121,37 +128,3 @@ module.exports = {
   }
 
 };
-
-
-//session stored 
-/* var estLat = sessionStorage.getItem("startLat");
-var estlng = sessionStorage.getItem("startLng");
-
-function foursquareSearch (category, loc, rad){
-  let apiString='https://api.foursquare.com/v2/venues/search?';
-  const clientID = '&client_id=WPAVV4TBTN0WB1AMQAZG5XTQFJ5AQ2EBWJPLU4Z1PSGAZLVC'
-  const clientSecret = '&client_secret=2JYX2TBCNACXMXOUXCVOM5DALR4F4ZZ5H3L35PZ1I54OVP1U'
-  const version = '&v=20170801'
- let resturantApi= 'https://api.foursquare.com/v2/venues/';
-  let location = string('&near'=+loc);
-  let radius = string('&radius='+rad);
-  let categoryID = '&categoryId='+ category;
-  const limit = '&limit=10';
-
-  console.log(apiString);
-    $.ajax({
-      url: apitstring+clientID+clientSecret+version+location+radius+categoryID+limit,
-      method:'GET'
-    }).then(result => {
-      let venues = results.response.venues;
-      console.log(venues);
-      console.log(venues.id);
-    console.log(resturantApi+venues.id+'/'+menu)
-    })
-  
-}
-
- foursquareSearch{
-  console.log(results.response.venues)
-};
- */

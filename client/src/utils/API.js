@@ -36,9 +36,13 @@ export default {
     console.log("in api");
     return axios.post("/api/restaurant/listbyname/city",formData);
   },
-  //search restaurant by category name
+  //get restaurant by rating order
    getRestaurantByRating: function() {
     return axios.get("/api/restaurant/rating");
+  },
+  //lists all restaurant by owner name
+  getRestaurantByOwner: function(id) {
+    return axios.get("/api/restaurant/listbyowner/"+id);
   },
   // signup page Saves the user to the database
   signUpUser: function(userData) {

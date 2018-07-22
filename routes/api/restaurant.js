@@ -58,6 +58,9 @@ router.route("/:id")
 .get(restaurantController.findRestaurantById);
 router.route("/listbyname/city")
 .post(restaurantController.findRestByNameCity);
+router.route("/listbyowner/:id")
+.get(restaurantController.findRestByOwner);
+
 
  
  

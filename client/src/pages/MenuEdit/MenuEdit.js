@@ -56,9 +56,17 @@ class MenuEdit extends Component {
 
         }).catch(err => console.log(err));
     }
+    componentDidMount() {
+        const restId = this.props.match.params.id;
+        this.loadAllMenus(restId);
+    		
+    }
     loadAllMenus = (restId) => {
         API.getAllMenus(restId).then(response => {
-            this.setState({ menuItems: response.data });
+            this.setState({
+                 menuItems: response.data,
+                 ids:response.data.map(item=>item._id)
+             });
         }).catch(err => console.log(err));
     }
     deleteMenuItem = (event) => {
@@ -229,8 +237,9 @@ class MenuEdit extends Component {
                                         <button className="edit" value={item._id} onClick={this.editMenuItem.bind(this)}>Edit</button>
                                     </div>
                                     <div className="menuItems">
-                                        ${item.price} {item.dishName} | {item.menutype}
+                                        ${item.price} {item.dishName} | {item.menutype} <img id="menuImage" src={item.imgpath===""?"http://placehold.it/100x100":'/uploads/'+item.imgpath} alt="itemImage"/>
                                     </div>
+                                    
                                 </div>
                             ))}
                         </div>
