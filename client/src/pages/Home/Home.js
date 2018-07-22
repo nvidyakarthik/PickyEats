@@ -64,7 +64,8 @@ class Home extends Component {
 			this.setState({
 				categories: response.data
 			});
-		});
+        }).catch(err => console.log(err)); 
+
 	};
 
 	handleInputChange = event => {
@@ -82,7 +83,7 @@ class Home extends Component {
 		API.getRestByNameCity(searchData).then(response => {
 			console.log("city search"+response.data)
 			this.props.history.push("/searchbyname/"+this.state.restaurantName+"/"+this.state.city); 
-		});
+        }).catch(err => console.log(err)); 
 		
 	}
 
