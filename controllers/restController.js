@@ -54,12 +54,13 @@ module.exports = {
     console.log("city"+req.body.city);
     db.Restaurant
       //.find({"restaurantName": {$regex : `^${req.body.restaurantName}.*` , $options: 'si' }})
-      .find({ $and: [{"restaurantName":{ $e: req.body.restaurantName}}, { "city": { $e: req.body.city } } ] })
-      .populate("category")
+      .find({ $and: [{"restaurantName":{ $eq: req.body.restaurantName}}, { "city": { $eq: req.body.city } } ] })
+      
       .then(dbRestaurant =>{ 
         console.log(dbRestaurant);
         res.json(dbRestaurant);})
       .catch(err => {
+        console.log(err);
          res.status(422).json({err:db.Restaurant.toString()});
       });
   },

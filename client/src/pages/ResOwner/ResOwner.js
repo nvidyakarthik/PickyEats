@@ -40,11 +40,10 @@ class ResOwner extends Component {
 		
     }
     
-    handleSubmit=(event)=>{
-        console.log("imgname"+this.state.selectedFile);
-        event.preventDefault();
-        let formData = new FormData();
-
+    handleSubmit=(event)=>{       
+      event.preventDefault();
+      console.log("imgname"+this.state.selectedFile);
+      let formData = new FormData();
       formData.append('restaurantName', this.state.restName);
       formData.append('street', this.state.street);
       formData.append('city', this.state.city);

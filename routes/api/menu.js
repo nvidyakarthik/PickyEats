@@ -45,6 +45,21 @@ const storage = multer.diskStorage({
      });
  
  }); 
+
+ router.put("/edit/:id",upload.single('imgpath'),(req,res,next)=>{
+    if(req.file)
+       req.body.imgpath=req.file.filename;    
+     console.log("Inside create restaurant"+JSON.stringify(req.body));
+     db.Menu
+      .findOneAndUpdate({ _id:req.params.id},req.body,{new:true})
+      
+      .then(dbMenu => { 
+          //console.log("firstName"+dbMenu.user.firstName);
+        res.json(dbMenu);
+      })
+      .catch(err => res.status(422).json(err));
+ 
+ }); 
 //for the route api/menu/comment/:id
 router.route("/comment/:id")
 .post(menuController.createComment)
@@ -55,8 +70,8 @@ router.route("/comment/:id")
 .post(menuController.createMenu);
  */
 //for the route api/menu/edit
-router.route("/edit/:id")
-.put(menuController.updateMenu);
+/* router.route("/edit/:id")
+.put(menuController.updateMenu); */
 
 //for the route api/menu/delete
 router.route("/delete/:id")
