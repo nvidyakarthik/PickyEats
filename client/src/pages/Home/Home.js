@@ -75,7 +75,15 @@ class Home extends Component {
 	};
 
 	seachByNameCity = () => {
-		this.props.history.push("/searchbyname/"+this.state.restaurantName+"/"+this.state.city); 
+		const searchData={
+			restaurantName:this.state.restaurantName,
+			city:this.state.city
+		}
+		API.getRestByNameCity(searchData).then(response => {
+			console.log("city search"+response.data)
+			this.props.history.push("/searchbyname/"+this.state.restaurantName+"/"+this.state.city); 
+		});
+		
 	}
 
 	takeMeTo = (site) => {
