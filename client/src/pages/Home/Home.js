@@ -112,8 +112,10 @@ class Home extends Component {
 					<div className="dropdown">
 						<button className="dropbtn">I'm in the mood for</button>
 						<div className="dropdown-content">
-							{this.state.categories.map(category => (
-								<a href={'/ressearch/' + category._id} key={this.state.categories.id} value={category.categoryName}>{category.categoryName}</a>
+							{this.state.categories.map(category => (								
+								<Link to={'/ressearch/' + category._id} key={this.state.categories.id} >
+									{category.categoryName}
+								</Link>
 							))}
 						</div>
 					</div>

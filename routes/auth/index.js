@@ -26,13 +26,13 @@ router.post('/login', function(req, res, next) {
 	passport.authenticate('local', function(err, user, info) {
 		if (err) {
 			if (err.name === 'IncorrectCredentialsError') {
-			  return res.json({
+			  return res.status(400).json({
 				//success: false,
 				message: err.message
 			  });
 			}
 	  
-			return res.json({
+			return res.status(400).json({
 			  //success: false,
 			  message: 'Could not process the form.'
 			});
