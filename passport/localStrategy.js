@@ -20,7 +20,7 @@ const strategy = new LocalStrategy(
 			}
 			
 			if (!userMatch) {
-				const error = new Error('Incorrect email');
+				const error = new Error('Email not found');
       			error.name = 'IncorrectCredentialsError';
       			return done(error);
 			}

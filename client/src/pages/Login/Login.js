@@ -29,6 +29,7 @@ class Login extends Component {
     handleSubmit=(event)=>{
         
         event.preventDefault();
+        if(this.state.email!=="" && this.state.password!==""){
         API.signInUser({
             email: this.state.email,
             password: this.state.password
@@ -49,6 +50,10 @@ class Login extends Component {
                 });
                 
             });
+        }
+        else{
+            this.setState({error:"Please enter all Fields"});
+        }
     }
 
     render() {
