@@ -63,7 +63,7 @@ db.once('open', () => {
 app.use(
 	session({
 		secret: process.env.APP_SECRET || 'secret key',
-		store: new MongoStore({ mongooseConnection: db }),
+		//store: new MongoStore({ mongooseConnection: db }),
 		resave: false,//don't save session if unmodified
 		saveUninitialized: false// don't create session until something stored
 	})

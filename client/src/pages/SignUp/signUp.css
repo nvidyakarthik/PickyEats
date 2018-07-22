@@ -13,8 +13,8 @@
     text-shadow: 2px 3px 5px black;
 }
 
-p#error {
-    color: red;
+.error {
+    color: white;
     font-size: 15px;
     margin-left: 29px;
 }

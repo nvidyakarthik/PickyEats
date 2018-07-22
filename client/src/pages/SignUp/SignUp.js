@@ -86,7 +86,7 @@ class SignUp extends Component {
                             onChange={this.handleInputChange}
                         />
                         {this.state.error?(
-                            <p id="error">{this.state.error}</p>
+                            <p className="error">{this.state.error}</p>
                         ):""}
                         <input
                             name="password"
