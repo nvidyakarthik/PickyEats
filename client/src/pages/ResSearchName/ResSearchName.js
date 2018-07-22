@@ -80,6 +80,7 @@ class resSearchName extends Component {
 								img={restaurant.imgpath===""?"http://placehold.it/100x100":'/uploads/'+restaurant.imgpath}
 								info={restaurant.street + " " + restaurant.city}
 								onClick={this.viewMenu}
+								linkTitle="Menu"
 
 							/>
 						))}
