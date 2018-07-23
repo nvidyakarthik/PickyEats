@@ -236,7 +236,14 @@ class MenuEdit extends Component {
                                 onChange={this.handleInputChange}
                             />
                         </div>  
-                                
+
+                        <input
+                                id="restImg"
+                                name="selectedFile"
+                                placeholder="Image Link"
+                                value={this.state.selectedFile}
+                                onChange={this.handleInputChange}
+                            />         
                         <div id="addDone">
                             {this.state.isEdit ? (
                                 <button id="updateItem" value={this.state.updateId} onClick={this.updateMenuItem.bind(this)}>Update Item</button>
@@ -264,7 +271,10 @@ class MenuEdit extends Component {
                                     <div className="menuButtons">
                                         <button className="delete" value={item._id} onClick={this.deleteMenuItem.bind(this)}>✗</button>
                                         <button className="edit" value={item._id} onClick={this.editMenuItem.bind(this)}>Edit</button>
-                                    </div>                                      
+                                    </div>
+                                    <div className="menuItems">
+                                        <img className="menuImage" src={item.imgpath===""?"http://placehold.it/100x100":item.imgpath} alt="itemImage"/> ${item.price} {item.dishName} | {item.menutype} 
+                                    </div>
                                     
                                 </div>
                             ))}
