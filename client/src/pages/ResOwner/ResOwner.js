@@ -44,10 +44,10 @@ class ResOwner extends Component {
     loadRestByOwner=()=>{
         const userId=this.props.match.params.id;
         API.getRestaurantByOwner(userId).then(response => {
-			console.log(response.data)
+			console.log("restaurantName"+response.data.restaurantName);
 			this.setState({
 				restaurants:response.data
-			  });
+              });           
 		}).catch(err => console.log(err));
     }
 
@@ -85,8 +85,7 @@ class ResOwner extends Component {
       }      
        API.saveRestaurant(formData).then(response => {
             console.log("id of data"+response.data._id);
-            this.props.history.push("/resowner/"+response.data._id);
-			
+            this.props.history.push("/resowner/"+response.data._id);			
 		}).catch(err => console.log(err));
 		 
     }

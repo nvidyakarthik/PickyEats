@@ -6,6 +6,7 @@ import API from "../../utils/API";
 
 class MenuEdit extends Component {
     state = {
+        restaurantName:"",
         dishName: "",
         description: "",
         price: "",
@@ -55,8 +56,18 @@ class MenuEdit extends Component {
     componentDidMount() {
         const restId = this.props.match.params.id;
         this.loadAllMenus(restId);
+        this.loadRestName(restId);    
     		
     }
+
+    loadRestName=(restId)=>{
+        API.getRestaurantById(restId).then(response => {
+            this.setState({
+                 restaurantName: response.data.restaurantName,                 
+             });
+        }).catch(err => console.log(err));        
+    }
+
     loadAllMenus = (restId) => {
         API.getAllMenus(restId).then(response => {
             this.state.ids.map(data => console.log("listing all lod menus ids"+data));
@@ -179,7 +190,7 @@ class MenuEdit extends Component {
         return (
             <Container>
                 <div className="half">
-                    <h3 className="title">Restaurant Name</h3>
+                    <h3 className="title">{this.state.restaurantName}</h3>
 
                     <h3 className="title">Menu Items</h3>
 
@@ -244,13 +255,16 @@ class MenuEdit extends Component {
                         <div id="addedMenu">
                             {this.state.menuItems.map(item => (
                                 <div key={item._id}>
+                                    <div id="menuImage">
+                                        <img src={item.imgpath===""?"http://placehold.it/100x100":item.imgpath} alt="itemImage"/>
+                                    </div>                                    
+                                    <div className="menuItems">
+                                        ${item.price} {item.dishName} | {item.menutype} 
+                                    </div>
                                     <div className="menuButtons">
                                         <button className="delete" value={item._id} onClick={this.deleteMenuItem.bind(this)}>✗</button>
                                         <button className="edit" value={item._id} onClick={this.editMenuItem.bind(this)}>Edit</button>
-                                    </div>
-                                    <div className="menuItems">
-                                        ${item.price} {item.dishName} | {item.menutype} <img id="menuImage" src={item.imgpath===""?"http://placehold.it/100x100":item.imgpath} alt="itemImage"/>
-                                    </div>
+                                    </div>                                      
                                     
                                 </div>
                             ))}
