@@ -19,7 +19,8 @@ class MenuItem extends Component {
         reviews: [],
         newRating: "",
         newReview: "",
-        newReviewerName: ""
+        newReviewerName: "",
+        open:false
     };
 
     componentDidMount() {
@@ -70,16 +71,28 @@ class MenuItem extends Component {
             rating: this.state.newRating,
             user: this.state.newReviewerName
         }
-
+        console.log("props"+this.props.modal);
         API.saveComment(commentData, menuId).then(response => {
             console.log(response.data);
             API.updateAvgRating(menuId).then(res => {
                 console.log("averaRating rating created" + res.data);
+                commentData.rating=res.data.rating;
+                this.setState({ reviews: [...this.state.reviews, commentData] });
+                
                 this.setState({rating:res.data.rating});
             }).catch(err => console.log(err));
-            window.location.reload();
+            this.closeModal();
         }).catch(err => console.log(err));
     }
+
+    openModal = () => {
+        this.setState({ open: true });
+      };
+      closeModal = () => {
+        this.setState({ open: false });
+      };
+
+    
 
     render() {
         /* if(!this.state.reviews.length){
@@ -111,12 +124,13 @@ class MenuItem extends Component {
                             <Link to="/restaurant/:id">
                                 <button className="resButton" onClick={this.goToRestPage.bind(this)}>Go to Restaurant Page</button>
                             </Link>
-
+                            <button className="resButton yourself" id={this.props.match.params.menuId} onClick={this.openModal}>Rate it Yourself</button>
                             <Popup
-                                trigger={<button className="resButton yourself" id={this.props.match.params.menuId}>Rate it Yourself</button>}
-                                modal
-                                closeOnDocumentClick>
-                                {close => (
+                                open={this.state.open}
+                                closeOnDocumentClick
+                                onClose={this.closeModal}
+                                 >
+                                <div className="modal">
                                     <div>
                                         <div className="modalTitle">{this.state.itemName}</div>
                                         <div className="modalContent">
@@ -146,12 +160,14 @@ class MenuItem extends Component {
                                             </div>
                                         </div>
                                         <div className="modalButtons">
-                                            <button className="modalButton" onClick={() => { close() }}>Cancel</button>
+                                            <button className="modalButton" onClick={this.closeModal}>Cancel</button>
                                             <button className="modalButton"  onClick={this.handleRateIt.bind(this)}>Submit</button>
                                         </div>
                                     </div>
-                                )}
+           
+                                </div>
                             </Popup>
+
                         </div>
                     </div>
 
