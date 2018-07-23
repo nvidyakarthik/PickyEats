@@ -11,7 +11,7 @@ class ResOwner extends Component {
         city: "",
         state: "",
         zip: "",
-        phone: "Phone Number (required)",
+        phone: "",
         categoryId:"",
         //categories: ["Chinese", "Mexican", "Korean", "American", "Steakhouse", "Italian", "Seafood", "Breakfast", "Pizza", "Burger", "Thai", "Japanese", "Vietnamese", "Sandwiches", "Sushi Bar"],
         categories:[],
@@ -55,7 +55,7 @@ class ResOwner extends Component {
       formData.append('category', this.state.categoryId);
         API.saveRestaurant(formData).then(response => {
             console.log("id of data"+response.data._id);
-            this.props.history.push("/resowner/"+response.data._id);
+            this.props.history.push("/resowner/"+ response.data._id);
 			
 		}).catch(err => console.log(err));
 		 
