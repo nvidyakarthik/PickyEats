@@ -146,7 +146,7 @@ class Restaurant extends Component {
                 </Container>
                 ):(
                     <Container>
-						<h1 className="title">No Menus available to display</h1>
+						<h1 className="title">No items available to display</h1>
 					</Container>
 
                 )}

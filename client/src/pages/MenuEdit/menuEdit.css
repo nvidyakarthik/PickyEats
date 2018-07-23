@@ -15,7 +15,7 @@
 }
 
 #addDone {
-    margin-left: 65%;
+    margin-left: 60%;
 }
 
 #addedMenu {
@@ -56,4 +56,9 @@
 
 #done {
     background-color: rgb(226, 68, 40);
+}
+
+.menuImage {
+    height: 15px;
+    margin-right: 7px;
 }

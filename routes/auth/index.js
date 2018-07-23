@@ -71,9 +71,9 @@ router.post('/logout', (req, res) => {
 	if (req.user) {
 		req.session.destroy()
 		res.clearCookie('connect.sid') // clean up!
-		return res.json({ msg: 'logging you out' })
+		return res.json({ msg: 'Logging you out' })
 	} else {
-		return res.json({ msg: 'no user to log out!' })
+		return res.json({ msg: 'No user to log out!' })
 	}
 })
 
@@ -83,7 +83,7 @@ router.post('/signup', (req, res) => {
 	User.findOne({ 'email': email }).then(function (user) {
 		if (user) {
 			return res.json({
-				error: `Sorry, already there is a user with the email: ${email}`
+				error: `Sorry, there is already a user with the email: ${email}`
 			})
 		}
 		else{
