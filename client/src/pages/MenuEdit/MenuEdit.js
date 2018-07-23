@@ -221,7 +221,7 @@ class MenuEdit extends Component {
                         <input
                                 id="restImg"
                                 name="selectedFile"
-                                placeholder="Image Path"
+                                placeholder="Image Link"
                                 value={this.state.selectedFile}
                                 onChange={this.handleInputChange}
                             />         
@@ -248,7 +248,7 @@ class MenuEdit extends Component {
                                         <button className="edit" value={item._id} onClick={this.editMenuItem.bind(this)}>Edit</button>
                                     </div>
                                     <div className="menuItems">
-                                        ${item.price} {item.dishName} | {item.menutype} <img id="menuImage" src={item.imgpath===""?"http://placehold.it/100x100":item.imgpath} alt="itemImage"/>
+                                    <img className="menuImage" src={item.imgpath===""?"http://placehold.it/100x100":item.imgpath} alt="itemImage"/> ${item.price} {item.dishName} | {item.menutype} 
                                     </div>
                                     
                                 </div>

@@ -78,3 +78,21 @@ button {
     font-family: 'Quicksand', sans-serif;
     border-radius: 5px;
 }
+
+.resEdit {
+    width: 40px;
+    height: 20px;
+    margin: -8% 8% 0 0;
+    padding: 0;
+    font-size: 70%;
+    float: right;
+}
+
+.resView {
+    width: 40px;
+    height: 20px;
+    margin: -8% 18% 0 0;
+    padding: 0;
+    font-size: 70%;
+    float: right;
+}
