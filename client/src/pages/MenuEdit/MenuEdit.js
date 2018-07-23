@@ -12,6 +12,7 @@ class MenuEdit extends Component {
         menutype: "",
         menuItems: [],
         ids: [],
+        loadIds:[],
         updateId: "",
         isEdit: false,
         types: ["Appetizer", "Breakfast", "Lunch", "Dinner", "Drink", "Kids"],
@@ -63,24 +64,38 @@ class MenuEdit extends Component {
     }
     loadAllMenus = (restId) => {
         API.getAllMenus(restId).then(response => {
+            this.state.ids.map(data => console.log("listing all lod menus ids"+data));
             this.setState({
                  menuItems: response.data,
-                 ids:response.data.map(item=>item._id)
+                 loadIds:response.data.map(item=>item._id)
              });
         }).catch(err => console.log(err));
     }
     deleteMenuItem = (event) => {
         event.preventDefault();
         const menuId = event.target.value;
-        // const restId=this.props.match.params.id;
+        const restId=this.props.match.params.id;
         console.log("delete id" + menuId);
         API.removeMenuItem(menuId).then(response => {
-            let newArrIds = this.state.ids.filter((x) => x._id !== menuId);
             let newMenuItems = this.state.menuItems.filter(item => item._id !== menuId);
-            this.setState({
-                ids: newArrIds,
-                menuItems: newMenuItems
-            });
+            if(this.state.loadIds.length===0){
+                let newArrIds = this.state.ids.filter((x) => x._id !== menuId);
+                
+                this.setState({
+                    ids: newArrIds,
+                    menuItems: newMenuItems
+                });
+            }
+            else{
+                this.setState({
+                    loadIds:this.state.loadIds.filter((x) => x._id !== menuId),
+                    menuItems: newMenuItems
+                });
+                const menuIds = { menus: this.state.loadIds };
+                API.upadateRestMenuIds(restId,menuIds).then(response => {
+                    console.log("updated"+response.data);
+                }).catch(err => console.log(err));
+            }
 
             console.log("menu item deleted" + response.data);
 
@@ -132,7 +147,8 @@ class MenuEdit extends Component {
                     dishName: item.dishName,
                     description: item.description,
                     menutype: item.menutype,
-                    price: item.price
+                    price: item.price,
+                    selectedFile:item.imgpath
                 });
             }
         });

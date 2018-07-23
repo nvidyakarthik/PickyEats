@@ -67,6 +67,10 @@ export default {
   upadateRestaurant: function(restId,menuData) {
     return axios.put("/api/restaurant/updaterest/"+restId, menuData);
   },
+  //update restaurant with new menu ids after delete
+  upadateRestMenuIds: function(restId,menuData) {
+    return axios.put("/api/restaurant/updaterestmenus/"+restId, menuData);
+  },
  /*  //user login info
   getUser:function(){
     return axios.get("/api/user")

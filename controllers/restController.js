@@ -33,7 +33,23 @@ module.exports = {
             res.status(422).json(err);
 
         });
-}, 
+},
+
+  updateRestMenuIds: function (req, res) {
+     db.Restaurant.findOneAndUpdate({ _id: req.params.id },
+        { menus: req.body.menus },
+        { new: true })        
+        .then(dbRestaurant => {
+          console.log(dbRestaurant);
+            res.json(dbRestaurant);
+
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(422).json(err);
+
+        });
+},  
   findAllCategories: function(req, res) {
     db.Category
       .find(req.query)
