@@ -46,6 +46,8 @@ router.route("/listbycategory/:id")
 .get(restaurantController.findRestByCategory);
 router.route("/updaterest/:id")
 .put(restaurantController.updateRestMenu);
+router.route("/updaterestmenus/:id")
+.put(restaurantController.updateRestMenuIds);
 router.route("/rating")
 .get(restaurantController.findRestByRating); 
 router.route("/venuesearch")
