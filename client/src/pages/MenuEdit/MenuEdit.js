@@ -207,6 +207,14 @@ class MenuEdit extends Component {
                             ))}
                         </select>
 
+                        <input
+                                id="restImg"
+                                name="selectedFile"
+                                placeholder="Image Path"
+                                value={this.state.selectedFile}
+                                onChange={this.handleInputChange}
+                        /> 
+
                         <div id="price">
                             <span>$</span>
                             <input
@@ -217,14 +225,7 @@ class MenuEdit extends Component {
                                 onChange={this.handleInputChange}
                             />
                         </div>  
-
-                        <input
-                                id="restImg"
-                                name="selectedFile"
-                                placeholder="Image Path"
-                                value={this.state.selectedFile}
-                                onChange={this.handleInputChange}
-                            />         
+                                
                         <div id="addDone">
                             {this.state.isEdit ? (
                                 <button id="updateItem" value={this.state.updateId} onClick={this.updateMenuItem.bind(this)}>Update Item</button>
