@@ -64,7 +64,7 @@ class MenuItem extends Component {
 
     handleRateIt = (event) => {
         event.preventDefault();
-        let menuId = event.target.value;
+        let menuId = this.props.match.params.menuId;
         let commentData = {
             description: this.state.newReview,
             rating: this.state.newRating,
@@ -75,8 +75,9 @@ class MenuItem extends Component {
             console.log(response.data);
             API.updateAvgRating(menuId).then(res => {
                 console.log("averaRating rating created" + res.data);
+                this.setState({rating:res.data.rating});
             }).catch(err => console.log(err));
-            window.location.reload();
+            //window.location.reload();
         }).catch(err => console.log(err));
     }
 
@@ -146,7 +147,7 @@ class MenuItem extends Component {
                                         </div>
                                         <div className="modalButtons">
                                             <button className="modalButton" onClick={() => { close() }}>Cancel</button>
-                                            <button className="modalButton" value={this.props.match.params.menuId} onClick={this.handleRateIt.bind(this)}>Submit</button>
+                                            <button className="modalButton"  onClick={this.handleRateIt.bind(this)}>Submit</button>
                                         </div>
                                     </div>
                                 )}
