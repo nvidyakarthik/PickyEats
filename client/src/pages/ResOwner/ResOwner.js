@@ -115,7 +115,7 @@ class ResOwner extends Component {
                                         name={restaurant.restaurantName}
                                         img={restaurant.imgpath === "" ? "http://placehold.it/100x100" : restaurant.imgpath}
                                         description={restaurant.street + ", " + restaurant.city + ", " + restaurant.zip}
-                                        rating={restaurant.menus[0].rating}
+                                        
                                     />
 
                                     <button className="resEdit" value={restaurant._id} onClick={this.editMenu.bind(this)}>Edit</button>
