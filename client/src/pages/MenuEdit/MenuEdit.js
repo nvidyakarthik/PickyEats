@@ -6,6 +6,7 @@ import API from "../../utils/API";
 
 class MenuEdit extends Component {
     state = {
+        restaurantName:"",
         dishName: "",
         description: "",
         price: "",
@@ -55,8 +56,18 @@ class MenuEdit extends Component {
     componentDidMount() {
         const restId = this.props.match.params.id;
         this.loadAllMenus(restId);
+        this.loadRestName(restId);    
     		
     }
+
+    loadRestName=(restId)=>{
+        API.getRestaurantById(restId).then(response => {
+            this.setState({
+                 restaurantName: response.data.restaurantName,                 
+             });
+        }).catch(err => console.log(err));        
+    }
+
     loadAllMenus = (restId) => {
         API.getAllMenus(restId).then(response => {
             this.state.ids.map(data => console.log("listing all lod menus ids"+data));
@@ -179,7 +190,7 @@ class MenuEdit extends Component {
         return (
             <Container>
                 <div className="half">
-                    <h3 className="title">Restaurant Name</h3>
+                    <h3 className="title">{this.state.restaurantName}</h3>
 
                     <h3 className="title">Menu Items</h3>
 
@@ -206,6 +217,14 @@ class MenuEdit extends Component {
                                 <option key={type} value={type}>{type}</option>
                             ))}
                         </select>
+
+                        <input
+                                id="restImg"
+                                name="selectedFile"
+                                placeholder="Image Path"
+                                value={this.state.selectedFile}
+                                onChange={this.handleInputChange}
+                        /> 
 
                         <div id="price">
                             <span>$</span>
@@ -248,7 +267,7 @@ class MenuEdit extends Component {
                                         <button className="edit" value={item._id} onClick={this.editMenuItem.bind(this)}>Edit</button>
                                     </div>
                                     <div className="menuItems">
-                                    <img className="menuImage" src={item.imgpath===""?"http://placehold.it/100x100":item.imgpath} alt="itemImage"/> ${item.price} {item.dishName} | {item.menutype} 
+                                        <img className="menuImage" src={item.imgpath===""?"http://placehold.it/100x100":item.imgpath} alt="itemImage"/> ${item.price} {item.dishName} | {item.menutype} 
                                     </div>
                                     
                                 </div>

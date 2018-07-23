@@ -69,6 +69,7 @@ module.exports = {
   findRestByOwner: function(req, res) {
     db.Restaurant
       .find({ personId: req.params.id })
+      .populate("menus")
       .then(dbRestaurant => res.json(dbRestaurant))
       .catch(err => res.status(422).json(err));
   },
