@@ -12,7 +12,6 @@ const PORT = process.env.PORT || 3001;
 // Define middleware here
 app.use(morgan('dev'))
 //Used for finding images in this path after uploading file
-app.use('/uploads',express.static('uploads'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 

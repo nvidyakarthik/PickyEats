@@ -21,14 +21,9 @@ class ResOwner extends Component {
 
     handleInputChange = e => {
         console.log(e.target.name);
-        
-        switch (e.target.name) {
-            case 'selectedFile':
-              this.setState({ selectedFile: e.target.files[0] });
-              break;
-            default:
+       
               this.setState({ [e.target.name]: e.target.value });
-          }
+          
     };
     
     componentDidMount() {
@@ -76,17 +71,18 @@ class ResOwner extends Component {
       event.preventDefault();
       console.log("imgname"+this.state.selectedFile);
       const userId=this.props.match.params.id;
-      console.log("userID:"+userId);
-      let formData = new FormData();
-      formData.append('restaurantName', this.state.restName);
-      formData.append('personId',userId);
-      formData.append('street', this.state.street);
-      formData.append('city', this.state.city);
-      formData.append('state', this.state.state);
-      formData.append('zip', this.state.zip);
-      formData.append('phone', this.state.phone);
-      formData.append('imgpath', this.state.selectedFile);
-      formData.append('category', this.state.categoryId);
+      console.log("userID:"+userId);      
+      let formData={
+        'restaurantName': this.state.restName,
+        'personId':userId,
+        'street': this.state.street,
+        'city': this.state.city,
+        'state': this.state.state,
+        'zip': this.state.zip,
+        'phone': this.state.phone,
+        'imgpath': this.state.selectedFile,
+        'category': this.state.categoryId
+      }      
        API.saveRestaurant(formData).then(response => {
             console.log("id of data"+response.data._id);
             this.props.history.push("/resowner/"+response.data._id);
@@ -164,14 +160,16 @@ class ResOwner extends Component {
                                 placeholder="Phone Number (required)"
                                 value={this.state.phone}
                                 onChange={this.handleInputChange}
-                            />      
+                            />
 
-                             <input
-                                className="fileUpload"
-                                type="file"
+                            <input
+                                id="restImg"
                                 name="selectedFile"
+                                placeholder="Image Path"
+                                value={this.state.selectedFile}
                                 onChange={this.handleInputChange}
-                            />    
+                            /> 
+                                                          
                             <button className="infoButton" type="submit" >Add Restaurant</button>
                         </form>
 

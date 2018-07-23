@@ -77,7 +77,7 @@ class MenuItem extends Component {
                 console.log("averaRating rating created" + res.data);
                 this.setState({rating:res.data.rating});
             }).catch(err => console.log(err));
-            //window.location.reload();
+            window.location.reload();
         }).catch(err => console.log(err));
     }
 
@@ -95,7 +95,7 @@ class MenuItem extends Component {
                 <Container>
                     <div className="half">
                         <p className="title">Details</p>
-                        <img src={this.state.pic===""?"http://placehold.it/100x100":'/uploads/'+this.state.pic} alt="top item" />
+                        <img src={this.state.pic===""?"http://placehold.it/100x100":this.state.pic} alt="top item" />
                         <p className="topdesc">{this.state.description}</p>
                         <p className="topdesc">Average Rating:
                             <Rating

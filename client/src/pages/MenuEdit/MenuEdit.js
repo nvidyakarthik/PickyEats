@@ -21,13 +21,8 @@ class MenuEdit extends Component {
 
     handleInputChange = e => {
         console.log(e.target.name);
-        switch (e.target.name) {
-            case 'selectedFile':
-                this.setState({ selectedFile: e.target.files[0] });
-                break;
-            default:
-                this.setState({ [e.target.name]: e.target.value });
-        }
+        this.setState({ [e.target.name]: e.target.value });
+        
     };
 
     addMenuItem = (event) => {
@@ -35,14 +30,14 @@ class MenuEdit extends Component {
         console.log("imgname" + this.state.selectedFile);
         console.log("params id" + this.props.match.params.id);
         const restId = this.props.match.params.id;
-        const formData = new FormData();
-        formData.append('restaurantId', restId);
-        formData.append('dishName', this.state.dishName);
-        formData.append('description', this.state.description);
-        formData.append('price', this.state.price);
-        formData.append('imgpath', this.state.selectedFile);
-        formData.append('menutype', this.state.menutype);
-
+        let formData={
+            'restaurantId':restId,
+            'dishName':this.state.dishName,
+            'description':this.state.description,
+            'price':this.state.price,
+            'imgpath': this.state.selectedFile,
+            'menutype':this.state.menutype
+        }         
         API.saveMenuItem(formData, restId).then(response => {
             this.setState({ ids: [...this.state.ids, response.data._id] });
             this.setState({ menuItems: [...this.state.menuItems, response.data] });
@@ -108,14 +103,14 @@ class MenuEdit extends Component {
         const menuId = event.target.value;
         console.log(menuId);
         const restId=this.props.match.params.id;
-        const formData=new FormData();
-        formData.append('restaurantId',restId);
-        formData.append('dishName',this.state.dishName);
-        formData.append('description',this.state.description);
-        formData.append('price',this.state.price);
-        formData.append('imgpath', this.state.selectedFile);
-        formData.append('menutype',this.state.menutype);
-        
+        let formData={
+            'restaurantId':restId,
+            'dishName':this.state.dishName,
+            'description':this.state.description,
+            'price':this.state.price,
+            'imgpath': this.state.selectedFile,
+            'menutype':this.state.menutype
+        }    
         API.editMenuItem(formData,menuId).then(response => {
             const foundIndex=this.state.menuItems.findIndex(item=> item._id===menuId);
             const newMenuItems=this.state.menuItems;
@@ -224,12 +219,12 @@ class MenuEdit extends Component {
                         </div>  
 
                         <input
-                            className="fileUpload"
-                            type="file"
-                            name="selectedFile"
-                            onChange={this.handleInputChange}
-                        />
-
+                                id="restImg"
+                                name="selectedFile"
+                                placeholder="Image Path"
+                                value={this.state.selectedFile}
+                                onChange={this.handleInputChange}
+                            />         
                         <div id="addDone">
                             {this.state.isEdit ? (
                                 <button id="updateItem" value={this.state.updateId} onClick={this.updateMenuItem.bind(this)}>Update Item</button>
@@ -253,7 +248,7 @@ class MenuEdit extends Component {
                                         <button className="edit" value={item._id} onClick={this.editMenuItem.bind(this)}>Edit</button>
                                     </div>
                                     <div className="menuItems">
-                                        ${item.price} {item.dishName} | {item.menutype} <img id="menuImage" src={item.imgpath===""?"http://placehold.it/100x100":'/uploads/'+item.imgpath} alt="itemImage"/>
+                                        ${item.price} {item.dishName} | {item.menutype} <img id="menuImage" src={item.imgpath===""?"http://placehold.it/100x100":item.imgpath} alt="itemImage"/>
                                     </div>
                                     
                                 </div>
