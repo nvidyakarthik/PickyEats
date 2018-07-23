@@ -262,12 +262,6 @@ class MenuEdit extends Component {
                         <div id="addedMenu">
                             {this.state.menuItems.map(item => (
                                 <div key={item._id}>
-                                    <div id="menuImage">
-                                        <img src={item.imgpath===""?"http://placehold.it/100x100":item.imgpath} alt="itemImage"/>
-                                    </div>                                    
-                                    <div className="menuItems">
-                                        ${item.price} {item.dishName} | {item.menutype} 
-                                    </div>
                                     <div className="menuButtons">
                                         <button className="delete" value={item._id} onClick={this.deleteMenuItem.bind(this)}>✗</button>
                                         <button className="edit" value={item._id} onClick={this.editMenuItem.bind(this)}>Edit</button>
