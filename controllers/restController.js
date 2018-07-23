@@ -37,8 +37,8 @@ module.exports = {
 
   updateRestMenuIds: function (req, res) {
      db.Restaurant.findOneAndUpdate({ _id: req.params.id },
-        { menus: req.body.menus },
-        { new: true })        
+      { $set: 
+        { menus: req.body.menus}}, {multi: true})        
         .then(dbRestaurant => {
           console.log(dbRestaurant);
             res.json(dbRestaurant);

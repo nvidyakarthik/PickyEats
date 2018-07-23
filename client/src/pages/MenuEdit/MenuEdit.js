@@ -79,7 +79,7 @@ class MenuEdit extends Component {
         API.removeMenuItem(menuId).then(response => {
             let newMenuItems = this.state.menuItems.filter(item => item._id !== menuId);
             if(this.state.loadIds.length===0){
-                let newArrIds = this.state.ids.filter((x) => x._id !== menuId);
+                let newArrIds = this.state.ids.filter((x) => x !== menuId);
                 
                 this.setState({
                     ids: newArrIds,
@@ -88,7 +88,7 @@ class MenuEdit extends Component {
             }
             else{
                 this.setState({
-                    loadIds:this.state.loadIds.filter((x) => x._id !== menuId),
+                    loadIds:this.state.loadIds.filter((x) => x !== menuId),
                     menuItems: newMenuItems
                 });
                 const menuIds = { menus: this.state.loadIds };

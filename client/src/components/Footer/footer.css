@@ -8,6 +8,6 @@
     font-family: 'Quicksand', sans-serif;
     font-size: 80%;
     float: left;
-    position: sticky;
+    /* position: sticky; */
     bottom: 0;
 }
