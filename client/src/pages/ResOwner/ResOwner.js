@@ -105,21 +105,23 @@ class ResOwner extends Component {
             <Container>
                 <div className="middle">
                     {this.state.restaurants.length ?
-                        this.state.restaurants.map(restaurant => (
-                            <div>
-                                <h3 className="title">Your Restaurants</h3>
-                                <Longcard
-                                    key={restaurant._id}
-                                    id={restaurant._id}
-                                    name={restaurant.restaurantName}
-                                    img={restaurant.imgpath === "" ? "http://placehold.it/100x100" : restaurant.imgpath}
-                                    description={restaurant.street + ", " + restaurant.city + ", " + restaurant.zip}
-                                />
+                        <div>
+                            <h3 className="title">Your Restaurants</h3>
+                            {this.state.restaurants.map(restaurant => (
+                                <div>
+                                    <Longcard
+                                        key={restaurant._id}
+                                        id={restaurant._id}
+                                        name={restaurant.restaurantName}
+                                        img={restaurant.imgpath === "" ? "http://placehold.it/100x100" : restaurant.imgpath}
+                                        description={restaurant.street + ", " + restaurant.city + ", " + restaurant.zip}
+                                    />
 
-                                <button className="resEdit" value={restaurant._id} onClick={this.editMenu.bind(this)}>Edit</button>
-                                <button className="resView" value={restaurant._id} onClick={this.viewMenu.bind(this)}>View</button>
-                            </div>
-                        ))
+                                    <button className="resEdit" value={restaurant._id} onClick={this.editMenu.bind(this)}>Edit</button>
+                                    <button className="resView" value={restaurant._id} onClick={this.viewMenu.bind(this)}>View</button>
+                                </div>
+                            ))}
+                        </div>
                         :
                         <div></div>
                     }

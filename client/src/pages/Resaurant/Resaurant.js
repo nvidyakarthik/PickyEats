@@ -85,71 +85,71 @@ class Restaurant extends Component {
 
                 <div id="menu" className="title">Menu</div>
                 {this.state.menus.length ? (
-                <Container>
-                {this.state.menus.map(item => (
-                    <div>
-                        <LongCard
-                            img={item.imgpath===""?"http://placehold.it/100x100":item.imgpath}
-                            key={item._id}
-                            id={item._id}
-                            name={item.dishName}
-                            description={item.description}
-                            price={"$" + item.price}
-                            rating={item.rating}
-                        />
-
-                        <Popup
-                            trigger={<button className="rateIt" id={item._id}>Rate it!</button>}
-                            modal
-                            closeOnDocumentClick>
-                            {close => (
-                                <div>
-                                    <div className="modalTitle">{item.dishName}</div>
-                                    <div className="modalContent">
-                                        <input
-                                            name="reviewerName"
-                                            placeholder="Name (required)"
-                                            className="modalSection"
-                                            value={this.state.reviewerName}
-                                            onChange={this.handleInputChange.bind(this)}
-                                        />
-                                        <textarea id={"review" + item._id}
-                                            name="review"
-                                            value={this.state.review}
-                                            className="modalSection modalReview"
-                                            placeholder="Your review..."
-                                            onChange={this.handleInputChange.bind(this)}
-                                        />
-                                        <div className="modalSection modalDiv">Your rating:
-                                            <Rating
-                                                id={"rating" + item._id}
-                                                stop="5"
-                                                initialRating={this.state.rating}
-                                                emptySymbol="far fa-star"
-                                                fullSymbol="fas fa-star"
-                                                onChange={(rate) => this.change(rate)}
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="modalButtons">
-                                        <button className="modalButton" onClick={() => { close() }}>Cancel</button>
-                                        <button className="modalButton" value={item._id} onClick={this.handleRateIt.bind(this)}>Submit</button>
-                                    </div>
-                                </div>
-                            )}
-                        </Popup>
-
-                        <button className="linkToMenuItem" onClick={() => this.linkToMenuItem(item._id)}>More Reviews</button>
-
-                    </div>
-                ))}
-                </Container>
-                ):(
                     <Container>
-						<h1 className="title">No items available to display</h1>
-					</Container>
+                        {this.state.menus.map(item => (
+                            <div>
+                                <LongCard
+                                    img={item.imgpath === "" ? "http://placehold.it/100x100" : item.imgpath}
+                                    key={item._id}
+                                    id={item._id}
+                                    name={item.dishName}
+                                    description={item.description}
+                                    price={"$" + item.price}
+                                    rating={item.rating}
+                                />
 
-                )}
+                                <Popup
+                                    trigger={<button className="rateIt" id={item._id}>Rate it!</button>}
+                                    modal
+                                    closeOnDocumentClick>
+                                    {close => (
+                                        <div>
+                                            <div className="modalTitle">{item.dishName}</div>
+                                            <div className="modalContent">
+                                                <input
+                                                    name="reviewerName"
+                                                    placeholder="Name (required)"
+                                                    className="modalSection"
+                                                    value={this.state.reviewerName}
+                                                    onChange={this.handleInputChange.bind(this)}
+                                                />
+                                                <textarea id={"review" + item._id}
+                                                    name="review"
+                                                    value={this.state.review}
+                                                    className="modalSection modalReview"
+                                                    placeholder="Your review..."
+                                                    onChange={this.handleInputChange.bind(this)}
+                                                />
+                                                <div className="modalSection modalDiv">Your rating:
+                                            <Rating
+                                                        id={"rating" + item._id}
+                                                        stop="5"
+                                                        initialRating={this.state.rating}
+                                                        emptySymbol="far fa-star"
+                                                        fullSymbol="fas fa-star"
+                                                        onChange={(rate) => this.change(rate)}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="modalButtons">
+                                                <button className="modalButton" onClick={() => { close() }}>Cancel</button>
+                                                <button className="modalButton" value={item._id} onClick={this.handleRateIt.bind(this)}>Submit</button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </Popup>
+
+                                <button className="linkToMenuItem" onClick={() => this.linkToMenuItem(item._id)}>More Reviews</button>
+
+                            </div>
+                        ))}
+                    </Container>
+                ) : (
+                        <Container>
+                            <h1 className="title">No items available to display</h1>
+                        </Container>
+
+                    )}
 
                 <div id="popupContainer"></div>
 
