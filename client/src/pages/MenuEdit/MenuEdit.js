@@ -148,7 +148,7 @@ class MenuEdit extends Component {
         this.setState({ updateId: menuId });
         this.state.menuItems.map(item => {
             console.log("itemId" + item._id);
-            if (item._id == menuId) {
+            if (item._id === menuId) {
                 this.setState({
                     dishName: item.dishName,
                     description: item.description,
@@ -221,7 +221,7 @@ class MenuEdit extends Component {
                         <input
                                 id="restImg"
                                 name="selectedFile"
-                                placeholder="Image Path"
+                                placeholder="Image Link"
                                 value={this.state.selectedFile}
                                 onChange={this.handleInputChange}
                         /> 
@@ -235,15 +235,8 @@ class MenuEdit extends Component {
                                 value={this.state.price}
                                 onChange={this.handleInputChange}
                             />
-                        </div>  
-
-                        <input
-                                id="restImg"
-                                name="selectedFile"
-                                placeholder="Image Link"
-                                value={this.state.selectedFile}
-                                onChange={this.handleInputChange}
-                            />         
+                        </div> 
+                                
                         <div id="addDone">
                             {this.state.isEdit ? (
                                 <button id="updateItem" value={this.state.updateId} onClick={this.updateMenuItem.bind(this)}>Update Item</button>
