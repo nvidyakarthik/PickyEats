@@ -6,6 +6,7 @@ const Nav = props => {
 	
 	if (props.loggedIn) {
 		const isResOwner=props.user.restaurantOwner;
+		const userId=props.user._id;
 		return (
 			
 				<ul id="nav">
@@ -21,13 +22,13 @@ const Nav = props => {
 					</li>					
 					{isResOwner ?
 						<li className="user">
-							<Link to="/resowner" className="nav-link">
+							<Link to={"/dashboard/"+userId} className="nav-link">
 								Dashboard
 							</Link>
 						</li> 
 					 : ''}
 					 <li className="user">
-						<a href="">Welcome {props.user.firstName}</a>
+						<a href="#" onclick="return false;">Welcome {props.user.firstName}</a>
 					</li>				
 					
 				</ul>

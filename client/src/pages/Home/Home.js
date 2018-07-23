@@ -64,7 +64,8 @@ class Home extends Component {
 			this.setState({
 				categories: response.data
 			});
-		});
+        }).catch(err => console.log(err)); 
+
 	};
 
 	handleInputChange = event => {
@@ -75,7 +76,15 @@ class Home extends Component {
 	};
 
 	seachByNameCity = () => {
-		this.props.history.push("/searchbyname/"+this.state.restaurantName+"/"+this.state.city); 
+		const searchData={
+			restaurantName:this.state.restaurantName,
+			city:this.state.city
+		}
+		API.getRestByNameCity(searchData).then(response => {
+			console.log("city search"+response.data)
+			this.props.history.push("/searchbyname/"+this.state.restaurantName+"/"+this.state.city); 
+        }).catch(err => console.log(err)); 
+		
 	}
 
 	takeMeTo = (site) => {
@@ -112,8 +121,10 @@ class Home extends Component {
 					<div className="dropdown">
 						<button className="dropbtn">I'm in the mood for</button>
 						<div className="dropdown-content">
-							{this.state.categories.map(category => (
-								<a href={'/ressearch/' + category._id} key={this.state.categories.id} value={category.categoryName}>{category.categoryName}</a>
+							{this.state.categories.map(category => (								
+								<Link to={'/ressearch/' + category._id} key={this.state.categories.id} >
+									{category.categoryName}
+								</Link>
 							))}
 						</div>
 					</div>

@@ -12,7 +12,6 @@ import NoMatch from "./pages/NoMatch";
 import SignUp from "./pages/SignUp";
 import API from "./utils/API"
 import MenuItem from "./pages/MenuItem";
-
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 
@@ -27,24 +26,7 @@ class App extends React.Component {
     this._logout = this._logout.bind(this)
     this._login = this._login.bind(this)
   }
-  componentDidMount() {
-    API.getUserInfo().then(response => {
-      console.log(response.data)
-      if (!!response.data.user) {
-        console.log('THERE IS A USER')
-        this.setState({
-          loggedIn: true,
-          user: response.data.user          
-        })
-      } else {
-        this.setState({
-          loggedIn: false,
-          user: null
-        })
-      }
-    })
-  }
-
+  
   _logout(event) {
     event.preventDefault()
     console.log('logging out')
@@ -54,27 +36,17 @@ class App extends React.Component {
         this.setState({
           loggedIn: false,
           user: null
-        })
+        });
+        window.location="/";
       }
     })
   }
 
-  _login(email, password) {
-    API.signInUser({
-      email: email,
-      password: password
-    })
-      .then(response => {
-        console.log(response)
-        if (response.status === 200) {
-          // update the state
-          console.log("response.data"+response.data);
-          this.setState({
-            loggedIn: true,
-            user: response.data.user
-          });
-        }
-      })
+  _login(isLoggedIn,userData) {   
+      this.setState({
+        loggedIn: isLoggedIn,
+        user: userData
+      });
   }
 
   render() {
@@ -94,7 +66,7 @@ class App extends React.Component {
             />
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/restaurant/:id" component={Resaurant} />
-            <Route exact path="/resowner" component={ResOwner} />
+            <Route exact path="/dashboard/:id" component={ResOwner} />
             <Route exact path="/resowner/:id" component={MenuEdit} />      
             <Route exact path="/ressearch/:id" component={ResSearch} />
             <Route exact path="/searchbyname/:name/:city" component={ResSearchName} />

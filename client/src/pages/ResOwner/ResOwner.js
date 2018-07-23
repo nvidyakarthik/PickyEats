@@ -15,45 +15,75 @@ class ResOwner extends Component {
         categoryId:"",
         //categories: ["Chinese", "Mexican", "Korean", "American", "Steakhouse", "Italian", "Seafood", "Breakfast", "Pizza", "Burger", "Thai", "Japanese", "Vietnamese", "Sandwiches", "Sushi Bar"],
         categories:[],
+        restaurants:[],
         selectedFile:""
     };
 
     handleInputChange = e => {
         console.log(e.target.name);
-        
-        switch (e.target.name) {
-            case 'selectedFile':
-              this.setState({ selectedFile: e.target.files[0] });
-              break;
-            default:
+       
               this.setState({ [e.target.name]: e.target.value });
-          }
+          
     };
     
     componentDidMount() {
-		API.getCategories().then(response => {
+        this.loadCategories();
+        this.loadRestByOwner();			
+    }
+
+    loadCategories=()=>{
+        API.getCategories().then(response => {
 			console.log(response.data)
 			this.setState({
 				categories:response.data
 			  });
 		}).catch(err => console.log(err));
-		
+
+    }
+
+    loadRestByOwner=()=>{
+        const userId=this.props.match.params.id;
+        API.getRestaurantByOwner(userId).then(response => {
+			console.log(response.data)
+			this.setState({
+				restaurants:response.data
+			  });
+		}).catch(err => console.log(err));
+    }
+
+    editMenu = (event) => {
+        event.preventDefault();
+        const restId = event.target.value;
+        console.log(restId);
+        this.props.history.push("/resowner/"+restId);
+        
+    }
+
+    viewMenu = (event) => {
+        event.preventDefault();
+        const restId = event.target.value;
+        console.log(restId);
+        this.props.history.push("/restaurant/" + restId);
+        
     }
     
-    handleSubmit=(event)=>{
-        console.log("imgname"+this.state.selectedFile);
-        event.preventDefault();
-        let formData = new FormData();
-
-      formData.append('restaurantName', this.state.restName);
-      formData.append('street', this.state.street);
-      formData.append('city', this.state.city);
-      formData.append('state', this.state.state);
-      formData.append('zip', this.state.zip);
-      formData.append('phone', this.state.phone);
-      formData.append('imgpath', this.state.selectedFile);
-      formData.append('category', this.state.categoryId);
-        API.saveRestaurant(formData).then(response => {
+    handleSubmit=(event)=>{       
+      event.preventDefault();
+      console.log("imgname"+this.state.selectedFile);
+      const userId=this.props.match.params.id;
+      console.log("userID:"+userId);      
+      let formData={
+        'restaurantName': this.state.restName,
+        'personId':userId,
+        'street': this.state.street,
+        'city': this.state.city,
+        'state': this.state.state,
+        'zip': this.state.zip,
+        'phone': this.state.phone,
+        'imgpath': this.state.selectedFile,
+        'category': this.state.categoryId
+      }      
+       API.saveRestaurant(formData).then(response => {
             console.log("id of data"+response.data._id);
             this.props.history.push("/resowner/"+ response.data._id);
 			
@@ -130,16 +160,28 @@ class ResOwner extends Component {
                                 placeholder="Phone Number (required)"
                                 value={this.state.phone}
                                 onChange={this.handleInputChange}
-                            />      
+                            />
 
-                             <input
-                                className="fileUpload"
-                                type="file"
+                            <input
+                                id="restImg"
                                 name="selectedFile"
+                                placeholder="Image Path"
+                                value={this.state.selectedFile}
                                 onChange={this.handleInputChange}
-                            />    
+                            /> 
+                                                          
                             <button className="infoButton" type="submit" >Add Restaurant</button>
                         </form>
+
+                         <div>
+                         {this.state.restaurants.map(rest => (
+                                  <div key={rest._id}>
+                                    <p>{rest.restaurantName}</p>
+                                    <button className="edit" value={rest._id} onClick={this.editMenu.bind(this)}>Edit Menu</button>
+                                    <button className="edit" value={rest._id} onClick={this.viewMenu.bind(this)}>View Menu</button>
+                                  </div>  
+                            ))}
+                         </div>           
  
                         
                     </div>

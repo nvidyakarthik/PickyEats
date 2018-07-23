@@ -64,7 +64,7 @@ class MenuItem extends Component {
 
     handleRateIt = (event) => {
         event.preventDefault();
-        let menuId = event.target.value;
+        let menuId = this.props.match.params.menuId;
         let commentData = {
             description: this.state.newReview,
             rating: this.state.newRating,
@@ -75,6 +75,7 @@ class MenuItem extends Component {
             console.log(response.data);
             API.updateAvgRating(menuId).then(res => {
                 console.log("averaRating rating created" + res.data);
+                this.setState({rating:res.data.rating});
             }).catch(err => console.log(err));
             window.location.reload();
         }).catch(err => console.log(err));
@@ -94,7 +95,7 @@ class MenuItem extends Component {
                 <Container>
                     <div className="half">
                         <p className="title">Details</p>
-                        <img src={this.state.pic===""?"http://placehold.it/100x100":'/uploads/'+this.state.pic} alt="top item" />
+                        <img src={this.state.pic===""?"http://placehold.it/100x100":this.state.pic} alt="top item" />
                         <p className="topdesc">{this.state.description}</p>
                         <p className="topdesc">Average Rating:
                             <Rating
@@ -146,7 +147,7 @@ class MenuItem extends Component {
                                         </div>
                                         <div className="modalButtons">
                                             <button className="modalButton" onClick={() => { close() }}>Cancel</button>
-                                            <button className="modalButton" value={this.props.match.params.menuId} onClick={this.handleRateIt.bind(this)}>Submit</button>
+                                            <button className="modalButton"  onClick={this.handleRateIt.bind(this)}>Submit</button>
                                         </div>
                                     </div>
                                 )}

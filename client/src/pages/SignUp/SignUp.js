@@ -15,7 +15,8 @@ class SignUp extends Component {
             password: "",
             confirmPass: "",
             restaurantOwner: false,
-            redirectTo: null
+            redirectTo: null,
+            error:""
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,13 +40,15 @@ class SignUp extends Component {
         })
             .then(response => {
                 console.log(response)
-                if (!response.data.errmsg) {
+                if (!response.data.error) {
                     console.log('youre good')
                     this.setState({
                         redirectTo: '/login'
-                    })
+                    });
                 } else {
-                    console.log('duplicate')
+                    this.setState({
+                        error:response.data.error
+                    })
                 }
             });
     }
@@ -82,6 +85,9 @@ class SignUp extends Component {
                             value={this.state.username}
                             onChange={this.handleInputChange}
                         />
+                        {this.state.error?(
+                            <p className="error">{this.state.error}</p>
+                        ):""}
                         <input
                             name="password"
                             type="password"

@@ -22,8 +22,39 @@ router.get('/user', (req, res, next) => {
 		return res.json({ user: null })
 	}
 });
-
-router.post(
+router.post('/login', function(req, res, next) {
+	passport.authenticate('local', function(err, user, info) {
+		if (err) {
+			if (err.name === 'IncorrectCredentialsError') {
+			  return res.status(400).json({
+				//success: false,
+				message: err.message
+			  });
+			}
+	  
+			return res.status(400).json({
+			  //success: false,
+			  message: 'Could not process the form.'
+			});
+		  }
+		console.log('POST to /login')
+        const user1 = JSON.parse(JSON.stringify(user)) // hack
+        console.log("*****************"+info.message);
+        const cleanUser = Object.assign({}, user1);        
+		if (cleanUser) {
+			console.log(`Deleting ${cleanUser.password}`)
+			delete cleanUser.password
+		}
+	  
+		  return res.json({
+			//success: true,
+			message: 'You have successfully logged in!',
+			user: cleanUser
+		  });	  
+	
+	})(req, res, next);
+});
+/* router.post(
 	'/login',
 	function(req, res, next) {
 		console.log(req.body)
@@ -32,17 +63,9 @@ router.post(
 	},
 	passport.authenticate('local'),
 	(req, res) => {
-		console.log('POST to /login')
-        const user = JSON.parse(JSON.stringify(req.user)) // hack
-        console.log("*****************"+req.message);
-        const cleanUser = Object.assign({}, user);        
-		if (cleanUser) {
-			console.log(`Deleting ${cleanUser.password}`)
-			delete cleanUser.password
-		}
-		res.json({ user: cleanUser })
+		
 	}
-)
+) */
 
 router.post('/logout', (req, res) => {
 	if (req.user) {
@@ -57,23 +80,25 @@ router.post('/logout', (req, res) => {
 router.post('/signup', (req, res) => {
 	const { firstName,lastName,email, password,restaurantOwner } = req.body
 	// ADD VALIDATION
-	User.findOne({ 'email': email }, (err, userMatch) => {
-		if (userMatch) {
+	User.findOne({ 'email': email }).then(function (user) {
+		if (user) {
 			return res.json({
-				error: `Sorry, already a user with the email: ${email}`
+				error: `Sorry, already there is a user with the email: ${email}`
 			})
 		}
-		const newUser = new User({
-            'firstName':firstName,
-            'lastName':lastName,
-			'email': email,
-            'password': password,
-            'restaurantOwner':restaurantOwner
-		})
-		newUser.save((err, savedUser) => {
-			if (err) return res.json(err)
-			return res.json(savedUser)
-		})
+		else{
+			const newUser = new User({
+            	'firstName':firstName,
+            	'lastName':lastName,
+				'email': email,
+            	'password': password,
+            	'restaurantOwner':restaurantOwner
+			})
+			newUser.save((err, savedUser) => {
+				if (err) return res.json(err)
+				return res.json(savedUser)
+			})
+		}
 	})
 })
 

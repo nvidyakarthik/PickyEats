@@ -10,7 +10,8 @@ class Login extends Component {
 		this.state = {
 			email: "",
             password: "" ,
-			redirectTo: null
+            redirectTo: null,
+            error:""
 		}
 		// this.googleSignin = this.googleSignin.bind(this)
 		this.handleSubmit = this.handleSubmit.bind(this)
@@ -28,11 +29,31 @@ class Login extends Component {
     handleSubmit=(event)=>{
         
         event.preventDefault();
-        this.props._login(this.state.email, this.state.password)
-		this.setState({
-			redirectTo: '/'
-		});
-		
+        if(this.state.email!=="" && this.state.password!==""){
+        API.signInUser({
+            email: this.state.email,
+            password: this.state.password
+          })
+            .then(response => {
+             if (response.status === 200) {
+                // update the state
+                console.log("response.data"+response.data);
+                this.props._login(true,response.data.user); 
+                this.setState({
+                    redirectTo: '/'                    
+                });               
+              }             
+            }).catch(err => {
+                console.log(err.response.data);
+                this.setState({
+                    error:err.response.data.message
+                });
+                
+            });
+        }
+        else{
+            this.setState({error:"Please enter all Fields"});
+        }
     }
 
     render() {
@@ -43,7 +64,9 @@ class Login extends Component {
             <Container>
                 <div className="middle">
                     <h3 className="title">Login</h3>
-
+                    {this.state.error!==""?(
+                            <p className="error">{this.state.error}</p>
+                        ):""}
                     <input
                         name="email"
                         placeholder="Email (required)"

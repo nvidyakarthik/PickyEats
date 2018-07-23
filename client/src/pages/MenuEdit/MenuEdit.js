@@ -12,6 +12,7 @@ class MenuEdit extends Component {
         menutype: "",
         menuItems: [],
         ids: [],
+        loadIds:[],
         updateId: "",
         isEdit: false,
         types: ["Appetizer", "Breakfast", "Lunch", "Dinner", "Drink", "Kids"],
@@ -20,13 +21,8 @@ class MenuEdit extends Component {
 
     handleInputChange = e => {
         console.log(e.target.name);
-        switch (e.target.name) {
-            case 'selectedFile':
-                this.setState({ selectedFile: e.target.files[0] });
-                break;
-            default:
-                this.setState({ [e.target.name]: e.target.value });
-        }
+        this.setState({ [e.target.name]: e.target.value });
+        
     };
 
     addMenuItem = (event) => {
@@ -34,14 +30,14 @@ class MenuEdit extends Component {
         console.log("imgname" + this.state.selectedFile);
         console.log("params id" + this.props.match.params.id);
         const restId = this.props.match.params.id;
-        const formData = new FormData();
-        formData.append('restaurantId', restId);
-        formData.append('dishName', this.state.dishName);
-        formData.append('description', this.state.description);
-        formData.append('price', this.state.price);
-        formData.append('imgpath', this.state.selectedFile);
-        formData.append('menutype', this.state.menutype);
-
+        let formData={
+            'restaurantId':restId,
+            'dishName':this.state.dishName,
+            'description':this.state.description,
+            'price':this.state.price,
+            'imgpath': this.state.selectedFile,
+            'menutype':this.state.menutype
+        }         
         API.saveMenuItem(formData, restId).then(response => {
             this.setState({ ids: [...this.state.ids, response.data._id] });
             this.setState({ menuItems: [...this.state.menuItems, response.data] });
@@ -56,23 +52,45 @@ class MenuEdit extends Component {
 
         }).catch(err => console.log(err));
     }
+    componentDidMount() {
+        const restId = this.props.match.params.id;
+        this.loadAllMenus(restId);
+    		
+    }
     loadAllMenus = (restId) => {
         API.getAllMenus(restId).then(response => {
-            this.setState({ menuItems: response.data });
+            this.state.ids.map(data => console.log("listing all lod menus ids"+data));
+            this.setState({
+                 menuItems: response.data,
+                 loadIds:response.data.map(item=>item._id)
+             });
         }).catch(err => console.log(err));
     }
     deleteMenuItem = (event) => {
         event.preventDefault();
         const menuId = event.target.value;
-        // const restId=this.props.match.params.id;
+        const restId=this.props.match.params.id;
         console.log("delete id" + menuId);
         API.removeMenuItem(menuId).then(response => {
-            let newArrIds = this.state.ids.filter((x) => x._id !== menuId);
             let newMenuItems = this.state.menuItems.filter(item => item._id !== menuId);
-            this.setState({
-                ids: newArrIds,
-                menuItems: newMenuItems
-            });
+            if(this.state.loadIds.length===0){
+                let newArrIds = this.state.ids.filter((x) => x !== menuId);
+                
+                this.setState({
+                    ids: newArrIds,
+                    menuItems: newMenuItems
+                });
+            }
+            else{
+                this.setState({
+                    loadIds:this.state.loadIds.filter((x) => x !== menuId),
+                    menuItems: newMenuItems
+                });
+                const menuIds = { menus: this.state.loadIds };
+                API.upadateRestMenuIds(restId,menuIds).then(response => {
+                    console.log("updated"+response.data);
+                }).catch(err => console.log(err));
+            }
 
             console.log("menu item deleted" + response.data);
 
@@ -84,29 +102,31 @@ class MenuEdit extends Component {
         event.preventDefault();
         const menuId = event.target.value;
         console.log(menuId);
-        const restId = this.props.match.params.id;
-        const menuItemData = {
-            restaurantId: restId,
-            dishName: this.state.dishName,
-            description: this.state.description,
-            price: this.state.price,
-            menutype: this.state.menutype
-        }
-        API.editMenuItem(menuItemData, menuId).then(response => {
-            const foundIndex = this.state.menuItems.findIndex(item => item._id === menuId);
-            const newMenuItems = this.state.menuItems;
-            newMenuItems[foundIndex] = response.data;
-            this.setState({ menuItems: newMenuItems });
+        const restId=this.props.match.params.id;
+        let formData={
+            'restaurantId':restId,
+            'dishName':this.state.dishName,
+            'description':this.state.description,
+            'price':this.state.price,
+            'imgpath': this.state.selectedFile,
+            'menutype':this.state.menutype
+        }    
+        API.editMenuItem(formData,menuId).then(response => {
+            const foundIndex=this.state.menuItems.findIndex(item=> item._id===menuId);
+            const newMenuItems=this.state.menuItems;
+            newMenuItems[foundIndex]=response.data;
+            this.setState({menuItems:newMenuItems});
             this.setState(
-                {
-                    dishName: "",
-                    description: "",
-                    price: "",
-                    menutype: "",
-                    isEdit: false
-                });
-
-        }).catch(err => console.log(err));
+                {   
+                    dishName:"",
+                    description:"",
+                    price:"",
+                    menutype:"",
+                    isEdit:false,
+                    selectedFile:""
+                });           
+            
+        }).catch(err => console.log(err)); 
     }
 
     editMenuItem = (event) => {
@@ -122,7 +142,8 @@ class MenuEdit extends Component {
                     dishName: item.dishName,
                     description: item.description,
                     menutype: item.menutype,
-                    price: item.price
+                    price: item.price,
+                    selectedFile:item.imgpath
                 });
             }
         });
@@ -198,12 +219,12 @@ class MenuEdit extends Component {
                         </div>  
 
                         <input
-                            className="fileUpload"
-                            type="file"
-                            name="selectedFile"
-                            onChange={this.handleInputChange}
-                        />
-
+                                id="restImg"
+                                name="selectedFile"
+                                placeholder="Image Path"
+                                value={this.state.selectedFile}
+                                onChange={this.handleInputChange}
+                            />         
                         <div id="addDone">
                             {this.state.isEdit ? (
                                 <button id="updateItem" value={this.state.updateId} onClick={this.updateMenuItem.bind(this)}>Update Item</button>
@@ -227,8 +248,9 @@ class MenuEdit extends Component {
                                         <button className="edit" value={item._id} onClick={this.editMenuItem.bind(this)}>Edit</button>
                                     </div>
                                     <div className="menuItems">
-                                        ${item.price} {item.dishName} | {item.menutype}
+                                        ${item.price} {item.dishName} | {item.menutype} <img id="menuImage" src={item.imgpath===""?"http://placehold.it/100x100":item.imgpath} alt="itemImage"/>
                                     </div>
+                                    
                                 </div>
                             ))}
                         </div>

@@ -84,11 +84,12 @@ class Restaurant extends Component {
                 </div>
 
                 <div id="menu" className="title">Menu</div>
+                {this.state.menus.length ? (
                 <Container>
                 {this.state.menus.map(item => (
                     <div>
                         <LongCard
-                            img={item.imgpath===""?"http://placehold.it/100x100":'/uploads/'+item.imgpath}
+                            img={item.imgpath===""?"http://placehold.it/100x100":item.imgpath}
                             key={item._id}
                             id={item._id}
                             name={item.dishName}
@@ -143,6 +144,12 @@ class Restaurant extends Component {
                     </div>
                 ))}
                 </Container>
+                ):(
+                    <Container>
+						<h1 className="title">No Menus available to display</h1>
+					</Container>
+
+                )}
 
                 <div id="popupContainer"></div>
 

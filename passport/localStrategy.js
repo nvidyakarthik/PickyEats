@@ -20,16 +20,17 @@ const strategy = new LocalStrategy(
 			}
 			
 			if (!userMatch) {
-				const error = new Error('Incorrect email or password');
-				error.name = 'IncorrectCredentialsError';
-		  
-				return done(error);
+				const error = new Error('Email not found');
+      			error.name = 'IncorrectCredentialsError';
+      			return done(error);
 			}
 			
 			if (!userMatch.checkPassword(password)) {
-				return done(null, false, { message: 'Incorrect password' })
+				const error = new Error('Incorrect  password');
+        		error.name = 'IncorrectCredentialsError';
+        		return done(error);
 			}
-			return done(null, userMatch)
+			return done(null, userMatch,{ message: 'found user' })
 		})
 	}
 )
