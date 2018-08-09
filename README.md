@@ -5,7 +5,7 @@
 * The website also has specific page ,the restaurant owners dashboard where the restaurant owners can upload the restaurant menu.They also has the option to stop the process of uploading and continue later from where they left off.
 * Link to deployed app https://infinite-inlet-43626.herokuapp.com/
 
-#Sample Screenshots of Homepage,Restaurant menu page and menu item review page
+# Sample Screenshots of Homepage, Restaurant menu page and menu item review page
 
 ![PickyEats](https://github.com/nvidyakarthik/PickyEats/blob/master/client/public/homepage.png)
 ![PickyEats](https://github.com/nvidyakarthik/PickyEats/blob/master/client/public/menupage.png)
